@@ -1,0 +1,8 @@
+# public IPv4
+##############
+
+protocol static local_ip4 {
+	table peering;
+	route {{ snat_ip4 }}/32 reject;
+};
+

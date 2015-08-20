@@ -1,0 +1,10 @@
+[Match]
+
+[NetDev]
+Name=ffhh-wende0
+Kind=ip6tnl
+
+[Tunnel]
+Mode=ip6ip6
+Local=2a01:4f8:100:2384::ff:1
+Remote=2001:868:100:d00::10

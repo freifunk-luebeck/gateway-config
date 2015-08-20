@@ -1,0 +1,11 @@
+ip4: 10.130.0.252
+ip6: 2001:67c:2d50::801
+ip6_ula: fdef:ffc0:3dd7::801
+fastd_mac: d2:d0:93:63:f7:da
+fastd_mac_2: 66:3a:16:58:af:5c
+fastd_gw_mac: d2:d0:93:63:f7:db
+freifunk_mac: 6e:e4:d2:8a:3b:63
+dhcpd_start: 10.130.1.0
+dhcpd_end: 10.130.4.190
+units_enable:
+  - openvpn@hideio.service

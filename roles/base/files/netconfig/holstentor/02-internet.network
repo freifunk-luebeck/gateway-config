@@ -1,0 +1,13 @@
+[Match]
+Name=eth2
+
+[Network]
+Address=5.9.153.153/27
+Gateway=5.9.153.129
+Address=2a01:4f8:190:4190::3007:1/64
+Address=2a01:4f8:190:4190::3007:2/64
+Gateway=fe80::1
+
+Tunnel=he-ipv6
+Tunnel=ffrhein-ber
+Tunnel=ffrhein-fra3

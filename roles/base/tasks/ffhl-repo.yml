@@ -1,0 +1,5 @@
+---
+- command: pacman-key -r 944DE5F7
+- command: pacman-key --lsign-key 944DE5F7
+- lineinfile: dest=/etc/pacman.conf line="[ffhl]"
+- lineinfile: dest=/etc/pacman.conf line="Server = http://metameute.de/~nils/ffhl-gw/" insertafter="^\[ffhl\]"

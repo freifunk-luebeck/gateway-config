@@ -1,0 +1,16 @@
+ip4: 10.130.0.255
+ip6: 2001:67c:2d50::e01
+ip6_ula: fdef:ffc0:3dd7::e01
+fastd_mac: 52:54:00:f3:62:d9
+fastd_mac_2: ea:af:13:66:6d:71
+fastd_gw_mac: 52:54:00:f3:62:da
+freifunk_mac: 52:54:00:ee:5c:d7
+dhcpd_start: 10.130.12.63
+dhcpd_end: 10.130.15.254
+snat_dev: ffrhein-+
+snat_ip4: 185.66.193.32
+icvpn_name: luebeck2
+icvpn_ip4: 10.207.0.131
+icvpn_ip6: fec0::a:cf:0:83
+units_enable:
+  - "'fastd@dn42\\x2dchaos.service'"

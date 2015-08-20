@@ -1,0 +1,11 @@
+---
+- template: src=40-icvpn.network.j2 dest=/etc/systemd/network/40-icvpn.network
+- file: state=directory dest=/etc/tinc
+- git: repo=https://github.com/freifunk/icvpn.git dest=/etc/tinc/icvpn
+- template: src=tinc.conf.j2 dest=/etc/tinc/icvpn/tinc.conf
+- copy: src=post-merge/icvpn dest=/etc/tinc/icvpn/.git/hooks/post-merge mode=a+x
+- command: .git/hooks/post-merge
+  args:
+    chdir: /etc/tinc/icvpn
+- command: systemctl enable tincd@icvpn.service
+- command: systemctl enable update-icvpn.timer

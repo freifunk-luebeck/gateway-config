@@ -1,0 +1,7 @@
+[Match]
+Name=ffrhein-fra3
+
+[Network]
+IPForward=yes
+Address=100.64.0.167/31
+Address=2a03:2260:0:60::2/64

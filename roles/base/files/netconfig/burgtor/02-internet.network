@@ -1,0 +1,15 @@
+[Match]
+Name=internet
+
+[Network]
+Address=172.23.190.79/27
+Gateway=172.23.190.70
+Address=2a01:4f8:200:71e3:5054:ff:fe1c:c60c/64
+Address=2a01:4f8:200:71e3:5054:ff:fe1c:c60d/64
+Gateway=fe80::1
+
+Tunnel=he-ipv6
+Tunnel=ffrhein-fra3-v4
+Tunnel=ffrhein-fra3-v6
+Tunnel=ffrhein-dus-v4
+Tunnel=ffrhein-dus-v6

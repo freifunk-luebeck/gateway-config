@@ -1,0 +1,11 @@
+[Match]
+Name=internet
+
+[Network]
+Address=192.168.122.210/24
+Gateway=192.168.122.1
+
+Address=2a01:4f8:100:2384::ff:1/64
+Gateway=2a01:4f8:100:2384::2
+
+Tunnel=ffhh-wende0
