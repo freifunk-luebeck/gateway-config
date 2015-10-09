@@ -1,6 +1,8 @@
 [Match]
-Name=eth0
+Name=ens3
 
 [Network]
-Address=192.168.122.11/24
-Gateway=192.168.122.1
+Address=192.168.1.2/24
+Gateway=192.168.1.1
+Address=2a00:c98:2050:a033:2::1/128
+Gateway=fe80::1
