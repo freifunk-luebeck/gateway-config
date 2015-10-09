@@ -7,3 +7,5 @@ Gateway=192.168.1.1
 Address=2a00:c98:2050:a033:2::1/128
 Gateway=fe80::1
 IPForward=yes
+
+Tunnel=he-ipv6
