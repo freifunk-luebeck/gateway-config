@@ -8,4 +8,3 @@ freifunk_mac: 6e:e4:d2:8a:3b:63
 dhcpd_start: 10.130.1.0
 dhcpd_end: 10.130.4.190
 units_enable:
-  - openvpn@hideio.service
