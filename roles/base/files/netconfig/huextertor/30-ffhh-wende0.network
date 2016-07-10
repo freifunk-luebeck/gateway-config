@@ -1,6 +1,0 @@
-[Match]
-Name=ffhh-wende0
-
-[Network]
-IPForward=yes
-Address=2a03:2267:ffff:b01::2/64

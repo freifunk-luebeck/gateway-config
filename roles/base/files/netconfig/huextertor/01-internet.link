@@ -1,5 +1,5 @@
 [Match]
-Path=pci-0000:00:0b.0
+Path=virtio-pci-0000:00:03.0
 
 [Link]
 Name=internet
