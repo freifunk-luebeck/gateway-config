@@ -17,6 +17,9 @@
 - template: src=radvd.conf.j2 dest=/etc/radvd.conf
 - template: src=10-freifunk-hl.netdev.j2 dest=/etc/systemd/network/10-freifunk-hl.netdev
 - template: src=12-freifunk-hl.network.j2 dest=/etc/systemd/network/12-freifunk-hl.network
+- lineinfile: dest=/etc/systemd/system/multi-user.target.wants/bird6.service line="Restart=on-failure" insertafter="ExecStop=/usr/bin/birdc6 down"
+- lineinfile: dest=/etc/systemd/system/multi-user.target.wants/bird.service line="Restart=on-failure" insertafter="ExecStop=/usr/bin/birdc down"
+- lineinfile: dest=/etc/systemd/system/multi-user.target.wants/named.service line="Restart=on-failure" insertafter="ExecStop=/usr/bin/rndc stop"
 - command: systemctl daemon-reload
 - file: path=/var/net-snmp state=directory
 - copy: content="createUser guest SHA guestffhl AES guestffhl" dest=/var/net-snmp/snmpd.conf
