@@ -1,11 +1,11 @@
 ---
 - hosts: all
-  sudo: yes
+  become: yes
   roles:
     - base
 
 - hosts: burgtor:holstentor
-  sudo: yes
+  become: yes
   roles:
     - icvpn
     - ffrhein-uplink
