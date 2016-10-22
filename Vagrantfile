@@ -14,18 +14,18 @@ Vagrant.configure(2) do |config|
   config.vm.network "private_network", type: "dhcp"
 
   config.vm.define "burgtor" do |config|
-    config.vm.box = "terrywang/archlinux"
+    config.vm.box = "ogarcia/archlinux-x64"
   end
 
   config.vm.define "holstentor" do |config|
-    config.vm.box = "terrywang/archlinux"
+    config.vm.box = "ogarcia/archlinux-x64"
   end
 
   config.vm.define "huextertor" do |config|
-    config.vm.box = "terrywang/archlinux"
+    config.vm.box = "ogarcia/archlinux-x64"
   end
 
   config.vm.define "muehlentor" do |config|
-    config.vm.box = "terrywang/archlinux"
+    config.vm.box = "ogarcia/archlinux-x64"
   end
 end
