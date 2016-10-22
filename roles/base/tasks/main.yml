@@ -24,7 +24,6 @@
 - include: bird.yml
   tags:
     - bird
-- include: icvpn-meta.yml
 - include: ffhl-dns.yml
 - include: ffhl-peers.yml
 - include: units.yml

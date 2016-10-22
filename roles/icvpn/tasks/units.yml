@@ -1,0 +1,4 @@
+---
+- command: systemctl enable {{ item }}
+  with_items:
+    - update-icvpn-meta.timer

@@ -24,7 +24,6 @@
     - tayga.service
     - update-ffhl-dns.timer
     - update-ffhl-mesh-vpn.timer
-    - update-icvpn-meta.timer
     - vnstat.service
 - command: systemctl enable {{ item }}
   with_items: units_enable
