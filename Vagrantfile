@@ -6,10 +6,10 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
-#  config.vm.provision "ansible" do |ansible|
-#    ansible.playbook = "repo/playbook.yml"
-#    ansible.extra_vars = { ansible_python_interpreter: "/usr/bin/env python2" }
-#  end
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yml"
+    ansible.extra_vars = { ansible_python_interpreter: "/usr/bin/env python2" }
+  end
 
   config.vm.network "private_network", type: "dhcp"
 
