@@ -28,4 +28,5 @@
     - bird
 - include: ffhl-dns.yml
 - include: ffhl-peers.yml
+  ignore_errors: True
 - include: units.yml
