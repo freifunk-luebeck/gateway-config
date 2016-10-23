@@ -1,0 +1,16 @@
+---
+- blockinfile:
+    dest: /etc/pacman.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      [archlinuxfr]
+      SigLevel = Never
+      Server = http://repo.archlinux.fr/$arch
+
+- user: name=yaourt system=yes
+- lineinfile:
+    dest: /etc/sudoers
+    line: "yaourt ALL=(ALL) NOPASSWD: ALL"
+
+- pacman: update_cache=yes
+- pacman: state=present name=sudo,yaourt
