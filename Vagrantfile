@@ -7,9 +7,6 @@
 # you're doing.
 Vagrant.configure(2) do |config|
   config.vm.provision "shell",
-    inline: "sudo pacman --noconfirm -Syu"
-
-  config.vm.provision "shell",
     inline: "sudo pacman --noconfirm -S --needed python2"
 
   config.vm.provision "ansible" do |ansible|

@@ -1,5 +1,0 @@
----
-- command: pacman-key -r 53BD2A1A8E4F9357007DFAB2A5A0621F2078D574
-- command: pacman-key --lsign-key 53BD2A1A8E4F9357007DFAB2A5A0621F2078D574
-- lineinfile: dest=/etc/pacman.conf line="[ffhl]"
-- lineinfile: dest=/etc/pacman.conf line="Server = http://metameute.de/~nils/ffhl-gw/" insertafter="^\[ffhl\]"

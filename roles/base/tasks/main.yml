@@ -1,5 +1,6 @@
 ---
-- include: ffhl-repo.yml
+- include: yaourt.yml
+- include: update.yml
 - include: software.yml
 - lineinfile: dest=/etc/ssh/sshd_config regexp="^#?PermitRootLogin" line="PermitRootLogin without-password"
 - user: name=fastd system=yes home=/etc/fastd
