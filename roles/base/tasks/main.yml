@@ -8,6 +8,7 @@
 - command: grub-mkconfig -o /boot/grub/grub.cfg
 - copy: src=etc/ dest=/etc
 - copy: src=netconfig/{{ inventory_hostname }}/ dest=/etc/systemd/network
+  ignore_errors: True
 - copy: src=host/{{ inventory_hostname }}/etc/ dest=/etc
   ignore_errors: True
 - file: state=link src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
