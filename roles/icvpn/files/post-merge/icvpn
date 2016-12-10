@@ -18,6 +18,6 @@ while read HOST; do
   echo "ConnectTo = $HOST" >> $TINCCFG
 done < metanodes
 
-systemctl reload tincd@icvpn.service
+systemctl try-reload-or-restart tinc@icvpn.service
 
 exit 0
