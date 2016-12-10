@@ -10,5 +10,5 @@
 - command: .git/hooks/post-merge
   args:
     chdir: /etc/tinc/icvpn
-- command: systemctl enable tincd@icvpn.service
+- command: systemctl enable tinc@icvpn.service
 - command: systemctl enable update-icvpn.timer
