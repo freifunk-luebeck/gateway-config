@@ -16,4 +16,7 @@ Recommended for testing:
 
 ## Requirements for Remote Host
 
-The newest, available, base Arch Linux plus Python2.
+The newest, available, base Arch Linux, plus:
+
+- python2
+- sudo
