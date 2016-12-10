@@ -10,8 +10,8 @@ DATA=$(git rev-parse --show-toplevel)
 ../icvpn-scripts/mkroa -s $DATA -x luebeck -m 64 > /etc/bird/roa.ip6
 ../icvpn-scripts/mkroa -s $DATA -x luebeck -m 32 -4 > /etc/bird/roa.ip4
 
-systemctl reload named.service
-systemctl reload bird6.service
-systemctl reload bird.service
+systemctl try-reload-or-restart named.service
+systemctl try-reload-or-restart bird6.service
+systemctl try-reload-or-restart bird.service
 
 exit 0
