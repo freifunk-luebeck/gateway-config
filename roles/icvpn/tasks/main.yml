@@ -1,7 +1,6 @@
 ---
 - copy: src=etc/ dest=/etc
 - include: icvpn-meta.yml
-- include: units.yml
 - template: src=40-icvpn.network.j2 dest=/etc/systemd/network/40-icvpn.network
 - file: state=directory dest=/etc/tinc
 - git: repo=https://github.com/freifunk/icvpn.git dest=/etc/tinc/icvpn
@@ -10,5 +9,4 @@
 - command: .git/hooks/post-merge
   args:
     chdir: /etc/tinc/icvpn
-- command: systemctl enable tinc@icvpn.service
-- command: systemctl enable update-icvpn.timer
+- include: units.yml

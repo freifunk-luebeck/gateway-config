@@ -1,4 +1,6 @@
 ---
 - command: systemctl enable {{ item }}
   with_items:
+    - tinc@icvpn.service
+    - update-icvpn.timer
     - update-icvpn-meta.timer
