@@ -1,6 +1,6 @@
 ---
 - pacman: update_cache=yes
-- pacman: state=present name=linux-lts,openssh,grub,git,wget,python-yaml,zsh,grml-zsh-config,sudo
+- pacman: state=present name=linux-lts,openssh,grub,git,wget,python-yaml,zsh,grml-zsh-config,base-devel
 - pacman: state=present name=bird,bird6,make,tinc,bind
 - pacman: state=present name=radvd,dhcp,ntp,haveged,openvpn,vnstat,net-snmp,batctl
 
