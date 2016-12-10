@@ -7,4 +7,3 @@ fastd_gw_mac: 26:9c:57:9b:5c:b3
 freifunk_mac: de:ad:ca:fe:46:1d
 dhcpd_start: 10.130.8.127
 dhcpd_end: 10.130.12.62
-units_enable:

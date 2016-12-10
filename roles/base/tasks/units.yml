@@ -26,5 +26,5 @@
     - update-ffhl-mesh-vpn.timer
     - vnstat.service
 - command: systemctl enable {{ item }}
-  with_items: "{{ units_enable }}"
-  when: units_enable is defined
+  with_items: "{{ units_enable|default([]) }}"
+
