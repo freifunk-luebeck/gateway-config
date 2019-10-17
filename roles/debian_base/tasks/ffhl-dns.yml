@@ -1,0 +1,3 @@
+---
+- git: repo=https://github.com/freifunk-luebeck/ffhl-dns.git dest=/var/named/ffhl
+- copy: src=post-merge/ffhl-dns dest=/var/named/ffhl/.git/hooks/post-merge mode=a+x

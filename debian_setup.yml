@@ -1,0 +1,5 @@
+---
+- hosts: gateways
+  become: yes
+  roles:
+    - debian_base

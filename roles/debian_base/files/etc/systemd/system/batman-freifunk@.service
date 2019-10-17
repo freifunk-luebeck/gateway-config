@@ -1,0 +1,17 @@
+[Unit]
+Description=batman setup for freifunk
+Wants=network.target
+BindsTo=sys-subsystem-net-devices-ff%i\x2dmesh\x2dvpn.device sys-subsystem-net-devices-ff%i\x2dmesh\x2dvpn\x2d2.device sys-subsystem-net-devices-ff%i\x2dgw\x2dvpn.device
+After=sys-subsystem-net-devices-ff%i\x2dmesh\x2dvpn.device sys-subsystem-net-devices-ff%i\x2dmesh\x2dvpn\x2d2.device sys-subsystem-net-devices-ff%i\x2dgw\x2dvpn.device
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/batctl -m mesh-%i if add ff%i-mesh-vpn
+ExecStart=/usr/bin/batctl -m mesh-%i if add ff%i-mesh-vpn-2
+ExecStart=/usr/bin/batctl -m mesh-%i if add ff%i-gw-vpn
+ExecStart=/usr/bin/batctl -m mesh-%i gw server
+ExecStart=-/usr/bin/batctl -m mesh-%i nc disable
+
+[Install]
+WantedBy=multi-user.target

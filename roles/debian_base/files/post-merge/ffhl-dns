@@ -1,0 +1,5 @@
+#!/bin/sh
+
+systemctl reload named.service
+
+exit 0

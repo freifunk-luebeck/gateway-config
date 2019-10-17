@@ -1,0 +1,10 @@
+authoritative;
+default-lease-time 600;
+max-lease-time 600;
+
+subnet {{ dhcpd_subnet }} netmask {{ dhcpd_netmask }} {
+	range {{ dhcpd_start }} {{ dhcpd_end }};
+
+	option routers {{ ip4 }};
+	option domain-name-servers {{ ip4 }};
+}

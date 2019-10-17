@@ -1,0 +1,30 @@
+---
+- command: systemctl mask display-manager.service
+- command: systemctl enable {{ item }}
+  with_items:
+    #    - alfred@hl.service
+    #    - batadv-vis@hl.service
+    - batman-freifunk@hl.service
+    - bird6.service
+    - bird.service
+    - dhcpd4.service
+    - "'fastd@ffhl\\x2dmesh\\x2dvpn.service'"
+    - "'fastd@ffhl\\x2dmesh\\x2dvpn\\x2d2.service'"
+    - "'fastd@ffhl\\x2dgw\\x2dvpn.service'"
+    - freifunk-ip-rule.service
+    - haveged.service
+    - ip6tables.service
+    - iptables.service
+    - named.service
+    - ntpd.service
+    - radvd.service
+    - snmpd.service
+    - sshd.service
+    - systemd-networkd.service
+    - tayga.service
+    - update-ffhl-dns.timer
+    - update-ffhl-mesh-vpn.timer
+    - vnstat.service
+- command: systemctl enable {{ item }}
+  with_items: "{{ units_enable|default([]) }}"
+

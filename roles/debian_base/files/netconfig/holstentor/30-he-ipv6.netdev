@@ -1,0 +1,9 @@
+[NetDev]
+Name=he-ipv6
+Kind=sit
+MTUBytes=1480
+
+[Tunnel]
+Local=5.9.153.153
+Remote=216.66.84.54
+TTL=255

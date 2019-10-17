@@ -1,0 +1,10 @@
+[Unit]
+Description=A.L.F.R.E.D. batadv-vis
+After=alfred@%i.service
+
+[Service]
+ExecStart=/usr/bin/batadv-vis -s -i mesh-%i
+
+[Install]
+WantedBy=multi-user.target
+

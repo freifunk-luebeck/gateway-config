@@ -1,0 +1,9 @@
+[NetDev]
+Name=ffrhein-fra3
+Kind=gre
+MTUBytes=1400
+
+[Tunnel]
+Local=5.9.153.153
+Remote=185.66.194.1
+TTL=64

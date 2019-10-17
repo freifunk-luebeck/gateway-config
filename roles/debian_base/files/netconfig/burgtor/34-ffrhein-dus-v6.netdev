@@ -1,0 +1,10 @@
+[NetDev]
+Name=ffrhein-dus-v6
+Kind=ip6tnl
+MTUBytes=1400
+
+[Tunnel]
+Mode=ip6ip6
+Local=2a01:4f8:200:71e3:5054:ff:fe1c:c60c
+Remote=2a01:a700:48ac::1:2
+TTL=64

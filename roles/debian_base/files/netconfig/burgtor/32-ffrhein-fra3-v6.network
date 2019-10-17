@@ -1,0 +1,6 @@
+[Match]
+Name=ffrhein-fra3-v6
+
+[Network]
+IPForward=yes
+Address=2a03:2260:0:36::2/64

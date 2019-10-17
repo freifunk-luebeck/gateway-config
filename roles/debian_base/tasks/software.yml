@@ -1,0 +1,6 @@
+---
+- apt: update_cache=yes
+- name: install tools
+  apt: state=present name=openssh-server,openssh-client,git,wget,curl,zsh,tcpdump,iftop,iputils-ping,htop,bridge-utils,batctl
+- name: install networking stuff
+  apt: state=present name=bird,tinc,bind9,fastd,radvd,dhcpd,ntp,haveged

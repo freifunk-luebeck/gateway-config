@@ -1,0 +1,9 @@
+[NetDev]
+Name=ffrhein-ber
+Kind=gre
+MTUBytes=1400
+
+[Tunnel]
+Local=5.9.153.153
+Remote=185.66.195.1
+TTL=64

@@ -1,0 +1,11 @@
+[Unit]
+Description=A.L.F.R.E.D.
+Wants=network.target
+BindsTo=sys-subsystem-net-devices-mesh\x2d%i.device
+After=sys-subsystem-net-devices-mesh\x2d%i.device
+
+[Service]
+ExecStart=/usr/bin/alfred -i freifunk-%i -b mesh-%i
+
+[Install]
+WantedBy=multi-user.target
