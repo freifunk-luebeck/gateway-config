@@ -4,6 +4,5 @@
 COMMIT
 *mangle
 -A PREROUTING -i freifunk-+ -j MARK --set-xmark 0x1/0xffffffff
--A PREROUTING -i nat64 -j MARK --set-xmark 0x1/0xffffffff
 -A PREROUTING -i icvpn -j MARK --set-xmark 0x1/0xffffffff
 COMMIT

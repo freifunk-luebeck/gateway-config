@@ -1,0 +1,17 @@
+[Unit]
+Description=batman setup for freifunk
+Wants=network.target
+# BindsTo=sys-subsystem-net-devices-%i_mesh_vpn.device sys-subsystem-net-devices-%i_mesh_gwvpn.device
+# After=sys-subsystem-net-devices-%i_mesh_vpn.device sys-subsystem-net-devices-%i_mesh_gwvpn.device
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=ip link add %i type batadv
+# ExecStart=batctl -m %i_bat0 if add %i_mesh_vpn
+# ExecStart=batctl -m %i_bat0 if add %i_mesh_gwvpn
+# ExecStart=batctl -m %i_bat0 gw server
+# ExecStart=-batctl -m %i_bat0 nc disable
+
+[Install]
+WantedBy=multi-user.target

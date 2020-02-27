@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ip link set address {{ fastd_gw_mac }} dev $INTERFACE
+ip link set up $INTERFACE
+batctl -m ffhl_bat0 if add $INTERFACE

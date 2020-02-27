@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# this loads all files *.rules in /etc/iptables
+
+
+for i in /etc/iptables/*.rules; do
+	iptables-restore < "$i"
+done

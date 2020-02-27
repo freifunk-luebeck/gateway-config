@@ -1,0 +1,43 @@
+---
+- user: name=fastd system=yes home=/etc/fastd
+
+
+- template:
+    src: fastd/{{ item }}/fastd-up
+    dest: /etc/fastd/{{ item }}/fastd-up
+    owner: fastd
+    mode: 0744
+
+- name: generate fastd key
+  shell:
+    cmd: fastd --generate-key | awk '/Secret/ {print "secret \"" $2 "\";" }' > /etc/fastd/{{ item }}/secret.conf
+    creates: /etc/fastd/{{ item }}/secret.conf
+
+- name: generate peer file
+  shell:
+    cmd: fastd --show-key -c /etc/fastd/{{ item }}/fastd.conf | awk '/Public/ {print "key \"" $2 "\";" }' > /etc/fastd/{{ item }}/peer.conf
+
+
+- systemd:
+    enabled: yes
+    name: fastd@{{ item }}
+
+
+- fetch:
+    src: /etc/fastd/{{ item }}/peer.conf
+    dest: artifacts/
+
+
+
+
+        #
+        # - template:
+        #     src: fastd/ffhl_mesh_vpn/fastd-up
+        #     dest: /etc/fastd/ffhl_mesh_vpn/fastd-up
+        #     owner: fastd
+        #     mode: 0744
+        #
+        #     - name: generate fastd key
+        #     command: fastd --generate-key | awk  -e '/Secret/ {print "secret \"" $2 "\";" }' > /etc/fastd/ffhl_mesh_vpn/secret.conf
+        #     args:
+        #         creates: /etc/fastd/ffhl_mesh_vpn/secret.conf

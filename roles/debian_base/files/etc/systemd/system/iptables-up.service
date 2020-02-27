@@ -1,0 +1,10 @@
+[Unit]
+Description=Load *.rules from /etc/iptables and apply them
+After=systemd-networkd
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/iptables-up
+
+[Install]
+WantedBy=multi-user.target

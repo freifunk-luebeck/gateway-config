@@ -1,5 +1,0 @@
-[Match]
-Name=anycast-dns
-
-[Network]
-Address=2001:67c:2d50:1::10.130.127.224/128

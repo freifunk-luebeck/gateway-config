@@ -1,5 +1,8 @@
 [gateways]
-ffhl-gateway ansible_ssh_host=10.10.1.100 ansible_ssh_user=root
+burgtor ansible_ssh_host=burgtor.luebeck.freifunk.net
+holstentor ansible_ssh_host=holstentor.luebeck.freifunk.net
+muehlentor ansible_ssh_host=muehlentor.luebeck.freifunk.net
+huextertor ansible_ssh_host=huextertor.luebeck.freifunk.net
 
 [gateways:vars]
 ansible_python_interpreter=/usr/bin/env python2

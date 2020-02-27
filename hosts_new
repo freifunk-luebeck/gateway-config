@@ -1,0 +1,5 @@
+[gateways]
+kaisertor ansible_ssh_host=10.8.1.50 ansible_ssh_user=root
+
+[gateways:vars]
+ansible_python_interpreter=/usr/bin/env python2

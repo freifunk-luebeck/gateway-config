@@ -1,6 +1,44 @@
 ---
-- apt: update_cache=yes
+# - lineinfile:
+#     path: /etc/apt/sources.list
+#     regexp: '^deb .* main$'
+#     line: deb http://deb.debian.org/debian stable main
+
+- name: apt python update
+  command: apt-get update
+
+- name: install python-apt
+  command: apt-get install -y python-apt
+
 - name: install tools
-  apt: state=present name=openssh-server,openssh-client,git,wget,curl,zsh,tcpdump,iftop,iputils-ping,htop,bridge-utils,batctl
-- name: install networking stuff
-  apt: state=present name=bird,tinc,bind9,fastd,radvd,dhcpd,ntp,haveged
+  apt:
+    update_cache: yes
+    state: present
+    name:
+      - iptables-persistent
+      - apt-file
+      - batctl
+      - bind9
+      - bird
+      - bridge-utils
+      - curl
+      - isc-dhcp-server
+      - fastd
+      - git
+      - haveged
+      - htop
+      - iftop
+      - iputils-ping
+      - ntp
+      - openssh-client
+      - openssh-server
+      - python-apt
+      - radvd
+      - tcpdump
+      - tinc
+      - vim
+      - wget
+      - iperf3
+
+- name: load batman-adv
+  command: modprobe batman-adv

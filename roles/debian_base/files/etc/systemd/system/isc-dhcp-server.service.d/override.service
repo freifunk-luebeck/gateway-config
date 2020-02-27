@@ -1,0 +1,3 @@
+[Unit]
+BindsTo=sys-subsystem-net-devices-ffhl.device
+After=network.target sys-subsystem-net-devices-ffhl.device
