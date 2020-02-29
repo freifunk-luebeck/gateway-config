@@ -1,0 +1,17 @@
+zone "ffhl" IN {
+	type master;
+	file "ffhl/ffhl.zone";
+	allow-transfer { any; };
+};
+
+zone "130.10.in-addr.arpa" IN {
+	type master;
+	file "ffhl/10.130.zone";
+	allow-transfer { any; };
+};
+
+zone "7.d.d.3.0.c.f.f.f.e.d.f.ip6.arpa" IN {
+	type master;
+	file "ffhl/fdef:ffc0:3dd7.zone";
+	allow-transfer { any; };
+};

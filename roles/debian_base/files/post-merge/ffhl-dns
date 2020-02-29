@@ -1,5 +1,5 @@
 #!/bin/sh
 
-systemctl reload named.service
+systemctl reload bind9.service
 
 exit 0

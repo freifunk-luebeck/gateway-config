@@ -1,8 +1,9 @@
 ip4: 10.130.0.252
-ip6: 2001:67c:2d50::d01
-ip6_ula: fdef:ffc0:3dd7::d01
-fastd_mesh_mac: de:ad:ca:fe:aa:bb
-fastd_gw_mac: de:ad:ca:fe:bb:dd
-freifunk_mac: de:ad:ca:fe:cc:dd
-dhcpd_start: 10.130.12.63
-dhcpd_end: 10.130.15.255
+ip6: 2001:67c:2d50::bb
+ip6_ula: fdef:ffc0:3dd7::bb
+fastd_mesh_mac: de:ad:ca:fe:bb:bb
+fastd_gw_mac: de:ad:ca:fe:bb:cc
+freifunk_mac: de:ad:ca:fe:bb:aa
+dhcpd_start: 10.130.24.1
+dhcpd_end: 10.130.31.254
+internet_iface_mac: 52:54:00:57:84:a3
