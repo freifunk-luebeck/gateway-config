@@ -1,0 +1,23 @@
+# It looks like this unit is not needed.
+# batctl creates automatically a batman interface when an interface is added.
+# `batctl -m fobar123 if add eth0` would automatically create foobar123
+# Then only a proper .network and .link file for systemd-networkd is needed
+
+[Unit]
+Description=batman setup for freifunk
+Wants=network.target
+BindsTo=sys-subsystem-net-devices-ffhl_mesh_vpn.device sys-subsystem-net-devices-ffhl_mesh_gwvpn.device
+After=sys-subsystem-net-devices-bat0.device
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=batctl -m bat0 if add ffhl_mesh_gwvpn
+ExecStart=batctl -m bat0 if add ffhl_mesh_vpn
+ExecStart=batctl -m bat0 gw server 50000/25000
+ExecStart=batctl -m bat0 nc disable
+
+ExecStop=ip link delete bat0
+
+[Install]
+WantedBy=multi-user.target

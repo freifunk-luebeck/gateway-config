@@ -4,13 +4,13 @@ set -e
 
 DATA=$(git rev-parse --show-toplevel)
 
-../icvpn-scripts/mkdns -s $DATA -x luebeck -f bind > /etc/named_ffdns.conf
+../icvpn-scripts/mkdns -s $DATA -x luebeck -f bind > /etc/bind/icvpn.conf
 ../icvpn-scripts/mkbgp -s $DATA -x luebeck -p icvpn_ -d bgp_icvpn > /etc/bird/bird6_icvpn.conf
 ../icvpn-scripts/mkbgp -s $DATA -x luebeck -p icvpn_ -d bgp_icvpn -4 > /etc/bird/bird_icvpn.conf
-../icvpn-scripts/mkroa -s $DATA -x luebeck -m 64 > /etc/bird/roa.ip6
-../icvpn-scripts/mkroa -s $DATA -x luebeck -m 32 -4 > /etc/bird/roa.ip4
+../icvpn-scripts/mkroa -s $DATA -x luebeck -m 64 > /etc/bird/roa6.conf
+../icvpn-scripts/mkroa -s $DATA -x luebeck -m 32 -4 > /etc/bird/roa4.conf
 
-systemctl try-reload-or-restart named.service
+systemctl try-reload-or-restart bind9.service
 systemctl try-reload-or-restart bird6.service
 systemctl try-reload-or-restart bird.service
 

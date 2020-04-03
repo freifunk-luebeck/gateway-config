@@ -1,7 +1,12 @@
 ---
-- command: systemctl enable {{ item }}
+- systemd:
+    enabled: yes
+    state: restarted
+    name: "{{ item }}"
   with_items:
     - tinc.service
     - tinc@icvpn.service
     - update-icvpn.timer
     - update-icvpn-meta.timer
+    - bird.service
+    - bird6.service

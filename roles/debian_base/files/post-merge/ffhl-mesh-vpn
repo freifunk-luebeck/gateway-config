@@ -1,6 +1,5 @@
 #!/bin/sh
 
-systemctl reload 'fastd@ffhl\x2dmesh\x2dvpn.service'
-systemctl reload 'fastd@ffhl\x2dmesh\x2dvpn\x2d2.service'
+systemctl reload 'fastd@ffhl_mesh_vpn.service'
 
 exit 0

@@ -2,15 +2,21 @@
 - command: systemctl mask display-manager.service
 
 
+- name: stop bird
+  systemd:
+    state: stopped
+    name: bird.service
+
+
 - name: restart services
   systemd:
     state: restarted
     name: "{{ item }}"
   with_items:
-    - batman@ffhl_bat0.service
-    - bird6.service
-    - bird.service
     - systemd-networkd.service
+    - batman.service
+    # - bird6.service
+    # - bird.service
     - isc-dhcp-server.service
     - "fastd@ffhl_mesh_vpn.service"
     - "fastd@ffhl_mesh_gwvpn.service"

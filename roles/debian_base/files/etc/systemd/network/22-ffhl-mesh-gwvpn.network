@@ -1,0 +1,10 @@
+[Match]
+Name=ffhl_mesh_gwvpn
+
+[Network]
+LinkLocalAddressing=no
+IPv6AcceptRA=no
+DHCP=no
+
+[Link]
+ARP=no

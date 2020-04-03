@@ -43,14 +43,14 @@ protocol static local_mesh {
 };
 
 protocol static mesh_dn42 {
-  table mesh;
-  route 172.20.0.0/16 reject;
-  route 172.22.0.0/15 reject;
+	table mesh;
+	route 172.20.0.0/16 reject;
+	route 172.22.0.0/15 reject;
 };
 
 protocol static mesh_freifunk {
-  table mesh;
-  route 10.0.0.0/8 reject;
+  	table mesh;
+  	route 10.0.0.0/8 reject;
 };
 
 # Mesh-internal routing
@@ -68,7 +68,8 @@ protocol rip rip_mesh {
 
 protocol ospf ospf_mesh {
 	preference 90;
-	export where !((OWNMAGIC, 1) ~ bgp_community) && proto != "rip_mesh";
+	# export where !((OWNMAGIC, 1) ~ bgp_community) && proto != "rip_mesh";
+	export all;
 	import all;
 	area 0 {
 		interface "ffhl" {
@@ -88,15 +89,21 @@ protocol ospf ospf_mesh {
 # Kernel routing tables
 ########################
 
+protocol static test {
+	route 10.80.0.0/16 via "enp1s0";
+};
+
+
 protocol kernel {
 	scan time 20;
 	device routes;
-	import none;
-	export filter {
-		if is_dn42()     then { krt_prefsrc = OWNIP; accept ; }
-		if is_freifunk() then { krt_prefsrc = OWNIP; accept ; }
-		reject;
-	};
+	import all;
+	export all;
+	# export filter {
+	# 	if is_dn42()     then { krt_prefsrc = OWNIP; accept ; }
+	# 	if is_freifunk() then { krt_prefsrc = OWNIP; accept ; }
+	# 	reject;
+	# };
 };
 
 protocol kernel {
@@ -150,12 +157,11 @@ template bgp bgp_ibgp {
 	local as OWNAS;
 	direct;
 	import all;
-	export filter {
-		bgp_community.add((OWNMAGIC, 1));
-		if is_default() then reject;
-		if source = RTS_BGP then accept;
-		reject;
-	};
+	export filter { bgp_community.add((OWNMAGIC, 1));
+	                if is_default() then reject;
+	                if source = RTS_BGP then accept;
+	                reject;
+	              };
 }
 
 # InterCity VPN peerings
@@ -195,6 +201,6 @@ template bgp bgp_dn42 {
 ################################################
 
 include "bird_local.con?";
-include "bird_ibgp.conf";
+# include "bird_ibgp.conf";
 include "bird_icvpn.con?";
 include "bird_ffrhein.con?";

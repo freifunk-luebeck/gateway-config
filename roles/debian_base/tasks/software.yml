@@ -15,30 +15,39 @@
     update_cache: yes
     state: present
     name:
-      - iptables-persistent
       - apt-file
       - batctl
       - bind9
       - bird
       - bridge-utils
       - curl
-      - isc-dhcp-server
+      - dnsutils
       - fastd
       - git
       - haveged
       - htop
       - iftop
+      - iperf3
+      - iptables-persistent
       - iputils-ping
+      - isc-dhcp-server
       - ntp
       - openssh-client
       - openssh-server
+      - prometheus-bind-exporter
+      - prometheus-bird-exporter
+      - prometheus-node-exporter
       - python-apt
+      - python3-yaml
       - radvd
       - tcpdump
       - tinc
       - vim
       - wget
-      - iperf3
+      - socat
+      - jq
 
 - name: load batman-adv
-  command: modprobe batman-adv
+  modprobe:
+    name: batman-adv
+    state: present

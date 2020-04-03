@@ -1,0 +1,3 @@
+key "1bdc74ed0fc67931c7327fc21a3e83793ebce0f62eaf6c71e32f0e9669dd8997";
+remote 192.168.100.3 port 10001;
+float yes;

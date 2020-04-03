@@ -7,9 +7,11 @@
 
 - name: copy base configs
   copy: src=etc/ dest=/etc
+  tags: [bird, fastd]
 
 - name: copy host specific configs
   copy: src=host/{{ inventory_hostname }}/etc/ dest=/etc
+  tags: [bird, fastd]
 
 - name: copy scripts
   copy: src=scripts/iptables-up dest=/usr/local/bin/iptables-up mode=755
@@ -33,11 +35,21 @@
   block:
     - template: src=network/10-ffhl.netdev.j2 dest=/etc/systemd/network/10-ffhl.netdev
     - template: src=network/12-ffhl.network.j2 dest=/etc/systemd/network/12-ffhl.network
-    - template: src=network/10-internet.link.j2 dest=/etc/systemd/network/12-internet.link
+
+- name: template iptables
+  block:
+    - template: src=iptables/rules.v4 dest=/etc/iptables/rules.v4
+    # - template: src=iptables/rules.v6 dest=/etc/iptables/rules.v6
+
 
 # sometimes disabled (dunno why)
 - name: enable systemd-networkd
   command: systemctl enable systemd-networkd
+
+- name: restart systemd-networkd
+  systemd:
+    state: restarted
+    name: systemd-networkd
 
 
 - name: create fastd configs
@@ -47,20 +59,20 @@
     - ffhl_mesh_gwvpn
 
 
-- include: radvd.yml
-
-- include: dhcpd.yml
-
-
 - name: reload systemd
   command: systemctl daemon-reload
 
+
+- include: radvd.yml
+- include: dhcpd.yml
 
 - lineinfile: dest=/etc/iproute2/rt_tables line="42\tfreifunk"
 
 - include: bird.yml
   tags:
     - bird
+
+
 - include: ffhl-dns.yml
 - include: ffhl-peers.yml
 - include: units.yml

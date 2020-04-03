@@ -13,9 +13,10 @@
     cmd: fastd --generate-key | awk '/Secret/ {print "secret \"" $2 "\";" }' > /etc/fastd/{{ item }}/secret.conf
     creates: /etc/fastd/{{ item }}/secret.conf
 
+
 - name: generate peer file
   shell:
-    cmd: fastd --show-key -c /etc/fastd/{{ item }}/fastd.conf | awk '/Public/ {print "key \"" $2 "\";" }' > /etc/fastd/{{ item }}/peer.conf
+    cmd: fastd --show-key -c /etc/fastd/{{ item }}/fastd.conf | awk '/Public/ {print "key \"" $2 "\"; " }' > /etc/fastd/{{ item }}/peer.conf
 
 
 - systemd:

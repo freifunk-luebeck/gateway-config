@@ -1,4 +1,4 @@
 [Service]
 Type=oneshot
-WorkingDirectory=/var/lib/icvpn-meta
+WorkingDirectory=/var/lib/icvpn/icvpn-meta
 ExecStart=/usr/bin/git pull

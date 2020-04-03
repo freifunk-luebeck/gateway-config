@@ -1,5 +1,7 @@
 [Match]
-Name=ffhl_bat0
+Name=bat0
 
 [Network]
+LinkLocalAddressing = no
+IPv6AcceptRA=no
 Bridge=ffhl

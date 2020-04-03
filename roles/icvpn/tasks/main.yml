@@ -1,12 +1,23 @@
 ---
 - copy: src=etc/ dest=/etc
 - include: icvpn-meta.yml
+
 - template: src=40-icvpn.network.j2 dest=/etc/systemd/network/40-icvpn.network
+
+# The actual icvpn config
 - file: state=directory dest=/etc/tinc
 - git: repo=https://github.com/freifunk/icvpn.git dest=/etc/tinc/icvpn
 - template: src=tinc.conf.j2 dest=/etc/tinc/icvpn/tinc.conf
-- copy: src=post-merge/icvpn dest=/etc/tinc/icvpn/.git/hooks/post-merge mode=a+x
+- command: cp /etc/tinc/icvpn/scripts/post-merge /etc/tinc/icvpn/.git/hooks/post-merge
+- file: path=/etc/tinc/icvpn/.git/hooks/post-merge mode=a+x
+
 - command: .git/hooks/post-merge
   args:
-    chdir: /etc/tinc/icvpn
+    chdir: /etc/tinc/icvpn/
+
+# - systemd:
+#     daemon_reload: yes # not required. run daemon-reload before doing any other operations, to make sure systemd has read any changes.
+#     state: restarted # not required. choices: reloaded;restarted;started;stopped. C(started)/C(stopped) are idempotent actions that will not run commands unless necessary. C(restarted) will always bounce the service. C(reloaded) will always reload.
+#     name: "{{ item }}" # not required. Name of the service. When using in a chroot environment you always need to specify the full name i.e. (crond.service).
+
 - include: units.yml

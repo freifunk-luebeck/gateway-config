@@ -1,8 +1,9 @@
 ---
-- git: repo=https://github.com/freifunk/icvpn-scripts.git dest=/var/lib/icvpn-scripts
-- git: repo=https://github.com/freifunk/icvpn-meta.git dest=/var/lib/icvpn-meta
-- copy: src=post-merge/icvpn-meta dest=/var/lib/icvpn-meta/.git/hooks/post-merge mode=a+x
+- file: path=/var/lib/icvpn state=directory
+- git: repo=https://github.com/freifunk/icvpn-scripts.git dest=/var/lib/icvpn/icvpn-scripts
+- git: repo=https://github.com/freifunk/icvpn-meta.git dest=/var/lib/icvpn/icvpn-meta
+
+- copy: src=post-merge/icvpn-meta dest=/var/lib/icvpn/icvpn-meta/.git/hooks/post-merge mode=a+x
 - command: .git/hooks/post-merge
   args:
-    chdir: /var/lib/icvpn-meta
-    creates: /etc/named_ffdns.conf
+    chdir: /var/lib/icvpn/icvpn-meta
