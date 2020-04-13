@@ -1,4 +1,4 @@
 [Service]
 Type=oneshot
-WorkingDirectory=/var/cache/bind
+WorkingDirectory=/var/cache/bind/ffhl
 ExecStart=/usr/bin/git pull

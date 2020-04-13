@@ -8,6 +8,7 @@
 - file: state=directory dest=/etc/tinc
 - git: repo=https://github.com/freifunk/icvpn.git dest=/etc/tinc/icvpn
 - template: src=tinc.conf.j2 dest=/etc/tinc/icvpn/tinc.conf
+
 - command: cp /etc/tinc/icvpn/scripts/post-merge /etc/tinc/icvpn/.git/hooks/post-merge
 - file: path=/etc/tinc/icvpn/.git/hooks/post-merge mode=a+x
 

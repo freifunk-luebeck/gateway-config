@@ -11,7 +11,7 @@ DATA=$(git rev-parse --show-toplevel)
 ../icvpn-scripts/mkroa -s $DATA -x luebeck -m 32 -4 > /etc/bird/roa4.conf
 
 systemctl try-reload-or-restart bind9.service
-systemctl try-reload-or-restart bird6.service
+# systemctl try-reload-or-restart bird.service
 systemctl try-reload-or-restart bird.service
 
 exit 0

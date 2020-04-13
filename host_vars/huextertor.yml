@@ -8,3 +8,6 @@ dhcpd_start: 10.130.24.1
 dhcpd_end: 10.130.31.254
 # edit this before deploying on final servers!!!
 exit_iface: enp1s0
+
+units_enable:
+  - batman.service

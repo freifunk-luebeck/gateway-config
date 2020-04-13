@@ -1,8 +1,9 @@
 ---
-# - lineinfile:
-#     path: /etc/apt/sources.list
-#     regexp: '^deb .* main$'
-#     line: deb http://deb.debian.org/debian stable main
+- lineinfile:
+    path: /etc/apt/sources.list
+    # regexp: '^deb .* main$'
+    line: deb http://deb.debian.org/debian bullseye main
+
 
 - name: apt python update
   command: apt-get update
@@ -18,7 +19,7 @@
       - apt-file
       - batctl
       - bind9
-      - bird
+      - bird2
       - bridge-utils
       - curl
       - dnsutils
@@ -35,7 +36,7 @@
       - openssh-client
       - openssh-server
       - prometheus-bind-exporter
-      - prometheus-bird-exporter
+      # - prometheus-bird-exporter
       - prometheus-node-exporter
       - python-apt
       - python3-yaml

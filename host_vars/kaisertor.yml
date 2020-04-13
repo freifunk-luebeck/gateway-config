@@ -7,7 +7,7 @@ freifunk_mac: de:ad:ca:fe:aa:aa
 fastd_mesh_mac: de:ad:ca:fe:aa:bb
 fastd_gw_mac: de:ad:ca:fe:aa:cc
 dhcpd_start: 10.130.16.1
-dhcpd_end: 10.130.23.254
+dhcpd_end: 10.130.23.255
 
 # the out-interface for NAT
 exit_iface: enp1s0
@@ -16,3 +16,6 @@ exit_iface: enp1s0
 icvpn_name: luebeck2
 icvpn_ip4: 10.207.0.131
 icvpn_ip6: fec0::a:cf:0:83
+
+units_enable:
+  - batman.service

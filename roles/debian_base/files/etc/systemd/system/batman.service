@@ -12,10 +12,10 @@ After=sys-subsystem-net-devices-bat0.device
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=batctl -m bat0 if add ffhl_mesh_gwvpn
-ExecStart=batctl -m bat0 if add ffhl_mesh_vpn
-ExecStart=batctl -m bat0 gw server 50000/25000
-ExecStart=batctl -m bat0 nc disable
+ExecStart=batctl bat0 if add ffhl_mesh_gwvpn
+ExecStart=batctl bat0 if add ffhl_mesh_vpn
+ExecStart=batctl bat0 gw server 50000/25000
+ExecStart=batctl bat0 nc disable
 
 ExecStop=ip link delete bat0
 

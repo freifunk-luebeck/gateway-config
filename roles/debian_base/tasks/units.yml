@@ -11,13 +11,13 @@
 - name: restart services
   systemd:
     state: restarted
+    enabled: yes
     name: "{{ item }}"
   with_items:
     - systemd-networkd.service
     - batman.service
-    # - bird6.service
-    # - bird.service
-    - isc-dhcp-server.service
+    # - bird6.service we are using bird2 now
+    - bird.service
     - "fastd@ffhl_mesh_vpn.service"
     - "fastd@ffhl_mesh_gwvpn.service"
     - freifunk-ip-rule.service
@@ -28,6 +28,10 @@
     - sshd.service
     - update-ffhl-dns.timer
     - update-ffhl-mesh-vpn.timer
+    - isc-dhcp-server.service
 
-- command: systemctl enable {{ item }}
+- name: enable units
+  systemd:
+    enabled: yes
+    name: "{{ item }}"
   with_items: "{{ units_enable|default([]) }}"
