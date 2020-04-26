@@ -7,5 +7,8 @@ Address={{ ip4 }}/16
 Address={{ ip6 }}/64
 Address={{ ip6_ula }}/64
 
-LinkLocalAddressing=no
+# radvd wants a linklocal address
+LinkLocalAddressing=ipv6
+
+# we don't want to accept our own RA's
 IPv6AcceptRA=no

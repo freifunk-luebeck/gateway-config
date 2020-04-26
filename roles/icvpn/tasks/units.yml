@@ -9,4 +9,3 @@
     - update-icvpn.timer
     - update-icvpn-meta.timer
     - bird.service
-    - bird6.service

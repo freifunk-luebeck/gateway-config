@@ -2,6 +2,9 @@
 - command: systemctl mask display-manager.service
 
 
+- command: systemctl daemon-reload
+
+
 - name: stop bird
   systemd:
     state: stopped
@@ -15,7 +18,6 @@
     name: "{{ item }}"
   with_items:
     - systemd-networkd.service
-    - batman.service
     # - bird6.service we are using bird2 now
     - bird.service
     - "fastd@ffhl_mesh_vpn.service"
@@ -29,6 +31,9 @@
     - update-ffhl-dns.timer
     - update-ffhl-mesh-vpn.timer
     - isc-dhcp-server.service
+    - iptables.service
+    - ip6tables.service
+    - batman.service
 
 - name: enable units
   systemd:

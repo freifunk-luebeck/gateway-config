@@ -2,6 +2,6 @@
 Name=bat0
 
 [Network]
-LinkLocalAddressing = no
+LinkLocalAddressing=no
 IPv6AcceptRA=no
 Bridge=ffhl
