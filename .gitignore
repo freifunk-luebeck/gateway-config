@@ -2,3 +2,4 @@
 /playbook.retry
 secret*
 /artifacts
+/hosts_testing
