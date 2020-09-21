@@ -10,7 +10,7 @@ dhcpd_start: 10.130.16.1
 dhcpd_end: 10.130.23.255
 
 # the out-interface for NAT
-exit_iface: enp1s0
+exit_iface: ens3
 
 # ICVPN variables
 icvpn_name: luebeck2

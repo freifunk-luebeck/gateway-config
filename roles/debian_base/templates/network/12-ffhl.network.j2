@@ -12,3 +12,24 @@ LinkLocalAddressing=ipv6
 
 # we don't want to accept our own RA's
 IPv6AcceptRA=no
+
+
+[RoutingPolicyRule]
+From=10.130.0.0/16
+Table=42
+
+
+[RoutingPolicyRule]
+From=2001:67c:2d50::/48
+Table=42
+
+
+[RoutingPolicyRule]
+FirewallMark=0x1
+Table=42
+Family=both
+
+[RoutingPolicyRule]
+Table=42
+Priority=32767
+Family=ipv6

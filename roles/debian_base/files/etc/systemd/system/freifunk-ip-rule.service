@@ -1,3 +1,6 @@
+# This file is probalby not necessary anymore
+# rules are defined in the .network files
+
 [Unit]
 Description=ip rule
 Before=network.target

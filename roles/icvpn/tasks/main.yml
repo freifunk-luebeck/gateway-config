@@ -4,7 +4,7 @@
 
 - template: src=40-icvpn.network.j2 dest=/etc/systemd/network/40-icvpn.network
 
-# The actual icvpn config
+# The icvpn tinc configs config
 - file: state=directory dest=/etc/tinc
 - git: repo=https://github.com/freifunk/icvpn.git dest=/etc/tinc/icvpn
 - template: src=tinc.conf.j2 dest=/etc/tinc/icvpn/tinc.conf

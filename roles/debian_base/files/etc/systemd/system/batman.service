@@ -7,14 +7,14 @@
 Description=batman setup for freifunk
 Wants=network.target
 After=sys-subsystem-net-devices-bat0.device fastd@ffhl_mesh_gwvpn fastd@ffhl_mesh_vpn
-BindsTo=sys-subsystem-net-devices-ffhl_mesh_vpn.device sys-subsystem-net-devices-ffhl_mesh_gwvpn.device
+# BindsTo=sys-subsystem-net-devices-ffhl_mesh_vpn.device sys-subsystem-net-devices-ffhl_mesh_gwvpn.device
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=-ip link add bat0 type batadv
-ExecStart=batctl bat0 if add ffhl_mesh_gwvpn
-ExecStart=batctl bat0 if add ffhl_mesh_vpn
+ExecStart=-batctl bat0 if add ffhl_mesh_gwvpn
+ExecStart=-batctl bat0 if add ffhl_mesh_vpn
 ExecStart=batctl bat0 gw_mode server 50000/25000
 ExecStart=batctl bat0 network_coding disable
 

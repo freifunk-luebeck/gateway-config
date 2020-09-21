@@ -4,7 +4,6 @@
     # regexp: '^deb .* main$'
     line: deb http://deb.debian.org/debian bullseye main
 
-
 - name: apt python update
   command: apt-get update
 
@@ -18,7 +17,7 @@
     name:
       - apt-file
       - batctl
-      - bind9
+      - pdns-recursor
       - bird2
       - bridge-utils
       - curl
@@ -29,24 +28,22 @@
       - htop
       - iftop
       - iperf3
+      - iproute2
       - iptables-persistent
       - iputils-ping
       - isc-dhcp-server
-      - ntp
+      - jq
       - openssh-client
       - openssh-server
       - prometheus-bind-exporter
-      # - prometheus-bird-exporter
       - prometheus-node-exporter
       - python-apt
       - python3-yaml
       - radvd
+      - socat
       - tcpdump
-      - tinc
       - vim
       - wget
-      - socat
-      - jq
 
 - name: load batman-adv
   modprobe:

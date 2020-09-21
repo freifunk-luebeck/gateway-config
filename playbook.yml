@@ -1,11 +1,10 @@
 ---
-- hosts: all
+- hosts: gateways
   become: yes
   roles:
-    - base
+    - debian_base
 
-- hosts: burgtor:holstentor
+- hosts: kaisertor
   become: yes
   roles:
     - icvpn
-    - ffrhein-uplink

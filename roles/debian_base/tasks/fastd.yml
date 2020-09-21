@@ -6,7 +6,7 @@
     src: fastd/{{ item }}/fastd-up
     dest: /etc/fastd/{{ item }}/fastd-up
     owner: fastd
-    mode: 0744
+    mode: '0744'
 
 - name: generate fastd key
   shell:

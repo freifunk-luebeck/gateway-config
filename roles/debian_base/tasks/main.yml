@@ -55,6 +55,8 @@
 - name: create fastd configs
   include_tasks: fastd.yml
   loop:
+    - ffhl_mesh_vpn0
+    - ffhl_mesh_vpn1
     - ffhl_mesh_vpn
     - ffhl_mesh_gwvpn
 

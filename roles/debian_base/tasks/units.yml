@@ -22,7 +22,7 @@
     - bird.service
     - "fastd@ffhl_mesh_vpn.service"
     - "fastd@ffhl_mesh_gwvpn.service"
-    - freifunk-ip-rule.service
+    # - freifunk-ip-rule.service
     - haveged.service
     - bind9.service
     - ntp.service
