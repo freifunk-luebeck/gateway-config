@@ -1,5 +1,8 @@
 #!/bin/sh
 
-systemctl reload 'fastd@ffhl_mesh_vpn.service'
+systemctl reload 'fastd@ffhl_mesh_vpn0.service'
+systemctl reload 'fastd@ffhl_mesh_vpn1.service'
+systemctl reload 'fastd@ffhl_mesh_vpn2.service'
+systemctl reload 'fastd@ffhl_mesh_vpn3.service'
 
 exit 0
