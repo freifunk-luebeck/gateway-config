@@ -2,7 +2,7 @@
 - hosts: gateways
   become: yes
   roles:
-    - debian_base
+    - base
 
 - hosts: kaisertor
   become: yes

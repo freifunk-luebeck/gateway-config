@@ -1,6 +1,0 @@
-[gateways]
-kaisertor ansible_ssh_host=kaisertor.mesh.ffhl.chaotikum.org ansible_ssh_user=root
-huextertor ansible_ssh_host=huextertor.mesh.ffhl.chaotikum.org ansible_ssh_user=root
-
-[gateways:vars]
-ansible_python_interpreter=/usr/bin/env python2
