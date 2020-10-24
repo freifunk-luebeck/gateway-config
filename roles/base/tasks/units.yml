@@ -1,30 +1,37 @@
 ---
 - command: systemctl mask display-manager.service
-- command: systemctl enable {{ item }}
+
+- command: systemctl daemon-reload
+
+- name: stop bird
+  systemd:
+    state: stopped
+    name: bird.service
+
+- name: restart services
+  systemd:
+    state: restarted
+    enabled: yes
+    name: "{{ item }}"
   with_items:
-    #    - alfred@hl.service
-    #    - batadv-vis@hl.service
-    - batman-freifunk@hl.service
-    - bird6.service
+    - "fastd@ffhl_mesh_gwvpn.service"
+    - "fastd@ffhl_mesh_vpn.service"
+    - batman.service
     - bird.service
-    - dhcpd4.service
-    - "'fastd@ffhl\\x2dmesh\\x2dvpn.service'"
-    - "'fastd@ffhl\\x2dmesh\\x2dvpn\\x2d2.service'"
-    - "'fastd@ffhl\\x2dgw\\x2dvpn.service'"
-    - freifunk-ip-rule.service
     - haveged.service
     - ip6tables.service
     - iptables.service
-    - named.service
-    - ntpd.service
+    - isc-dhcp-server.service
+    - ntp.service
+    - pdns-recursor.service
     - radvd.service
-    - snmpd.service
     - sshd.service
     - systemd-networkd.service
-    - tayga.service
     - update-ffhl-dns.timer
     - update-ffhl-mesh-vpn.timer
-    - vnstat.service
-- command: systemctl enable {{ item }}
-  with_items: "{{ units_enable|default([]) }}"
 
+- name: enable units
+  systemd:
+    enabled: yes
+    name: "{{ item }}"
+  with_items: "{{ units_enable|default([]) }}"

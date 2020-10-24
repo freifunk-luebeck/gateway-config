@@ -1,1 +1,8 @@
-- command: sudo -u yaourt yaourt -Syua --noconfirm
+---
+- lineinfile:
+    path: /etc/apt/sources.list
+    regexp: '^deb .* main'
+    line: deb http://deb.debian.org/debian stable main
+- name: update the system
+  apt:
+    update_cache: yes

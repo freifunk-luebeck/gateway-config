@@ -1,4 +1,4 @@
 [Service]
 Type=oneshot
-WorkingDirectory=/var/cache/bind/ffhl
+WorkingDirectory=/etc/fastd/ffhl-mesh-vpn/peers
 ExecStart=/usr/bin/git pull

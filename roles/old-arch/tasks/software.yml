@@ -1,0 +1,8 @@
+---
+- pacman: update_cache=yes
+- pacman: state=present name=linux-lts,linux-lts-headers,openssh,grub,git,wget,python-yaml,zsh,grml-zsh-config,base-devel,tcpdump,iftop
+- pacman: state=present name=bird,bird6,make,tinc,bind
+- pacman: state=present name=radvd,dhcp,ntp,haveged,openvpn,vnstat,net-snmp,batctl
+- pacman: state=present name=linux-headers
+
+- command: sudo -u yaourt yaourt -S --noconfirm --needed fastd batman-adv-legacy-dkms batman-alfred tayga

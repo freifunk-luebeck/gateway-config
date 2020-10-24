@@ -1,8 +1,51 @@
 ---
-- pacman: update_cache=yes
-- pacman: state=present name=linux-lts,linux-lts-headers,openssh,grub,git,wget,python-yaml,zsh,grml-zsh-config,base-devel,tcpdump,iftop
-- pacman: state=present name=bird,bird6,make,tinc,bind
-- pacman: state=present name=radvd,dhcp,ntp,haveged,openvpn,vnstat,net-snmp,batctl
-- pacman: state=present name=linux-headers
+- lineinfile:
+    path: /etc/apt/sources.list
+    # regexp: '^deb .* main$'
+    line: deb http://deb.debian.org/debian bullseye main
 
-- command: sudo -u yaourt yaourt -S --noconfirm --needed fastd batman-adv-legacy-dkms batman-alfred tayga
+- name: apt python update
+  command: apt-get update
+
+- name: install python-apt
+  command: apt-get install -y python-apt
+
+- name: install tools
+  apt:
+    update_cache: yes
+    state: present
+    name:
+      - apt-file
+      - batctl
+      - pdns-recursor
+      - bird2
+      - bridge-utils
+      - curl
+      - dnsutils
+      - fastd
+      - git
+      - haveged
+      - htop
+      - iftop
+      - iperf3
+      - iproute2
+      - iptables-persistent
+      - iputils-ping
+      - isc-dhcp-server
+      - jq
+      - openssh-client
+      - openssh-server
+      - prometheus-bind-exporter
+      - prometheus-node-exporter
+      - python-apt
+      - python3-yaml
+      - radvd
+      - socat
+      - tcpdump
+      - vim
+      - wget
+
+- name: load batman-adv
+  modprobe:
+    name: batman-adv
+    state: present

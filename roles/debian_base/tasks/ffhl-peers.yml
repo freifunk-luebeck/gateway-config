@@ -1,3 +1,0 @@
----
-- git: repo=git@git.luebeck.freifunk.net:FreifunkLuebeck/fastd-keys.git dest=/var/local/ffhl-mesh-vpn-peers accept_hostkey=True
-- copy: src=post-merge/ffhl-mesh-vpn dest=/etc/fastd/ffhl_mesh_vpn/peers/.git/hooks/post-merge mode=a+x
