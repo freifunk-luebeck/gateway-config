@@ -7,7 +7,7 @@
 
 - name: copy base configs
   copy: src=etc/ dest=/etc
-  tags: [bird, fastd]
+  tags: [fastd]
 
 - name: copy host specific configs
   copy: src=host/{{ inventory_hostname }}/etc/ dest=/etc
