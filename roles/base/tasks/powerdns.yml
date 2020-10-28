@@ -1,0 +1,10 @@
+---
+- name: copy base configs
+  copy:
+    src: powerdns
+    dest: /etc/
+
+- name: restart powerdns
+  systemd:
+    state: restarted
+    name: pdns-recursor.service

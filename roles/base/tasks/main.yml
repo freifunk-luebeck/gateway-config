@@ -1,5 +1,4 @@
 ---
--
 - include: software.yml
 
 - name: Disable root login with password
@@ -60,6 +59,8 @@
 
 - include: radvd.yml
 - include: dhcpd.yml
+- include: powerdns.yml
+  tags: [powerdns]
 
 - lineinfile: dest=/etc/iproute2/rt_tables line="42\tfreifunk"
 
