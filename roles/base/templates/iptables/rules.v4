@@ -1,11 +1,11 @@
 *filter
 -A OUTPUT -o internet -p icmp -m icmp --icmp-type 3/1 -j DROP
+-A INPUT -s {{ ipv4_subnet }} -i ffhl -p udp -m udp --dport 10000:10020 -j REJECT --reject-with icmp-port-unreachable
 COMMIT
 *nat
--A POSTROUTING -s {{ ff_subnet }} -o {{ exit_iface }} -j MASQUERADE
+-A POSTROUTING -s {{ ipv4_subnet }} -o {{ exit_iface }} -j MASQUERADE
 COMMIT
 *mangle
--A FORWARD -o ffrhein-+ -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
--A PREROUTING -i freifunk-+ -j MARK --set-xmark 0x1/0xffffffff
+-A PREROUTING -i ffhl -j MARK --set-xmark 0x1/0xffffffff
 -A PREROUTING -i icvpn -j MARK --set-xmark 0x1/0xffffffff
 COMMIT

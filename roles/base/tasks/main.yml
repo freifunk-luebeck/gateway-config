@@ -12,8 +12,6 @@
   copy: src=host/{{ inventory_hostname }}/etc/ dest=/etc
   tags: [bird, fastd]
 
-- name: copy scripts
-  copy: src=scripts/iptables-up dest=/usr/local/bin/iptables-up mode=755
 
 # configurations and stuff
 
@@ -33,9 +31,15 @@
     - template: src=network/12-ffhl.network.j2 dest=/etc/systemd/network/12-ffhl.network
 
 - name: template iptables
+  tags: [iptables]
   block:
     - template: src=iptables/rules.v4 dest=/etc/iptables/rules.v4
-    # - template: src=iptables/rules.v6 dest=/etc/iptables/rules.v6
+    - template: src=iptables/rules.v6 dest=/etc/iptables/rules.v6
+    - name: reload iptables
+      systemd:
+        state: restarted
+        name: iptables.service
+
 
 # sometimes disabled (dunno why)
 - name: enable systemd-networkd
@@ -51,7 +55,6 @@
   loop:
     - ffhl_mesh_vpn0
     - ffhl_mesh_vpn1
-    - ffhl_mesh_vpn
     - ffhl_mesh_gwvpn
 
 - name: reload systemd
