@@ -15,35 +15,37 @@
     update_cache: yes
     state: present
     name:
-      - apt-file
+      # necessary packets
       - batctl
       - pdns-recursor
       - bird2
-      - bridge-utils
-      - curl
-      - dnsutils
       - fastd
       - git
       - haveged
-      - htop
-      - iftop
-      - iperf3
       - iproute2
       - iptables-persistent
-      - iputils-ping
       - isc-dhcp-server
-      - jq
-      - openssh-client
       - openssh-server
       - prometheus-bind-exporter
       - prometheus-node-exporter
       - python-apt
-      - python3-yaml
       - radvd
-      - socat
+      # tools for debugging
+      - bridge-utils
+      - apt-file
+      - curl
+      - dnsutils
+      - htop
+      - iftop
+      - openssh-client
+      - wget
+      - iperf3
       - tcpdump
       - vim
-      - wget
+      - iputils-ping
+      - socat
+      - jq
+      - python3-yaml
 
 - name: load batman-adv
   modprobe:
