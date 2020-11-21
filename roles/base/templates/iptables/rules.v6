@@ -2,14 +2,13 @@
 -A PREROUTING -j CT --notrack
 -A OUTPUT -j CT --notrack
 COMMIT
-*mangle
--A PREROUTING -i freifunk-+ -j MARK --set-xmark 0x1/0xffffffff
--A PREROUTING -i icvpn -j MARK --set-xmark 0x1/0xffffffff
-COMMIT
 *filter
 :INPUT ACCEPT [0:0]
 :FORWARD ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
 -A INPUT -s {{ ipv6_subnet }} -p udp -m udp --dport 10000:10020 -j REJECT --reject-with icmp6-port-unreachable
+
+# Block other IPs than ours
+-A FORWARD ! -s 2001:67c:2d50::/48 -i ffhl -j REJECT --reject-with icmp6-adm-prohibited
 -A OUTPUT -o ffhl -p ipv6-icmp -m icmp6 --icmpv6-type 137 -j DROP
 COMMIT

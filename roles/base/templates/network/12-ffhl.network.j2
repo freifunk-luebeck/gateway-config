@@ -6,30 +6,13 @@ IPForward=yes
 Address={{ ip4 }}/16
 Address={{ ip6 }}/64
 Address={{ ip6_ula }}/64
-
 # radvd wants a linklocal address
 LinkLocalAddressing=ipv6
-
 # we don't want to accept our own RA's
 IPv6AcceptRA=no
 
-
 [RoutingPolicyRule]
-From={{ ipv4_subnet }}
+IncomingInterface=ffhl
 Table=42
-
-
-[RoutingPolicyRule]
-From=2001:67c:2d50::/48
-Table=42
-
-
-[RoutingPolicyRule]
-FirewallMark=0x1
-Table=42
+Priority=32765
 Family=both
-
-[RoutingPolicyRule]
-Table=42
-Priority=32767
-Family=ipv6

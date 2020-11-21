@@ -1,5 +1,5 @@
 [Match]
-Name=ffhl_mesh_vpn
+Name=ffhl_mesh_*
 
 [Network]
 LinkLocalAddressing=no

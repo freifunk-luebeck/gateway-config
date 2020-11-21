@@ -1,11 +1,8 @@
 *filter
 -A OUTPUT -o internet -p icmp -m icmp --icmp-type 3/1 -j DROP
 -A INPUT -s {{ ipv4_subnet }} -i ffhl -p udp -m udp --dport 10000:10020 -j REJECT --reject-with icmp-port-unreachable
+-A FORWARD ! -s 10.130.0.0/16 -i ffhl -j REJECT
 COMMIT
 *nat
 -A POSTROUTING -s {{ ipv4_subnet }} -o {{ exit_iface }} -j MASQUERADE
-COMMIT
-*mangle
--A PREROUTING -i ffhl -j MARK --set-xmark 0x1/0xffffffff
--A PREROUTING -i icvpn -j MARK --set-xmark 0x1/0xffffffff
 COMMIT
