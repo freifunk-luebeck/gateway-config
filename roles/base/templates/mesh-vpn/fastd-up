@@ -1,5 +1,5 @@
 #!/bin/bash
 
-ip link set address {{ fastd_mesh_mac }} dev $INTERFACE
+ip link set address {{ item.mac }} dev $INTERFACE
 ip link set up $INTERFACE
 batctl if add $INTERFACE

@@ -39,7 +39,7 @@
 
 
 - name: template iptables
-  tags: [iptables]
+  tags: [iptables, networking]
   block:
     - template: src=iptables/rules.v4 dest=/etc/iptables/rules.v4
     - template: src=iptables/rules.v6 dest=/etc/iptables/rules.v6
@@ -51,29 +51,39 @@
 
 # sometimes disabled (dunno why)
 - name: enable systemd-networkd
-  command: systemctl enable systemd-networkd
+  tags: [networking]
+  systemd:
+    enabled: yes
+    name: systemd-networkd
 
 
-- name: create fastd configs
-  include_tasks: fastd.yml
-  loop:
-    - ffhl_mesh_vpn0
-    - ffhl_mesh_vpn1
-    - ffhl_mesh_gwvpn
+- name: mesh-vpn
+  tags: [debug, fastd, mesh-vpn]
+  include: mesh-vpn.yml
+
+# - name: create fastd configs
+#   tags: ['debug', 'fastd']
+#   include: fastd.yml
+#   loop: "{{ fastd_instances }}"
+
 
 - name: reload systemd
-  command: systemctl daemon-reload
+  systemd:
+    daemon_reload: yes
 
 - include: radvd.yml
 - include: dhcpd.yml
 - include: powerdns.yml
   tags: [powerdns]
 
-- lineinfile: dest=/etc/iproute2/rt_tables line="42\tfreifunk"
+- name: add freifunk routing table
+  tags: [networking]
+  lineinfile:
+    dest: /etc/iproute2/rt_tables
+    line: "42\tfreifunk"
 
 - include: bird.yml
   tags:
     - bird
 
-- include: ffhl-peers.yml
 - include: units.yml
