@@ -1,5 +1,0 @@
-#!/bin/bash
-
-ip link set $INTERFACE address {{ fastd_gw_mac }}
-ip link set $INTERFACE up
-batctl if add $INTERFACE

@@ -1,3 +1,3 @@
 key "17cfa7ece927a3c32ec5f3a8c923cc7cdfeb82d6d1cfc7ef39611d38b8e7cf8c";
-remote 192.168.100.2 port 10001;
+remote "huextertor.mesh.ffhl.chaotikum.org" port 10001;
 float yes;

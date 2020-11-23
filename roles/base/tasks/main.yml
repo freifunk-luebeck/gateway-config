@@ -61,10 +61,9 @@
   tags: [debug, fastd, mesh-vpn]
   include: mesh-vpn.yml
 
-# - name: create fastd configs
-#   tags: ['debug', 'fastd']
-#   include: fastd.yml
-#   loop: "{{ fastd_instances }}"
+- name: gwvpn
+  tags: ['gwvpn', 'fastd']
+  include: gwvpn.yml
 
 
 - name: reload systemd
