@@ -26,26 +26,26 @@
       - iptables-persistent
       - isc-dhcp-server
       - openssh-server
-      - prometheus-bind-exporter
       - prometheus-node-exporter
       - python-apt
       - radvd
-      # tools for debugging
-      - bridge-utils
+      # tools
       - apt-file
+      - bridge-utils
       - curl
       - dnsutils
       - htop
       - iftop
-      - openssh-client
-      - wget
       - iperf3
+      - iputils-ping
+      - jq
+      - molly-guard
+      - openssh-client
+      - python3-yaml
+      - socat
       - tcpdump
       - vim
-      - iputils-ping
-      - socat
-      - jq
-      - python3-yaml
+      - wget
 
 - name: load batman-adv
   modprobe:
