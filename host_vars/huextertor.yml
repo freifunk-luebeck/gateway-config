@@ -1,5 +1,5 @@
-# real host address
 
+# Base role
 ip4: 10.130.0.252
 ip6: 2001:67c:2d50::bbaa
 ip6_ula: fdef:ffc0:3dd7::bbaa
@@ -79,6 +79,3 @@ mesh_vpn_instances:
     mtu: 1312
     port: 10013
     mac: de:ad:ca:fe:bb:03
-
-units_enable:
-  - batman.service

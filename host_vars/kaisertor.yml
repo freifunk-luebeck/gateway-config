@@ -88,6 +88,3 @@ exit_iface: ens3
 icvpn_name: luebeck2
 icvpn_ip4: 10.207.0.131
 icvpn_ip6: fec0::a:cf:0:83
-
-units_enable:
-  - batman.service
