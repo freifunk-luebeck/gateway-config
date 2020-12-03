@@ -9,6 +9,7 @@ COMMIT
 -A INPUT -s {{ ipv6_subnet }} -p udp -m udp --dport 10000:10020 -j REJECT --reject-with icmp6-port-unreachable
 
 # Block other IPs than ours
--A FORWARD ! -s 2001:67c:2d50::/48 -i ffhl -j REJECT --reject-with icmp6-adm-prohibited
+-A FORWARD -s 2001:67c:2d50::/48,fdef:ffc0:3dd7::/48 -i ffhl -j ACCEPT
 -A OUTPUT -o ffhl -p ipv6-icmp -m icmp6 --icmpv6-type 137 -j DROP
+-A FORWARD -i ffhl -j REJECT --reject-with icmp6-adm-prohibited
 COMMIT

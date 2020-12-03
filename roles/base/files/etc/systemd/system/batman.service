@@ -1,6 +1,6 @@
 # It looks like this unit is not needed.
 # batctl creates automatically a batman interface when an interface is added.
-# `batctl -m fobar123 if add eth0` would automatically create foobar123
+# `batctl -m batfoo if add eth0` would automatically create batfoo
 # Then only a proper .network and .link file for systemd-networkd is needed
 
 [Unit]
@@ -13,11 +13,8 @@ After=sys-subsystem-net-devices-bat0.device fastd@ffhl_mesh_gwvpn fastd@ffhl_mes
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=-ip link add bat0 type batadv
-ExecStart=-batctl bat0 if add ffhl_mesh_gwvpn
-ExecStart=-batctl bat0 if add ffhl_mesh_vpn
 ExecStart=batctl bat0 gw_mode server 50000/25000
 ExecStart=batctl bat0 network_coding disable
-
 ExecStop=ip link delete bat0
 
 [Install]
