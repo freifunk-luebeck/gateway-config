@@ -1,10 +1,27 @@
 ---
-- file: path=/var/lib/icvpn state=directory
-# - git: repo=https://github.com/freifunk/icvpn-scripts.git dest=/var/lib/icvpn/icvpn-scripts
-- git: repo=https://github.com/cuechan/icvpn-scripts.git dest=/var/lib/icvpn/icvpn-scripts
-- git: repo=https://github.com/freifunk/icvpn-meta.git dest=/var/lib/icvpn/icvpn-meta
+- name: create config and scripts directory
+  file:
+    path: /var/lib/icvpn
+    state: directory
 
-- copy: src=post-merge/icvpn-meta dest=/var/lib/icvpn/icvpn-meta/.git/hooks/post-merge mode=a+x
-- command:
+- name: clone scripts
+  git:
+    repo: https://github.com/freifunk/icvpn-scripts.git
+    dest: /var/lib/icvpn/icvpn-scripts
+
+- name: clone meta repo
+  git:
+    repo: https://github.com/freifunk/icvpn-meta.git
+    dest: /var/lib/icvpn/icvpn-meta
+
+- name: copy post-merge hook
+  copy:
+    src: post-merge/icvpn-meta
+    dest: /var/lib/icvpn/icvpn-meta/.git/hooks/post-merge
+    mode: a+x
+
+
+- name: run post-merge hook
+  command:
     cmd: .git/hooks/post-merge
     chdir: /var/lib/icvpn/icvpn-meta

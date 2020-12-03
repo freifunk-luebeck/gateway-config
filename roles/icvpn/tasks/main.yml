@@ -1,18 +1,59 @@
 ---
-- copy: src=etc/ dest=/etc
-- include: icvpn-meta.yml
+- name: copy base files
+  tags: [icvpn]
+  copy:
+    src: etc/
+    dest: /etc
 
-- template: src=40-icvpn.network.j2 dest=/etc/systemd/network/40-icvpn.network
+- name: meta repo
+  tags: [icvpn]
+  include: icvpn-meta.yml
+
+- name: .network template
+  tags: [icvpn]
+  template:
+    src: 40-icvpn.network.j2
+    dest: /etc/systemd/network/40-icvpn.network
+
+
 
 # The icvpn tinc configs config
-- file: state=directory dest=/etc/tinc
-- git: repo=https://github.com/freifunk/icvpn.git dest=/etc/tinc/icvpn
-- template: src=tinc.conf.j2 dest=/etc/tinc/icvpn/tinc.conf
+- name: create tinc directory
+  tags: [icvpn]
+  file:
+    state: directory
+    dest: /etc/tinc
 
-- command: cp /etc/tinc/icvpn/scripts/post-merge /etc/tinc/icvpn/.git/hooks/post-merge
-- file: path=/etc/tinc/icvpn/.git/hooks/post-merge mode=a+x
 
-- command: .git/hooks/post-merge
+- name: clone the icvpn config repo
+  tags: [icvpn]
+  git:
+    repo: https://github.com/freifunk/icvpn.git
+    dest: /etc/tinc/icvpn
+
+- name: apply config template
+  tags: [icvpn]
+  template:
+    src: tinc.conf.j2
+    dest: /etc/tinc/icvpn/tinc.conf
+
+- name: copy private key
+  copy:
+    decrypt: yes
+    src: tinc-keys/{{ inventory_hostname }}.priv
+    dest: /etc/tinc/icvpn/rsa_key.priv
+
+- name: create git hooks
+  tags: [icvpn]
+  copy:
+    remote_src: yes
+    src: /etc/tinc/icvpn/scripts/post-merge
+    dest: /etc/tinc/icvpn/.git/hooks/post-merge
+    mode: a+xr
+
+- name: first run git hook
+  tags: [icvpn]
+  command: .git/hooks/post-merge
   args:
     chdir: /etc/tinc/icvpn/
 
@@ -21,4 +62,5 @@
 #     state: restarted # not required. choices: reloaded;restarted;started;stopped. C(started)/C(stopped) are idempotent actions that will not run commands unless necessary. C(restarted) will always bounce the service. C(reloaded) will always reload.
 #     name: "{{ item }}" # not required. Name of the service. When using in a chroot environment you always need to specify the full name i.e. (crond.service).
 
-- include: units.yml
+- tags: [icvpn]
+  include: units.yml
