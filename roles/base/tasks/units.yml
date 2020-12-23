@@ -29,9 +29,3 @@
     - systemd-networkd.service
     - update-ffhl-dns.timer
     - update-ffhl-mesh-vpn.timer
-
-- name: enable units
-  systemd:
-    enabled: yes
-    name: "{{ item }}"
-  with_items: "{{ units_enable|default([]) }}"

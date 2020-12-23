@@ -6,24 +6,22 @@
 
 - name: copy base configs
   copy: src=etc/ dest=/etc
-  tags: [fastd]
+
+- name: add freifunk routing table
+  tags: [network]
+  lineinfile:
+    dest: /etc/iproute2/rt_tables
+    line: "42\tfreifunk"
 
 - name: copy host specific configs
   copy: src=host/{{ inventory_hostname }}/etc/ dest=/etc
-  tags: [bird, fastd]
+  tags: [bird]
 
 
 # configurations and stuff
-
 - name: set local timezone
   file: state=link src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
 
-- name: configure ntp
-  blockinfile:
-    path: /etc/ntp.conf
-    block: |
-      restrict fdef:ffc0:3dd7:: mask ffff:ffff:ffff:ffff:: nomodify notrap nopeer
-      restrict 2001:67c:2d50:: mask ffff:ffff:ffff:ffff:: nomodify notrap nopeer
 
 - name: networkd templates
   tags: [systemd-networkd]
@@ -39,7 +37,7 @@
 
 
 - name: template iptables
-  tags: [iptables, networking]
+  tags: [iptables, network]
   block:
     - template: src=iptables/rules.v4 dest=/etc/iptables/rules.v4
     - template: src=iptables/rules.v6 dest=/etc/iptables/rules.v6
@@ -51,18 +49,18 @@
 
 # sometimes disabled (dunno why)
 - name: enable systemd-networkd
-  tags: [networking]
+  tags: [network]
   systemd:
     enabled: yes
     name: systemd-networkd
 
 
 - name: mesh-vpn
-  tags: [debug, fastd, mesh-vpn]
+  tags: [fastd, mesh-vpn]
   include: mesh-vpn.yml
 
 - name: gwvpn
-  tags: ['gwvpn', 'fastd']
+  tags: [gwvpn, fastd]
   include: gwvpn.yml
 
 
@@ -70,19 +68,20 @@
   systemd:
     daemon_reload: yes
 
+- name: enable batman service
+  systemd:
+    state: restarted
+    enabled: yes
+    name: batman
+
+
 - include: radvd.yml
 - include: dhcpd.yml
 - include: powerdns.yml
   tags: [powerdns]
 
-- name: add freifunk routing table
-  tags: [networking]
-  lineinfile:
-    dest: /etc/iproute2/rt_tables
-    line: "42\tfreifunk"
 
 - include: bird.yml
-  tags:
-    - bird
+  tags: [bird]
 
 - include: units.yml

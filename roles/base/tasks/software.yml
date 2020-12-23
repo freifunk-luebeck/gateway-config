@@ -17,7 +17,6 @@
     name:
       # necessary packets
       - batctl
-      - pdns-recursor
       - bird2
       - fastd
       - git
@@ -26,9 +25,11 @@
       - iptables-persistent
       - isc-dhcp-server
       - openssh-server
+      - pdns-recursor
       - prometheus-node-exporter
       - python-apt
       - radvd
+      - systemd-timesyncd
       # tools
       - apt-file
       - bridge-utils

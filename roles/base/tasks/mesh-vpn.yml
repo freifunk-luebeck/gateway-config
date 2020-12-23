@@ -6,14 +6,12 @@
     home: /etc/fastd
 
 - name: create fastd config dirs
-  tags: ['debug', 'fastd', 'mesh-vpn']
   loop: "{{ mesh_vpn_instances }}"
   file:
     path: /etc/fastd/{{ item.name }}
     state: directory
 
 - name: copy fastd config templates
-  tags: ['debug', 'fastd', 'mesh-vpn']
   loop: "{{ mesh_vpn_instances }}"
   template:
     src: mesh-vpn/fastd.conf
@@ -21,7 +19,6 @@
     mode: '0644'
 
 - name: create fastd-up script
-  tags: ['debug']
   loop: "{{ mesh_vpn_instances }}"
   template:
     src: mesh-vpn/fastd-up
@@ -31,7 +28,6 @@
 
 # configure peers git
 - name: clone fastd-keys repo
-  tags: [fastd, mesh-vpn]
   git:
     repo: git@git.luebeck.freifunk.net:FreifunkLuebeck/fastd-keys.git
     dest: /var/local/ffhl-mesh-vpn-peers
@@ -75,7 +71,6 @@
 
 - name: fetch public keys
   loop: "{{ mesh_vpn_instances }}"
-  tags: [debug, fastd, mesh-vpn]
   fetch:
     src: /etc/fastd/{{ item.name }}/pubkey.key
     dest: artifacts/
