@@ -1,0 +1,3 @@
+key "662ae002e43553f990c64f4b0277cf99178e5c582b8bc61d08caa51ff4de9aa5";
+remote "holstentor.mesh.ffhl.chaotikum.org" port 10001;
+float yes;
