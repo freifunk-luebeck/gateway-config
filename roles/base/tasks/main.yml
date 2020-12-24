@@ -1,11 +1,29 @@
 ---
-- include: software.yml
+
+- name: copy base configs
+  tags: [base, etc, apt]
+  copy: src=etc/ dest=/etc
+
+- name: install packages
+  include: software.yml
+  tags: [base, apt]
+
+# configurations and stuff
+- name: set local timezone
+  file: state=link src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
+
+- name: set locales
+  tags: [base, locales]
+  block:
+    - lineinfile: dest=/etc/locale.gen line="en_US.UTF-8 UTF-8"
+    - lineinfile: dest=/etc/locale.gen line="de_DE.UTF-8 UTF-8"
+    - command: locale-gen
+
 
 - name: Disable root login with password
   lineinfile: dest=/etc/ssh/sshd_config regexp="^#?PermitRootLogin" line="PermitRootLogin without-password"
 
-- name: copy base configs
-  copy: src=etc/ dest=/etc
+
 
 - name: add freifunk routing table
   tags: [network]
@@ -18,9 +36,6 @@
   tags: [bird]
 
 
-# configurations and stuff
-- name: set local timezone
-  file: state=link src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
 
 
 - name: networkd templates

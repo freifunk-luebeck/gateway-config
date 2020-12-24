@@ -1,17 +1,18 @@
 ---
-- lineinfile:
-    path: /etc/apt/sources.list
-    # regexp: '^deb .* main$'
-    line: deb http://deb.debian.org/debian bullseye main
+- name: install python3-apt
+  command: apt-get install -y python3-apt
 
-- name: apt python update
-  command: apt-get update
-
-- name: install python-apt
-  command: apt-get install -y python-apt
+- name: remove packages that are not needed
+  apt:
+    update_cache: yes
+    state: absent
+    name:
+      cron-apt
+      mutt
 
 - name: install tools
   apt:
+    autoremove: yes
     update_cache: yes
     state: present
     name:
@@ -29,8 +30,9 @@
       - prometheus-node-exporter
       - python-apt
       - radvd
-      - systemd-timesyncd
+      # - systemd-timesyncd causes dependency hell atm
       # tools
+      - screenfetch
       - apt-file
       - bridge-utils
       - curl
@@ -47,6 +49,7 @@
       - tcpdump
       - vim
       - wget
+      - rsync
 
 - name: load batman-adv
   modprobe:
