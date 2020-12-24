@@ -1,5 +1,10 @@
 #!/bin/bash
+set -e
 
-ip link set "$INTERFACE" address {{ fastd_gw_mac }}
-ip link set "$INTERFACE" up
-batctl if add "$INTERFACE"
+ip link set address {{ fastd_gw_mac }} dev $INTERFACE
+ip link set up $INTERFACE
+# for some reason it seems that adding the interface too fast
+# to bat0 will cause batman_adv to remove them because they are 'deactivated'
+sleep 5
+echo "Adding interface $INTERFACE to bat0"
+batctl if add $INTERFACE

@@ -16,14 +16,14 @@
   template:
     src: mesh-vpn/fastd.conf
     dest: /etc/fastd/{{ item.name }}/fastd.conf
-    mode: '0644'
+    mode: '0640'
 
 - name: create fastd-up script
   loop: "{{ mesh_vpn_instances }}"
   template:
     src: mesh-vpn/fastd-up
     dest: /etc/fastd/{{ item.name }}/fastd-up
-    mode: '0744'
+    mode: '0755'
 
 
 # configure peers git
