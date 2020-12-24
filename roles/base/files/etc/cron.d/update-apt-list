@@ -1,0 +1,4 @@
+# update the package lists so prometheus can alert us
+# if there are many updates available
+
+7 22 * * * apt-get update
