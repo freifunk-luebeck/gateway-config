@@ -6,8 +6,9 @@
 [Unit]
 Description=batman setup for freifunk
 Wants=network.target
-After=sys-subsystem-net-devices-bat0.device fastd@ffhl_mesh_gwvpn fastd@ffhl_mesh_vpn
-# BindsTo=sys-subsystem-net-devices-ffhl_mesh_vpn.device sys-subsystem-net-devices-ffhl_mesh_gwvpn.device
+#After=sys-subsystem-net-devices-bat0.device fastd@ffhl_mesh_gwvpn fastd@ffhl_mesh_vpn
+#BindsTo=sys-subsystem-net-devices-ffhl_mesh_vpn.device sys-subsystem-net-devices-ffhl_mesh_gwvpn.device
+BindsTo=sys-subsystem-net-devices-bat0.device
 
 [Service]
 Type=oneshot
