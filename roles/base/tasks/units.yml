@@ -17,7 +17,6 @@
     - batman.service
     - bird.service
     - haveged.service
-    - ip6tables.service
     - netfilter-persistent.service
     - isc-dhcp-server.service
     - pdns-recursor.service
