@@ -59,7 +59,7 @@
     - name: reload iptables
       systemd:
         state: restarted
-        name: iptables.service
+        name: netfilter-persistent.service
 
 
 # sometimes disabled (dunno why)
