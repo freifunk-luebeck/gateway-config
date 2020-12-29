@@ -18,7 +18,7 @@
     - bird.service
     - haveged.service
     - ip6tables.service
-    - iptables.service
+    - netfilter-persistent.service
     - isc-dhcp-server.service
     - pdns-recursor.service
     - radvd.service
