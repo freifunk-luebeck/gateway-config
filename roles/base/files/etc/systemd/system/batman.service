@@ -14,8 +14,8 @@ BindsTo=sys-subsystem-net-devices-bat0.device
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=-ip link add bat0 type batadv
-ExecStart=batctl bat0 gw_mode server 50000/25000
-ExecStart=batctl bat0 network_coding disable
+ExecStart=batctl -m bat0 gw_mode server 50000/25000
+ExecStart=batctl -m bat0 network_coding disable
 ExecStop=ip link delete bat0
 
 [Install]
