@@ -27,6 +27,8 @@
       - isc-dhcp-server
       - openssh-server
       - pdns-recursor
+      - pdns-server
+      - pdns-backend-bind
       - prometheus-node-exporter
       - python-apt
       - radvd
