@@ -50,6 +50,7 @@
       - vim
       - wget
       - rsync
+      - nmap
 
 - name: load batman-adv
   modprobe:
