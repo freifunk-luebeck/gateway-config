@@ -1,10 +1,29 @@
 ---
-- name: copy base configs
+
+
+- name: copy powerdns configs
   copy:
     src: powerdns
     dest: /etc/
 
+- name: clone dns-repo
+  git:
+    repo: "{{ dns_repo_url }}"
+    dest: /var/local/ffhl-dns
+    accept_hostkey: yes
+
+- name: remove default bind-backend config
+  file:
+    path: /etc/powerdns/pdns.d/bind.conf
+    state: absent
+
 - name: restart powerdns
   systemd:
+    daemon_reload: yes
+    enabled: yes
     state: restarted
-    name: pdns-recursor.service
+    name: "{{ item }}"
+  with_items:
+    - pdns-recursor.service
+    - pdns.service
+    - update-ffhl-dns.timer

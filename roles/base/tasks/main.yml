@@ -1,12 +1,12 @@
 ---
 
 - name: copy base configs
-  tags: [base, etc, apt]
+  tags: [base, etc, apt, powerdns]
   copy: src=etc/ dest=/etc
 
 - name: install packages
   include: software.yml
-  tags: [base, apt]
+  tags: [base, apt, software]
 
 # configurations and stuff
 - name: set local timezone
