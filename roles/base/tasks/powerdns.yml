@@ -1,9 +1,24 @@
 ---
 
+- name: install packages 
+  apt:
+    autoremove: yes
+    update_cache: yes
+    state: present
+    name:
+      - dnsdist
+      - pdns-recursor
+      - pdns-server
+      - pdns-backend-bind
 
 - name: copy powerdns configs
   copy:
     src: powerdns
+    dest: /etc/
+
+- name: copy dnsdist configs
+  copy:
+    src: dnsdist 
     dest: /etc/
 
 - name: clone dns-repo
@@ -27,3 +42,4 @@
     - pdns-recursor.service
     - pdns.service
     - update-ffhl-dns.timer
+    - dnsdist
