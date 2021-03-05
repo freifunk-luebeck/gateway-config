@@ -21,8 +21,11 @@
 
 
 - name: Disable root login with password
+  tags: [base]
   lineinfile: dest=/etc/ssh/sshd_config regexp="^#?PermitRootLogin" line="PermitRootLogin without-password"
 
+- name: reload sysctl
+  command: sysctl -p --system
 
 
 - name: add freifunk routing table
@@ -91,9 +94,11 @@
 
 
 - include: radvd.yml
+  tags: [network, radvd]
 - include: dhcpd.yml
+  tags: [network, dhcp]
 - include: powerdns.yml
-  tags: [powerdns]
+  tags: [powerdns, network]
 
 
 - include: bird.yml
