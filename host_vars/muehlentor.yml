@@ -9,7 +9,7 @@ fastd_gw_mac: de:ad:ca:fe:dd:cc
 dhcpd_start: 10.130.8.1
 dhcpd_end: 10.130.15.255
 # edit this before deploying on final servers!!!
-exit_iface: eth0
+exit_iface: ens3
 
 mesh_gwvpn_secret: !vault |
   $ANSIBLE_VAULT;1.1;AES256
