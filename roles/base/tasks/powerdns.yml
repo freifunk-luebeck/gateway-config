@@ -1,10 +1,10 @@
 ---
 
-- name: install packages 
+- name: install packages
   apt:
     autoremove: yes
     update_cache: yes
-    state: present
+    state: latest
     name:
       - dnsdist
       - pdns-recursor
@@ -18,7 +18,7 @@
 
 - name: copy dnsdist configs
   copy:
-    src: dnsdist 
+    src: dnsdist
     dest: /etc/
 
 - name: clone dns-repo
