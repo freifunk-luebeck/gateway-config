@@ -1,5 +1,0 @@
----
-- copy: src=bird/base/ dest=/etc/bird
-- copy: src=bird/{{ inventory_hostname }}/ dest=/etc/bird
-- template: src=bird_host.conf.j2 dest=/etc/bird/bird_host.conf
-- template: src=bird6_host.conf.j2 dest=/etc/bird/bird6_host.conf

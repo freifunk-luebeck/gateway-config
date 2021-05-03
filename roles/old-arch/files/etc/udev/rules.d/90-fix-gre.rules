@@ -1,1 +1,0 @@
-ACTION=="add", KERNEL=="ffrhein-*", SUBSYSTEM=="net", RUN+="/usr/bin/ip link set %k mtu 1400"

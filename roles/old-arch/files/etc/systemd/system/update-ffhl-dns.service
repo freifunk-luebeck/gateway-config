@@ -1,4 +1,0 @@
-[Service]
-Type=oneshot
-WorkingDirectory=/var/named/ffhl
-ExecStart=/usr/bin/git pull

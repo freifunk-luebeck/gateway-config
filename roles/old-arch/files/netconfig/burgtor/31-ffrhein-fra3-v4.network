@@ -1,6 +1,0 @@
-[Match]
-Name=ffrhein-fra3-v4
-
-[Network]
-IPForward=yes
-Address=100.64.0.95/31

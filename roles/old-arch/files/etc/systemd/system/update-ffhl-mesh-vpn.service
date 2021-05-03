@@ -1,4 +1,0 @@
-[Service]
-Type=oneshot
-WorkingDirectory=/etc/fastd/ffhl-mesh-vpn/peers
-ExecStart=/usr/bin/git pull

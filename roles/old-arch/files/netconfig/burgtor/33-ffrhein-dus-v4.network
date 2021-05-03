@@ -1,6 +1,0 @@
-[Match]
-Name=ffrhein-dus-v4
-
-[Network]
-IPForward=yes
-Address=100.64.0.93/31
