@@ -1,0 +1,18 @@
+image: debian:stable
+
+default:
+  interruptible: true
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+- test
+
+test:images:
+  stage: test
+  before_script:
+  - apt update
+  - apt install -qq -y ansible-lint
+  script:
+  - ansible-lint playbook.yml
