@@ -4,3 +4,4 @@ secret*
 /artifacts
 /hosts_testing
 vault-password.txt
+/my-playbook.yml
