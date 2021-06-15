@@ -105,3 +105,4 @@
   tags: [bird]
 
 - include: units.yml
+  tags: [base]
