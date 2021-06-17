@@ -1,7 +1,6 @@
 authoritative;
 default-lease-time 600;
 max-lease-time 600;
-log-facility syslog;
 
 subnet {{ dhcpd_subnet }} netmask {{ dhcpd_netmask }} {
     range {{ dhcpd_start }} {{ dhcpd_end }};

@@ -10,11 +10,18 @@
 
 - name: restart services
   systemd:
+    enabled: no
+    name: "{{ item }}"
+  with_items:
+    - batman.service
+
+
+- name: restart services
+  systemd:
     state: restarted
     enabled: yes
     name: "{{ item }}"
   with_items:
-    - batman.service
     - bird.service
     - haveged.service
     - netfilter-persistent.service
