@@ -13,11 +13,18 @@
   file: state=link src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
 
 - name: set locales
-  tags: [base, locales]
+  tags: [base]
   block:
     - lineinfile: dest=/etc/locale.gen line="en_US.UTF-8 UTF-8"
     - lineinfile: dest=/etc/locale.gen line="de_DE.UTF-8 UTF-8"
     - command: locale-gen
+
+- name: base config
+  tags: [base]
+  include_tasks:
+    file: base.yml
+    apply:
+      tags: [base]
 
 
 - name: Disable root login with password
@@ -37,7 +44,6 @@
 - name: copy host specific configs
   copy: src=host/{{ inventory_hostname }}/etc/ dest=/etc
   tags: [bird]
-
 
 
 
@@ -86,11 +92,6 @@
   systemd:
     daemon_reload: yes
 
-- name: enable batman service
-  systemd:
-    state: restarted
-    enabled: yes
-    name: batman
 
 
 - include: radvd.yml
