@@ -8,12 +8,12 @@
 #     state: stopped
 #     name: bird.service
 
-- name: restart services
-  systemd:
-    enabled: no
-    name: "{{ item }}"
-  with_items:
-    - batman.service
+# - name: restart services
+#   systemd:
+#     enabled: no
+#     name: "{{ item }}"
+#   with_items:
+#     - batman.service
 
 
 - name: restart services
