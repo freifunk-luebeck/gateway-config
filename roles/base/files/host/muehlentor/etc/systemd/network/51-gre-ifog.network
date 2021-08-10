@@ -1,0 +1,5 @@
+[Match]
+Name=gre-ifog
+
+[Network]
+Address=2a0c:9a40:100f:462::2/64
