@@ -1,8 +1,16 @@
 ---
-
 - name: copy base configs
   tags: [base, etc, apt, powerdns]
-  copy: src=etc/ dest=/etc
+  copy:
+    src: etc/
+    dest: /etc
+
+- name: copy scripts
+  tags: [base, powerdns]
+  copy:
+    src: scripts/
+    dest: /usr/local/lib/ffhl/
+    mode: a+x
 
 - name: install packages
   include: software.yml
@@ -26,14 +34,12 @@
     apply:
       tags: [base]
 
-
 - name: Disable root login with password
   tags: [base]
   lineinfile: dest=/etc/ssh/sshd_config regexp="^#?PermitRootLogin" line="PermitRootLogin without-password"
 
 - name: reload sysctl
   command: sysctl -p --system
-
 
 - name: add freifunk routing table
   tags: [network]
@@ -44,8 +50,6 @@
 - name: copy host specific configs
   copy: src=host/{{ inventory_hostname }}/etc/ dest=/etc
   tags: [bird]
-
-
 
 - name: networkd templates
   tags: [systemd-networkd]
@@ -59,7 +63,6 @@
         state: restarted
         name: systemd-networkd
 
-
 - name: template iptables
   tags: [iptables, network]
   block:
@@ -70,14 +73,12 @@
         state: restarted
         name: netfilter-persistent.service
 
-
 # sometimes disabled (dunno why)
 - name: enable systemd-networkd
   tags: [network]
   systemd:
     enabled: yes
     name: systemd-networkd
-
 
 - name: mesh-vpn
   tags: [fastd, mesh-vpn]
@@ -87,11 +88,9 @@
   tags: [gwvpn, fastd]
   include: gwvpn.yml
 
-
 - name: reload systemd
   systemd:
     daemon_reload: yes
-
 
 
 - include: radvd.yml
@@ -100,7 +99,6 @@
   tags: [network, dhcp]
 - include: powerdns.yml
   tags: [powerdns, network]
-
 
 - include: bird.yml
   tags: [bird]
