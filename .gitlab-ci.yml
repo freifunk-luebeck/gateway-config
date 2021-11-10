@@ -1,7 +1,4 @@
-image: debian:stable
-
-default:
-  interruptible: true
+image: debian:bullseye
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
@@ -9,7 +6,7 @@ variables:
 stages:
 - test
 
-test:images:
+ansible_lint:
   stage: test
   before_script:
   - apt update
