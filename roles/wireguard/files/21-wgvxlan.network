@@ -1,0 +1,7 @@
+[Match]
+Name=wgvxlan
+
+[Network]
+
+[Link]
+MTUBytes=1330

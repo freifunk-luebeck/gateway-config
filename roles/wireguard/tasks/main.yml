@@ -1,0 +1,13 @@
+---
+
+- name: prepare
+  tags: [wireguard]
+  include: prepare.yml
+
+- name: setup
+  tags: [wireguard]
+  include: setup.yml
+
+- name: finish
+  tags: [wireguard]
+  include: finish.yml

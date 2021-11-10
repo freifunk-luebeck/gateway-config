@@ -1,0 +1,10 @@
+---
+
+- name: install wireguard
+  apt:
+    autoremove: yes
+    update_cache: yes
+    state: present
+    name:
+      - wireguard
+      - wireguard-tools

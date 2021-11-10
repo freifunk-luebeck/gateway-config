@@ -1,0 +1,45 @@
+---
+
+- name: install packages
+  apt:
+    autoremove: yes
+    update_cache: yes
+    state: latest
+    name:
+      - dnsdist
+      - pdns-recursor
+      - pdns-server
+      - pdns-backend-bind
+
+- name: copy powerdns configs
+  copy:
+    src: powerdns
+    dest: /etc/
+
+- name: copy dnsdist configs
+  copy:
+    src: dnsdist
+    dest: /etc/
+
+- name: clone dns-repo
+  git:
+    repo: "{{ dns_repo_url }}"
+    dest: /var/local/ffhl-dns
+    accept_hostkey: yes
+
+- name: remove default bind-backend config
+  file:
+    path: /etc/powerdns/pdns.d/bind.conf
+    state: absent
+
+- name: restart powerdns
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+    name: "{{ item }}"
+  with_items:
+    - pdns-recursor.service
+    - pdns.service
+    - update-ffhl-dns.timer
+    - dnsdist

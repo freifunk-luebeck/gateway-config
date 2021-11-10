@@ -1,0 +1,76 @@
+---
+- name: create fastd user
+  user:
+    name: fastd
+    system: yes
+    home: /etc/fastd
+
+- name: create fastd config dirs
+  loop: "{{ mesh_vpn_instances }}"
+  file:
+    path: /etc/fastd/{{ item.name }}
+    state: directory
+
+- name: copy fastd config templates
+  loop: "{{ mesh_vpn_instances }}"
+  template:
+    src: mesh-vpn/fastd.conf
+    dest: /etc/fastd/{{ item.name }}/fastd.conf
+    mode: '0640'
+
+- name: create fastd-up script
+  loop: "{{ mesh_vpn_instances }}"
+  template:
+    src: mesh-vpn/fastd-up
+    dest: /etc/fastd/{{ item.name }}/fastd-up
+    mode: '0755'
+
+
+# configure peers git
+- name: clone fastd-keys repo
+  git:
+    repo: git@git.luebeck.freifunk.net:FreifunkLuebeck/fastd-keys.git
+    dest: /var/local/ffhl-mesh-vpn-peers
+    accept_hostkey: yes
+
+- name: add post-merge hook
+  template:
+    src: mesh-vpn/peers-post-merge.sh
+    dest: /var/local/ffhl-mesh-vpn-peers/.git/hooks/post-merge
+    mode: a+x
+
+- name: install mesh-vpn peer update service
+  copy:
+    src: mesh-vpn/
+    dest: /etc/systemd/system/
+    owner: root
+
+
+
+# enable services
+
+- name: enable fastd instances
+  loop: "{{ mesh_vpn_instances }}"
+  systemd:
+    enabled: yes
+    state: restarted
+    name: fastd@{{ item.name }}
+
+- name: enable mesh-vpn peer update job
+  systemd:
+    name: update-ffhl-mesh-vpn.timer
+    enabled: yes
+    state: started
+
+
+# download public keys to our local machine
+- name: create public key files
+  loop: "{{ mesh_vpn_instances }}"
+  shell:
+    cmd: fastd --show-key -c /etc/fastd/{{ item.name }}/fastd.conf > /etc/fastd/{{ item.name }}/pubkey.key
+
+- name: fetch public keys
+  loop: "{{ mesh_vpn_instances }}"
+  fetch:
+    src: /etc/fastd/{{ item.name }}/pubkey.key
+    dest: artifacts/

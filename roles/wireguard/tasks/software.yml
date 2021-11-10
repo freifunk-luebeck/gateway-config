@@ -27,6 +27,7 @@
       - isc-dhcp-server
       - openssh-server
       - prometheus-node-exporter
+      - python-apt
       - radvd
       # - systemd-timesyncd causes dependency hell atm
       # tools

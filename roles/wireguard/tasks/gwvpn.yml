@@ -1,0 +1,49 @@
+---
+- name: create fastd user
+  user:
+    name: fastd
+    system: yes
+    home: /etc/fastd
+
+- name: create fastd config dirs
+  file:
+    path: /etc/fastd/ffhl_mesh_gwvpn
+    state: directory
+
+- name: copy gwvpn config
+  copy:
+    src: mesh-gwvpn/
+    dest: /etc/fastd/ffhl_mesh_gwvpn
+    owner: root
+
+
+- name: apply fastd.conf template
+  template:
+    src: mesh-gwvpn/fastd.conf
+    dest: /etc/fastd/ffhl_mesh_gwvpn/fastd.conf
+
+
+- name: create fastd-up script
+  template:
+    src: mesh-gwvpn/fastd-up
+    dest: /etc/fastd/ffhl_mesh_gwvpn/fastd-up
+    mode: '0744'
+
+
+# enable fastd@ffhl_mesh_gwvpn service
+
+- name: enable gwvpn
+  systemd:
+    name: fastd@ffhl_mesh_gwvpn.service
+    state: restarted
+    enabled: yes
+
+# download public keys to your local machine
+- name: create public key files
+  shell:
+    cmd: fastd --show-key -c /etc/fastd/ffhl_mesh_gwvpn/fastd.conf > /etc/fastd/ffhl_mesh_gwvpn/pubkey.key
+
+- name: fetch public keys
+  fetch:
+    src: /etc/fastd/ffhl_mesh_gwvpn/pubkey.key
+    dest: artifacts/

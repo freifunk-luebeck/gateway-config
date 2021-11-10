@@ -1,0 +1,6 @@
+---
+- hosts: test
+  become: yes
+  roles:
+    - base
+    - wireguard

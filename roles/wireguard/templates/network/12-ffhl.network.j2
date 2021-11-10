@@ -1,0 +1,18 @@
+[Match]
+Name=ffhl
+
+[Network]
+IPForward=yes
+Address={{ ip4 }}/16
+Address={{ ip6 }}/64
+Address={{ ip6_ula }}/64
+# radvd wants a linklocal address
+LinkLocalAddressing=ipv6
+# we don't want to accept our own RA's
+IPv6AcceptRA=no
+
+[RoutingPolicyRule]
+IncomingInterface=ffhl
+Table=42
+Priority=32765
+Family=both

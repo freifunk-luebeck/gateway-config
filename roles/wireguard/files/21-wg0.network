@@ -1,0 +1,6 @@
+[Match]
+Name=wg0
+
+[Network]
+Address=fe80::1/64
+VXLAN=wgvxlan

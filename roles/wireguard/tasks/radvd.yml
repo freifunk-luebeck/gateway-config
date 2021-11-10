@@ -1,0 +1,8 @@
+---
+
+
+- name: restart radvd
+  systemd:
+    state: restarted
+    enabled: yes
+    name: "radvd"

@@ -1,0 +1,11 @@
+[NetDev]
+Name=wgvxlan
+Kind=vxlan
+
+[VXLAN]
+VNI=13812637
+DestinationPort=4789
+UDP6ZeroChecksumRx=true
+UDP6ZeroChecksumTx=true
+Local=fe80::1
+# Remote=fe80::239:70ff:fe57:efdf

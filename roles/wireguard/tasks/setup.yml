@@ -1,0 +1,18 @@
+- name: copy wg0 config
+  template:
+    src: 20-wg0.netdev.j2
+    dest: /etc/systemd/network/20-wg0.netdev
+
+- name: copy private key
+  copy:
+    src: wg0.priv.key
+    dest: /etc/systemd/network/wg0.priv.key
+
+- name: copy private key
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/network/
+  with_items:
+    - 21-wg0.network
+    - 21-wgvxlan.netdev
+    - 21-wgvxlan.network

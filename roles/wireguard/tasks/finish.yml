@@ -1,0 +1,11 @@
+---
+- name: reload systemd
+  command: systemctl daemon-reload
+
+- name: restart services
+  systemd:
+    state: restarted
+    enabled: yes
+    name: "{{ item }}"
+  with_items:
+    - systemd-networkd.service

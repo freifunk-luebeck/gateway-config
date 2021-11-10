@@ -1,0 +1,15 @@
+interface ffhl
+{
+	AdvSendAdvert on;
+	IgnoreIfMissing on;
+	MaxRtrAdvInterval 200;
+	AdvDefaultLifetime 900;
+
+{% for prefix in radvd_prefixes %}
+	prefix {{ prefix }} {
+	};
+{% endfor %}
+
+	RDNSS {{ ip6 }} {
+	};
+};
