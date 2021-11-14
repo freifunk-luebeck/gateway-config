@@ -55,3 +55,25 @@
   modprobe:
     name: batman-adv
     state: present
+
+
+# install prometheus-fastd-exporter
+- name: install prometheus-fastd-exporter
+  tags: [prometheus-fastd-exporter]
+  block:
+  - name: download prometheus-fastd-exporter
+    get_url:
+      url: https://freifunk-luebeck.pages.chaotikum.org/prometheus-fastd-exporter/prometheus-fastd-exporter.deb
+      dest: /tmp/prometheus-fastd-exporter.deb
+
+  - name: install prometheus-fastd-exporter
+    command: dpkg -i --force-confold /tmp/prometheus-fastd-exporter.deb
+
+  - name: reload systemd
+    command: systemctl daemon-reload
+
+  - name: enable prometheus-fastd-exporter
+    systemd:
+      state: restarted
+      enabled: yes
+      name: prometheus-fastd-exporter

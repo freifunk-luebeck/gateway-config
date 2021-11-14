@@ -33,3 +33,4 @@
     - update-ffhl-mesh-vpn.timer
     - systemd-journald
     - fastd
+    - prometheus-fastd-exporter
