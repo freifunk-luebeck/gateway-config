@@ -41,6 +41,7 @@
 # download public keys to your local machine
 - name: create public key files
   shell:
+    creates: /etc/fastd/ffhl_mesh_gwvpn/pubkey.key
     cmd: fastd --show-key -c /etc/fastd/ffhl_mesh_gwvpn/fastd.conf > /etc/fastd/ffhl_mesh_gwvpn/pubkey.key
 
 - name: fetch public keys

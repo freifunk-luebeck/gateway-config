@@ -26,6 +26,7 @@
     repo: "{{ dns_repo_url }}"
     dest: /var/local/ffhl-dns
     accept_hostkey: yes
+    version: HEAD
 
 - name: remove default bind-backend config
   file:

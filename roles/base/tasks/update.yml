@@ -1,8 +1,12 @@
 ---
-- lineinfile:
+
+- name: check and add apt sources.list contents
+  lineinfile:
     path: /etc/apt/sources.list
     regexp: '^deb .* main'
-    line: deb http://deb.debian.org/debian stable main
+    line: deb http://deb.debian.org/debian bullseye main
+
 - name: update the system
   apt:
     update_cache: yes
+    upgrade: safe

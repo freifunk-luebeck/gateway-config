@@ -54,8 +54,10 @@
 - name: networkd templates
   tags: [systemd-networkd]
   block:
-    - template: src=network/10-ffhl.netdev.j2 dest=/etc/systemd/network/10-ffhl.netdev
-    - template: src=network/12-ffhl.network.j2 dest=/etc/systemd/network/12-ffhl.network
+    - name: apply network templates
+      template: src=network/10-ffhl.netdev.j2 dest=/etc/systemd/network/10-ffhl.netdev
+    - name: apply netowrk templates
+      template: src=network/12-ffhl.network.j2 dest=/etc/systemd/network/12-ffhl.network
     - name: copy network configs
       copy: src=systemd-networkd/ dest=/etc/systemd/network/
     - name: restart systemd-networkd
@@ -66,8 +68,10 @@
 - name: template iptables
   tags: [iptables, network]
   block:
-    - template: src=iptables/rules.v4 dest=/etc/iptables/rules.v4
-    - template: src=iptables/rules.v6 dest=/etc/iptables/rules.v6
+    - name: iptables4 template
+      template: src=iptables/rules.v4 dest=/etc/iptables/rules.v4
+    - name: iptables6 template
+      template: src=iptables/rules.v6 dest=/etc/iptables/rules.v6
     - name: reload iptables
       systemd:
         state: restarted

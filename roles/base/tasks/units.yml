@@ -1,7 +1,13 @@
 ---
-- command: systemctl mask display-manager.service
 
-- command: systemctl daemon-reload
+- name: mask display-manager
+  systemd:
+    masked: yes
+    name: display-manager.service
+
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
 
 # - name: stop bird
 #   systemd:

@@ -1,5 +1,6 @@
 ---
-- systemd:
+- name: restart and enable units
+  systemd:
     enabled: yes
     state: restarted
     name: "{{ item }}"

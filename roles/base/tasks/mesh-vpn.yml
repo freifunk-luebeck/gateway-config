@@ -32,6 +32,7 @@
     repo: git@git.luebeck.freifunk.net:FreifunkLuebeck/fastd-keys.git
     dest: /var/local/ffhl-mesh-vpn-peers
     accept_hostkey: yes
+    version: HEAD
 
 - name: add post-merge hook
   template:
