@@ -1,0 +1,16 @@
+---
+- name: base config
+  tags: [base]
+  include_tasks:
+    file: base.yml
+    apply:
+      tags: [base]
+
+
+- name: install packages
+  include: software.yml
+  tags: [base, apt, software]
+
+- name: install packages
+  include: monitoring.yml
+  tags: [base, apt, software]
