@@ -1,0 +1,34 @@
+groups:
+  - name: ffhl
+    rules:
+    - record: "fastd_peer_traffic_sum"
+      expr: 'sum by (key, name) (rate(fastd_peer_traffic{iface=~"ffhl_mesh_vpn.*", kind="bytes", type=~"rx|tx"}[1m]))'
+    - record: "ffhl_mesh_links"
+      expr: 'count by (link_type) (link_tq{link_type!="undefined"})'
+
+    - record: "ffhl_nodes_online_percentage"
+      expr: 'meshnodes_online_total{job="hopglass"} / meshnodes_total{job="hopglass"}'
+
+    - record: "ffhl_mesh_avg_link_quality"
+      expr: 'avg by (link_type)(link_tq{link_type!="undefined"})'
+
+    - record: "ffhl_mesh_connected_clients_24"
+      expr: 'avg_over_time(total_clients{job="hopglass",instance_!="hopglass"}[24h])'
+
+    - record: 'ffhl_firmware_distribution'
+      expr: 'count by (firmware)(online{firmware!="", instance_!="hopglass"})'
+
+    - record: 'ffhl_device_distribution'
+      expr: 'count by (model)(online{model!="", instance_!="hopglass"})'
+
+    - record: 'ffhl_gateway_distribution'
+      expr: 'count by (gateway) (online{gateway!="", job="hopglass"})'
+
+    - record: 'ffhl_mesh_sum_traffic_type'
+      expr: 'sum by (type) (rate(statistics_traffic[300s]))'
+
+    - record: "ffhl_mesh_sum_traffic_mtype"
+      expr: 'sum by (mtype) (rate(statistics_traffic[300s]))'
+
+    - record: 'ffhl_node_statistics_traffic'
+      expr: 'sum by (nodeid, mtype) (rate(statistics_traffic{site="ffhl", instance_!="hopglass"}[5m]) * 8)'
