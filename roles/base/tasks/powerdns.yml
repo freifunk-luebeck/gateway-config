@@ -43,4 +43,5 @@
     - pdns-recursor.service
     - pdns.service
     - update-ffhl-dns.timer
-    - dnsdist
+    - dnsdist.service
+    - update-ffhl-dns.service

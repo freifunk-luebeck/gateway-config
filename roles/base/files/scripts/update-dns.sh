@@ -2,7 +2,7 @@
 set -e
 
 DIR=$(mktemp -d)
-DEST=/var/lib/powerdns/zones
+DEST=/var/local/ffhl-dns
 REPO=https://git.luebeck.freifunk.net/FreifunkLuebeck/ffhl-dns.git
 
 mkdir -p "$DEST"
