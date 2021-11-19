@@ -1,0 +1,52 @@
+server {
+	listen 80;
+	listen [::]:80;
+	
+	listen localhost:443 ssl http2;
+	listen [::]:443 ssl http2;
+
+        server_name luebeck.freifunk.net ffhl.de ffhl;
+	
+	include snippets/acme.conf;
+	include snippets/tls.conf;
+	include snippets/https-redirect.conf;
+
+        ssl_certificate /var/lib/acme/live/luebeck.freifunk.net/fullchain;
+        ssl_certificate_key /var/lib/acme/live/luebeck.freifunk.net/privkey;
+
+        root /var/www/luebeck.freifunk.net;
+
+        location ~ /map(/?.*) {
+                return 301 $scheme://map.luebeck.freifunk.net$1;
+        }
+
+        location ~ /wiki(/?.*) {
+                return 301 https://wiki.luebeck.freifunk.net$1;
+        }
+
+        location /firmware/ {
+        	return 301 $scheme://firmware.luebeck.freifunk.net/;
+        }
+
+        location /opkg/ {
+        	return 301 $scheme://firmware.luebeck.freifunk.net/;
+        }
+
+        location = /Moelln {
+                return 302 https://wiki.luebeck.freifunk.net/wiki/Moelln;
+        }
+}
+
+server {
+        listen [::]:80;
+        listen [::]:443 ssl;
+        server_name xn--lbeck-kva.freifunk.net www.luebeck.freifunk.net www.ffhl.de;
+	
+	include snippets/acme.conf;
+	include snippets/tls.conf;
+
+        ssl_certificate /var/lib/acme/live/www.luebeck.freifunk.net/fullchain;
+        ssl_certificate_key /var/lib/acme/live/www.luebeck.freifunk.net/privkey;
+
+        return 301 $scheme://luebeck.freifunk.net$request_uri;
+}

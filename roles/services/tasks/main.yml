@@ -11,6 +11,10 @@
   include: software.yml
   tags: [base, apt, software]
 
-- name: install packages
+- name: setup monitoring
   include: monitoring.yml
   tags: [base, apt, software]
+
+- name: setup nginx
+  include: nginx.yml
+  tags: [nginx]
