@@ -1,10 +1,6 @@
 ---
 
 
-- name: copy systemd services and timers
-  copy:
-    src: systemd/
-    dest: /etc/systemd/system/
 
 - name: copy dnsdist configs
   copy:
@@ -16,11 +12,30 @@
     path: /etc/powerdns/pdns.d/bind.conf
     state: absent
 
+- name: copy powerdns configs
+  copy:
+    src: powerdns
+    dest: /etc/
+
+
 - name: remove old dns repo
   file:
     path: /var/local/ffhl-dns
     state: absent
 
+
+# add update script
+- name: copy update script
+  copy:
+    src: scripts/update-dns.sh
+    dest: /usr/local/lib/ffhl/
+    mode: 775
+
+
+- name: copy systemd services and timers
+  copy:
+    src: systemd/
+    dest: /etc/systemd/system/
 
 - name: restart powerdns
   systemd:

@@ -9,3 +9,9 @@
   become: yes
   roles:
     - icvpn
+
+- hosts: service_hosts
+  become: yes
+  roles:
+    - services
+    - ffhl_nameserver
