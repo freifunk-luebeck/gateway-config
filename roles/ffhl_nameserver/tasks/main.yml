@@ -1,0 +1,15 @@
+---
+
+- name: install packages
+  tags: [dns, powerdns]
+  apt:
+    state: latest
+    name:
+      - dnsdist
+      - pdns-recursor
+      - pdns-server
+      - pdns-backend-bind
+
+
+- include: powerdns.yml
+  tags: [powerdns]

@@ -9,6 +9,6 @@ mkdir -p "$DEST"
 git clone "$REPO" "$DIR"
 git --git-dir="$DIR/.git" --work-tree="$DEST" reset --hard
 
-rm -rf $DIR
+rm -rf "$DIR"
 
 pdns_control reload

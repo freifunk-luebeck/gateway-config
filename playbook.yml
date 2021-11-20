@@ -3,6 +3,7 @@
   become: yes
   roles:
     - base
+    - ffhl_nameserver
 
 - hosts: kaisertor
   become: yes

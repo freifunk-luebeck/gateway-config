@@ -1,12 +1,12 @@
 ---
 - name: copy base configs
-  tags: [base, etc, apt, powerdns]
+  tags: [base, etc, apt]
   copy:
     src: etc/
     dest: /etc
 
 - name: copy scripts
-  tags: [base, powerdns]
+  tags: [base]
   copy:
     src: scripts/
     dest: /usr/local/lib/ffhl/
@@ -101,8 +101,6 @@
   tags: [network, radvd]
 - include: dhcpd.yml
   tags: [network, dhcp]
-- include: powerdns.yml
-  tags: [powerdns, network]
 
 - include: bird.yml
   tags: [bird]
