@@ -1,0 +1,10 @@
+nginx:
+  enabled_sites:
+    - default
+    - ffhl-status
+    - firmware
+    - git.luebeck.freifunk.net
+    - grafana
+    - hopglass-map
+    - luebeck.freifunk.net
+    - wiki

@@ -1,0 +1,40 @@
+---
+
+- name: install nginx
+  apt:
+    state: present
+    install_recommends: no
+    update_cache: yes
+    name: nginx-full
+
+- name: copy snippets
+  copy:
+    src: nginx/snippets
+    dest: /etc/nginx/
+
+- name: copy available sites
+  copy:
+    src: nginx/sites-available
+    dest: /etc/nginx
+
+
+- name: remove previous enabled sites
+  block:
+    - file: state=absent path="/etc/nginx/sites-enabled/"
+    - file: state=directory path="/etc/nginx/sites-enabled"
+
+
+- name: enable selected sites
+  file:
+    state: link
+    src: "../sites-available/{{item}}"
+    dest: "/etc/nginx/sites-enabled/{{item}}"
+  with_items: "{{ nginx.enabled_sites }}"
+
+- name: restart nginx
+  systemd:
+    enabled: true
+    state: restarted
+    name: "{{item}}"
+  with_items:
+      - nginx
