@@ -18,7 +18,10 @@
 
 # configurations and stuff
 - name: set local timezone
-  file: state=link src=/usr/share/zoneinfo/Europe/Berlin dest=/etc/localtime
+  file:
+    state: link
+    src: /usr/share/zoneinfo/Europe/Berlin
+    dest: /etc/localtime
 
 - name: set locales
   tags: [base]
@@ -36,7 +39,10 @@
 
 - name: Disable root login with password
   tags: [base]
-  lineinfile: dest=/etc/ssh/sshd_config regexp="^#?PermitRootLogin" line="PermitRootLogin without-password"
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#?PermitRootLogin"
+    line: "PermitRootLogin without-password"
 
 - name: reload sysctl
   command: sysctl -p --system
@@ -48,8 +54,10 @@
     line: "42\tfreifunk"
 
 - name: copy host specific configs
-  copy: src=host/{{ inventory_hostname }}/etc/ dest=/etc
   tags: [bird]
+  copy:
+    src: host/{{ inventory_hostname }}/etc/
+    dest: /etc
 
 - name: networkd templates
   tags: [systemd-networkd]
