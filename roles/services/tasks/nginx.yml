@@ -5,7 +5,10 @@
     state: present
     install_recommends: no
     update_cache: yes
-    name: nginx-full
+    name:
+      - nginx-full
+      - libnginx-mod-http-fancyindex
+      - libnginx-mod-http-headers-more-filter
 
 - name: copy snippets
   copy:
