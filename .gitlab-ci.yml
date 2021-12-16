@@ -13,3 +13,10 @@ ansible_lint:
   - apt install -qq -y ansible-lint
   script:
   - ansible-lint playbook.yml
+
+shellcheck:
+  stage: test
+  before_script:
+    - apt update && apt install -y shellcheck
+  script:
+    - find ./roles/ -name "*.sh" -exec shellcheck "{}" \+
