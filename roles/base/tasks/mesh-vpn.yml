@@ -27,33 +27,32 @@
 
 
 # configure peers git
-- name: clone fastd-keys repo
-  git:
-    repo: "{{ fastd_keys_repo }}"
-    dest: /var/local/ffhl-mesh-vpn-peers
-    accept_hostkey: yes
-    version: HEAD
-
-- name: add post-merge hook
+# add update script
+- name: copy update script
   template:
-    src: mesh-vpn/peers-post-merge.sh
-    dest: /var/local/ffhl-mesh-vpn-peers/.git/hooks/post-merge
-    mode: a+x
+    src: mesh-vpn/update-meshvpn-keys.sh
+    dest: /usr/local/lib/ffhl/
+    mode: 775
 
 - name: install mesh-vpn peer update service
   copy:
-    src: mesh-vpn/
+    src: mesh-vpn/systemd/
     dest: /etc/systemd/system/
     owner: root
 
 
-
 # enable services
+
+# download public keys to our local machine
+- name: run meshvpn-keys update script
+  shell:
+    cmd: /usr/local/lib/ffhl/update-meshvpn-keys.sh
 
 - name: enable fastd instances
   loop: "{{ mesh_vpn_instances }}"
   systemd:
     enabled: yes
+    daemon-reload: yes
     state: restarted
     name: fastd@{{ item.name }}
 

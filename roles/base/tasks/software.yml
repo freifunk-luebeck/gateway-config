@@ -59,7 +59,7 @@
 
 # install prometheus-fastd-exporter
 - name: install prometheus-fastd-exporter
-  tags: [prometheus-fastd-exporter]
+  tags: [prometheus-fastd-exporter, fastd]
   block:
   - name: download prometheus-fastd-exporter
     get_url:
