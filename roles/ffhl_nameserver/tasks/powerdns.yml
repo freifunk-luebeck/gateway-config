@@ -1,7 +1,4 @@
 ---
-
-
-
 - name: copy dnsdist configs
   copy:
     src: dnsdist
@@ -26,11 +23,14 @@
 
 # add update script
 - name: copy update script
-  copy:
-    src: scripts/update-dns.sh
+  template:
+    src: update-dns.sh
     dest: /usr/local/lib/ffhl/
     mode: 775
 
+- name: run dns-update script
+  shell:
+    cmd: /usr/local/lib/ffhl/update-dns.sh
 
 - name: copy systemd services and timers
   copy:

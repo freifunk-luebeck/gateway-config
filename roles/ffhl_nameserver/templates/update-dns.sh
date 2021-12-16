@@ -2,8 +2,8 @@
 set -e
 
 DIR=$(mktemp -d)
-DEST=/var/local/ffhl-dns
-REPO=https://git.luebeck.freifunk.net/FreifunkLuebeck/ffhl-dns.git
+DEST="/var/local/ffhl-dns"
+REPO="{{ dns_repo_url }}"
 
 mkdir -p "$DEST"
 git clone "$REPO" "$DIR"
