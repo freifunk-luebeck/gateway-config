@@ -29,7 +29,7 @@
 # configure peers git
 - name: clone fastd-keys repo
   git:
-    repo: git@git.luebeck.freifunk.net:FreifunkLuebeck/fastd-keys.git
+    repo: "{{ fastd_keys_repo }}"
     dest: /var/local/ffhl-mesh-vpn-peers
     accept_hostkey: yes
     version: HEAD
