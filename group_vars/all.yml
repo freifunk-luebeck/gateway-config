@@ -7,5 +7,5 @@ ipv4_subnet: 10.130.0.0/16
 ipv6_subnet: 2001:67c:2d50::/48
 
 # Some other configs:
-dns_repo_url: "https://git.luebeck.freifunk.net/FreifunkLuebeck/ffhl-dns.git"
+dns_repo_url: "https://git.chaotikum.org/freifunk-luebeck/ffhl-dns.git"
 fastd_keys_repo: "git@git.chaotikum.org:freifunk-luebeck/fastd-keys.git"
