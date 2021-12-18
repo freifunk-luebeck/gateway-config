@@ -1,16 +1,21 @@
 server {
-	listen 80;
-	listen [::]:80;
-	listen localhost:443 ssl http2;
-	listen [::]:443 ssl http2;
+    listen 80;
+    listen [::]:80;
+    listen localhost:443 ssl http2;
+    listen [::]:443 ssl http2;
 
-        server_name wiki.luebeck.freifunk.net wiki.ffhl.de wiki.ffhl;
-	
-	include snippets/acme.conf;
-	include snippets/tls.conf;
+    server_name wiki.luebeck.freifunk.net wiki.ffhl.de wiki.ffhl;
 
-        ssl_certificate /var/lib/acme/live/luebeck.freifunk.net/fullchain;
-        ssl_certificate_key /var/lib/acme/live/luebeck.freifunk.net/privkey;
+    include snippets/acme.conf;
+    include snippets/tls.conf;
 
-	root /var/www/wiki;
+    ssl_certificate /var/lib/acme/live/luebeck.freifunk.net/fullchain;
+    ssl_certificate_key /var/lib/acme/live/luebeck.freifunk.net/privkey;
+
+    root /var/www/wiki;
+
+    location / {
+        proxy_pass https://freifunk-luebeck.pages.chaotikum.org/wiki/;
+        proxy_set_header Host freifunk-luebeck.pages.chaotikum.org;
+    }
 }
