@@ -19,4 +19,4 @@ shellcheck:
   before_script:
     - apt update && apt install -y shellcheck
   script:
-    - find ./roles/ -name "*.sh" -exec shellcheck "{}" \+
+    -  find ./roles/ -name "*.sh" | grep -v templates | xargs shellcheck
