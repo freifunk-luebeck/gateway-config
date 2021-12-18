@@ -17,24 +17,25 @@
 
 - name: copy available sites
   copy:
-    src: nginx/sites-available
-    dest: /etc/nginx
+    src: "{{ item }}"
+    dest: /etc/nginx/sites-available/
+  with_fileglob: 'nginx/sites-available/*'
 
 
-- name: remove previous enabled sites
+- name: enable sites
   block:
     - name: remove all enabled sites
       file: state=absent path="/etc/nginx/sites-enabled/"
     - name: create enabled-sites directory
       file: state=directory path="/etc/nginx/sites-enabled"
+    - name: enable selected sites
+      file:
+        state: link
+        src: "../sites-available/{{ item }}"
+        dest: "/etc/nginx/sites-enabled/{{ item }}"
+      with_items: "{{ nginx.enabled_sites }}"
 
 
-- name: enable selected sites
-  file:
-    state: link
-    src: "../sites-available/{{ item }}"
-    dest: "/etc/nginx/sites-enabled/{{ item }}"
-  with_items: "{{ nginx.enabled_sites }}"
 
 - name: restart nginx
   systemd:
