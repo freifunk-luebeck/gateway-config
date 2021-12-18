@@ -16,6 +16,7 @@ ansible_lint:
 
 shellcheck:
   stage: test
+  allow_failure: yes
   before_script:
     - apt update && apt install -y shellcheck
   script:
