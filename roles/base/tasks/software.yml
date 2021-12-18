@@ -1,6 +1,8 @@
 ---
 - name: install python3-apt
-  command: apt-get install -y python3-apt
+  shell:
+    cmd: apt-get install -y python3-apt
+    warn: no
 
 - name: remove packages that are not needed
   apt:
@@ -70,7 +72,8 @@
     command: dpkg -i --force-confold /tmp/prometheus-fastd-exporter.deb
 
   - name: reload systemd
-    command: systemctl daemon-reload
+    systemd:
+      daemon_reload: yes
 
   - name: enable prometheus-fastd-exporter
     systemd:

@@ -26,9 +26,12 @@
 - name: set locales
   tags: [base]
   block:
-    - lineinfile: dest=/etc/locale.gen line="en_US.UTF-8 UTF-8"
-    - lineinfile: dest=/etc/locale.gen line="de_DE.UTF-8 UTF-8"
-    - command: locale-gen
+    - name: enable en_US locals
+      lineinfile: dest=/etc/locale.gen line="en_US.UTF-8 UTF-8"
+    - name: enable de_DE locals
+      lineinfile: dest=/etc/locale.gen line="de_DE.UTF-8 UTF-8"
+    - name: generate locales
+      command: locale-gen
 
 - name: base config
   tags: [base]

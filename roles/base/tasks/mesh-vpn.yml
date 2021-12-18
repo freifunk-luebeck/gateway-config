@@ -23,7 +23,7 @@
   template:
     src: mesh-vpn/fastd-up
     dest: /etc/fastd/{{ item.name }}/fastd-up
-    mode: '0755'
+    mode: 0755
 
 
 # configure peers git
@@ -32,7 +32,7 @@
   template:
     src: mesh-vpn/update-meshvpn-keys.sh
     dest: /usr/local/lib/ffhl/
-    mode: 775
+    mode: 0775
 
 - name: install mesh-vpn peer update service
   copy:
@@ -45,8 +45,7 @@
 
 # download public keys to our local machine
 - name: run meshvpn-keys update script
-  shell:
-    cmd: /usr/local/lib/ffhl/update-meshvpn-keys.sh
+  script: /usr/local/lib/ffhl/update-meshvpn-keys.sh
 
 - name: enable fastd instances
   loop: "{{ mesh_vpn_instances }}"

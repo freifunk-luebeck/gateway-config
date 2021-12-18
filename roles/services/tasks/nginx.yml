@@ -23,21 +23,23 @@
 
 - name: remove previous enabled sites
   block:
-    - file: state=absent path="/etc/nginx/sites-enabled/"
-    - file: state=directory path="/etc/nginx/sites-enabled"
+    - name: remove all enabled sites
+      file: state=absent path="/etc/nginx/sites-enabled/"
+    - name: create enabled-sites directory
+      file: state=directory path="/etc/nginx/sites-enabled"
 
 
 - name: enable selected sites
   file:
     state: link
-    src: "../sites-available/{{item}}"
-    dest: "/etc/nginx/sites-enabled/{{item}}"
+    src: "../sites-available/{{ item }}"
+    dest: "/etc/nginx/sites-enabled/{{ item }}"
   with_items: "{{ nginx.enabled_sites }}"
 
 - name: restart nginx
   systemd:
     enabled: true
     state: restarted
-    name: "{{item}}"
+    name: "{{ item }}"
   with_items:
       - nginx

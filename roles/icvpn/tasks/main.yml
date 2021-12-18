@@ -30,7 +30,7 @@
   git:
     repo: https://github.com/freifunk/icvpn.git
     dest: /etc/tinc/icvpn
-    version: HEAD
+    version: master
 
 - name: apply config template
   tags: [icvpn]

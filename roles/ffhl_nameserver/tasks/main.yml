@@ -3,7 +3,7 @@
 - name: install packages
   tags: [dns, powerdns]
   apt:
-    state: latest
+    state: present
     name:
       - dnsdist
       - pdns-recursor

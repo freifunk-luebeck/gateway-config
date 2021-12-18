@@ -26,7 +26,7 @@
   template:
     src: update-dns.sh
     dest: /usr/local/lib/ffhl/
-    mode: 775
+    mode: 0775
 
 - name: run dns-update script
   shell:
