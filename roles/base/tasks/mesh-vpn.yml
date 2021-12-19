@@ -42,10 +42,8 @@
 
 
 # enable services
-
-# download public keys to our local machine
 - name: run meshvpn-keys update script
-  script: /usr/local/lib/ffhl/update-meshvpn-keys.sh
+  command: /usr/local/lib/ffhl/update-meshvpn-keys.sh
 
 - name: enable fastd instances
   loop: "{{ mesh_vpn_instances }}"
