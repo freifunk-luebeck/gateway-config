@@ -1,37 +1,5 @@
 ---
-- name: copy base configs
-  tags: [base, etc, apt]
-  copy:
-    src: etc/
-    dest: /etc
 
-- name: copy scripts
-  tags: [base]
-  copy:
-    src: scripts/
-    dest: /usr/local/lib/ffhl/
-    mode: a+x
-
-- name: install packages
-  include: software.yml
-  tags: [base, apt, software]
-
-# configurations and stuff
-- name: set local timezone
-  file:
-    state: link
-    src: /usr/share/zoneinfo/Europe/Berlin
-    dest: /etc/localtime
-
-- name: set locales
-  tags: [base]
-  block:
-    - name: enable en_US locals
-      lineinfile: dest=/etc/locale.gen line="en_US.UTF-8 UTF-8"
-    - name: enable de_DE locals
-      lineinfile: dest=/etc/locale.gen line="de_DE.UTF-8 UTF-8"
-    - name: generate locales
-      command: locale-gen
 
 - name: base config
   tags: [base]
@@ -40,15 +8,11 @@
     apply:
       tags: [base]
 
-- name: Disable root login with password
-  tags: [base]
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: "^#?PermitRootLogin"
-    line: "PermitRootLogin without-password"
 
-- name: reload sysctl
-  command: sysctl -p --system
+- name: install packages
+  include: software.yml
+  tags: [software, base, apt]
+
 
 - name: add freifunk routing table
   tags: [network]
@@ -56,11 +20,6 @@
     dest: /etc/iproute2/rt_tables
     line: "42\tfreifunk"
 
-- name: copy host specific configs
-  tags: [bird]
-  copy:
-    src: host/{{ inventory_hostname }}/etc/
-    dest: /etc
 
 - name: networkd templates
   tags: [systemd-networkd]
