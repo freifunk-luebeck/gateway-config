@@ -70,12 +70,9 @@
   - name: install prometheus-fastd-exporter
     command: dpkg -i --force-confold /tmp/prometheus-fastd-exporter.deb
 
-  - name: reload systemd
-    systemd:
-      daemon_reload: yes
-
   - name: enable prometheus-fastd-exporter
     systemd:
+      daemon_reload: yes
       state: restarted
       enabled: yes
       name: prometheus-fastd-exporter

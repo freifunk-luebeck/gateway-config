@@ -1,4 +1,0 @@
-[Service]
-Type=oneshot
-#WorkingDirectory=/var/local/ffhl-mesh-vpn-peers
-ExecStart=/usr/local/lib/ffhl/update-meshvpn-keys.sh
