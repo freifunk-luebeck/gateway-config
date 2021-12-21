@@ -1,0 +1,11 @@
+---
+- name: radvd templates
+  template:
+    src: radvd/radvd.conf.j2
+    dest: /etc/radvd.conf
+
+- name: restart radvd
+  systemd:
+    state: restarted
+    enabled: yes
+    name: radvd

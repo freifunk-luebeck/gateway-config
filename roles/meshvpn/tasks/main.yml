@@ -1,0 +1,19 @@
+---
+
+- name: preapare base
+  import_tasks: base.yml
+  tags: [software, base, apt]
+
+- name: copy network configs
+  tags: [networl]
+  import_tasks: network.yml
+
+- name: mesh-vpn
+  tags: [fastd]
+  import_tasks: meshvpn.yml
+
+- import_tasks: radvd.yml
+  tags: [radvd]
+
+- import_tasks: dhcpd.yml
+  tags: [dhcp]

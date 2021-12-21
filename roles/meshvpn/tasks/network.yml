@@ -1,0 +1,6 @@
+---
+
+- name: copy static network configs
+  copy:
+    src: network/
+    dest: /etc/systemd/network/
