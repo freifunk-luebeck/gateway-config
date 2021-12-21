@@ -10,7 +10,8 @@ dhcpd_start: 10.130.32.1
 dhcpd_end: 10.130.39.255
 exit_iface: enp1s0
 
-disabled_services: []
+masked_services:
+  - radvd.service
 
 mesh_gwvpn_secret: !vault |
       $ANSIBLE_VAULT;1.1;AES256
