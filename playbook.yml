@@ -3,6 +3,8 @@
   become: yes
   roles:
     - base
+    - role: meshvpn
+      tags: [meshvpn]
     - ffhl_nameserver
 
 - hosts: kaisertor

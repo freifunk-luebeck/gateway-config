@@ -1,0 +1,17 @@
+---
+
+- name: process dhcpd templates
+  template:
+    src: dhcpd/dhcpd.conf.j2
+    dest: /etc/dhcp/dhcpd.conf
+
+- name: tell dhcpd what interfaces it should listen
+  lineinfile:
+    path: /etc/default/isc-dhcp-server
+    regexp: '^INTERFACESv4='
+    line: INTERFACESv4="ffhl"
+
+- name: restart dhcpd
+  systemd:
+    state: restarted
+    name: isc-dhcp-server.service
