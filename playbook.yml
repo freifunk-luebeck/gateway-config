@@ -5,7 +5,9 @@
     - base
     - role: meshvpn
       tags: [meshvpn]
-    - ffhl_nameserver
+    - role: ffhl_nameserver
+      tags: [nameserver]
+
 
 - hosts: kaisertor
   become: yes
