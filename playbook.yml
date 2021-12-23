@@ -18,4 +18,6 @@
   become: yes
   roles:
     - services
-    - ffhl_nameserver
+    - role: ffhl_nameserver
+      tags: [nameserver]
+    
