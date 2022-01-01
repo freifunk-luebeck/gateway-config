@@ -1,0 +1,26 @@
+---
+
+- name: copy configs
+  copy:
+    src: ffdyndns/ffdyndns.toml
+    dest: /etc/
+
+
+
+# install ffdyndns
+- name: install ffdyndns
+  block:
+  - name: download ffdyndns
+    get_url:
+      url: https://freifunk-luebeck.pages.chaotikum.org/ffdyndns/ffdyndns.deb
+      dest: /tmp/ffdyndns.deb
+
+  - name: install ffdyndns
+    command: dpkg -i --force-confold /tmp/ffdyndns.deb
+
+  - name: enable ffdyndns
+    systemd:
+      daemon_reload: yes
+      state: restarted
+      enabled: yes
+      name: ffdyndns

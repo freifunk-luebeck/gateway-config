@@ -1,11 +1,8 @@
 ---
 - name: base config
   tags: [base]
-  include_tasks:
+  import_tasks:
     file: base.yml
-    apply:
-      tags: [base]
-
 
 - name: install packages
   include: software.yml
@@ -18,3 +15,8 @@
 - name: setup nginx
   include: nginx.yml
   tags: [nginx]
+
+- name: ffdyndns
+  tags: [ffdyndns]
+  import_tasks:
+    file: ffdyndns.yml

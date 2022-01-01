@@ -8,3 +8,4 @@ nginx:
     - hopglass-map
     - luebeck.freifunk.net
     - wiki
+    - ffdyndns

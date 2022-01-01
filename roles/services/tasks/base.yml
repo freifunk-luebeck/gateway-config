@@ -38,8 +38,3 @@
   copy:
     src: etc/
     dest: /etc
-
-
-- name: install base tools
-  include: software.yml
-  tags: [base, apt, software]
