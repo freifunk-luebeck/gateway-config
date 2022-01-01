@@ -5,16 +5,16 @@
     file: base.yml
 
 - name: install packages
-  include: software.yml
+  import_tasks: software.yml
   tags: [base, apt, software]
 
 - name: setup monitoring
-  include: monitoring.yml
-  tags: [base, apt, software]
+  tags: [monitoring, base, apt, software]
+  import_tasks: monitoring.yml
 
 - name: setup nginx
-  include: nginx.yml
   tags: [nginx]
+  import_tasks: nginx.yml
 
 - name: ffdyndns
   tags: [ffdyndns]

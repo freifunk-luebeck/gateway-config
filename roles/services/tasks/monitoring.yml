@@ -4,8 +4,16 @@
     src: prometheus
     dest: /etc/
 
+- name: install grafana
+  apt:
+    update_cache: yes
+    state: latest
+    name: prometheus
+
+
 - name: restart prometheus
   systemd:
+    enabled: yes
     state: restarted
     name: prometheus
 
@@ -27,5 +35,5 @@
 - name: install grafana
   apt:
     update_cache: yes
-    state: present
+    state: latest
     name: grafana
