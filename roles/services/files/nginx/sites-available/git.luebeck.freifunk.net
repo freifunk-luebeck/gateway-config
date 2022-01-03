@@ -1,5 +1,3 @@
-include snippets/geoblock.conf;
-
 server {
     listen 80;
     listen [::]:80;
@@ -17,14 +15,6 @@ server {
     if ($ssl_protocol = "") {
         # force TLS
         return 301 https://$host$request_uri;
-    }
-
-
-    client_max_body_size 256M;
-
-    # apply geoblocking
-    if ($allowed_country = no) {
-        return 302 https://luebeck.freifunk.net/;
     }
 
     location / {
