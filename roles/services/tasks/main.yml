@@ -9,7 +9,7 @@
   tags: [base, apt, software]
 
 - name: setup monitoring
-  tags: [monitoring, base, apt, software]
+  tags: [monitoring]
   import_tasks: monitoring.yml
 
 - name: setup nginx
