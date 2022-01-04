@@ -1,0 +1,25 @@
+---
+
+
+
+- name: remove other dns services
+  tags: [dns]
+  apt:
+    state: absent
+    name:
+      - pdns-recursor
+      - pdns-server
+      - pdns-backend-bind
+
+
+- name: install packages
+  tags: [dns, bind]
+  apt:
+    state: present
+    name:
+      - bind9
+
+
+- name: installing bind
+  import_tasks: bind.yml
+  tags: [powerdns]

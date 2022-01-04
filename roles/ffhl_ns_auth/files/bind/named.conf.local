@@ -1,0 +1,19 @@
+zone "luebeck.freifunk.net" IN {
+    type master;
+    file "luebeck.freifunk.net.zone";
+};
+
+zone "ffhl.de" IN {
+    type master;
+    file "ffhl.de.zone";
+};
+
+zone "ffdyn.net" IN {
+    type master;
+    file "ffdyn.net.zone";
+};
+
+zone "ffhl" IN {
+    type master;
+    file "ffhl.zone";
+};

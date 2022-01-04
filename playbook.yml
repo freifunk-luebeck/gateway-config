@@ -18,6 +18,5 @@
   become: yes
   roles:
     - services
-    - role: ffhl_nameserver
-      tags: [nameserver]
-    
+    - role: ffhl_ns_auth
+      tags: [nameserver, nsauth]
