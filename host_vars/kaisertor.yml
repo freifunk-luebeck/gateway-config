@@ -54,6 +54,7 @@ mesh_vpn_instances:
 
 # the out-interface for NAT
 exit_iface: ens3
+exit_traffic: yes
 
 # ICVPN variables
 icvpn_name: luebeck2

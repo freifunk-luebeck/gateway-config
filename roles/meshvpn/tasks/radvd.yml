@@ -5,7 +5,16 @@
     dest: /etc/radvd.conf
 
 - name: restart radvd
+  when: exit_traffic
   systemd:
     state: restarted
     enabled: yes
+    name: radvd
+
+
+- name: restart radvd
+  when: exit_traffic == false
+  systemd:
+    state: stopped
+    enabled: no
     name: radvd

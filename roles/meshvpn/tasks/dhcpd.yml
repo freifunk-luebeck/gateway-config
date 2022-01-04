@@ -12,6 +12,15 @@
     line: INTERFACESv4="ffhl"
 
 - name: restart dhcpd
+  when: exit_traffic == false
   systemd:
+    enabled: no
+    state: stopped
+    name: isc-dhcp-server.service
+
+- name: restart dhcpd
+  when: exit_traffic
+  systemd:
+    enabled: yes
     state: restarted
     name: isc-dhcp-server.service
