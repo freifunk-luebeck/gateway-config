@@ -1,0 +1,45 @@
+---
+# - name: copy dnsdist configs
+#   copy:
+#     src: dnsdist
+#     dest: /etc/
+
+
+- name: copy bind configs
+  loop:
+    - named.conf.options
+    - named.conf.local
+  copy:
+    src: "bind/{{ item }}"
+    dest: "/etc/bind/{{ item }}"
+
+
+- name: remove old dns repo
+  file:
+    path: /var/local/ffhl-dns
+    state: absent
+
+
+# add update script
+- name: copy update script
+  template:
+    src: update-dns.sh
+    dest: /usr/local/lib/ffhl/
+    mode: 0775
+
+- name: copy systemd services and timers
+  copy:
+    src: systemd/
+    dest: /etc/systemd/system/
+
+- name: restart dns services
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+    name: "{{ item }}"
+  loop:
+    - bind9.service
+    - dnsdist.service
+    - update-ffhl-dns.timer
+    - update-ffhl-dns.service
