@@ -13,7 +13,7 @@
 
 
 - name: restart radvd
-  when: exit_traffic == false
+  when: not exit_traffic
   systemd:
     state: stopped
     enabled: no

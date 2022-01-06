@@ -12,7 +12,7 @@
     line: INTERFACESv4="ffhl"
 
 - name: restart dhcpd
-  when: exit_traffic == false
+  when: not exit_traffic
   systemd:
     enabled: no
     state: stopped
