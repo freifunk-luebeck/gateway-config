@@ -1,8 +1,7 @@
 ---
 - name: base config
   tags: [base]
-  import_tasks:
-    file: base.yml
+  import_tasks: base.yml
 
 - name: install packages
   import_tasks: software.yml
@@ -18,5 +17,4 @@
 
 - name: ffdyndns
   tags: [ffdyndns]
-  import_tasks:
-    file: ffdyndns.yml
+  import_tasks: ffdyndns.yml
