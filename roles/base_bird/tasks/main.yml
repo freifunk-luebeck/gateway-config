@@ -1,50 +1,10 @@
 ---
 
 
-- name: synchronize system time
-  when: ansible_lsb.codename == "bullseye"
-  systemd:
-    state: restarted
-    name: systemd-timesyncd.service
-
-- name: synchronize system time
-  when: ansible_lsb.codename == "buster"
-  systemd:
-    state: restarted
-    name: ntp.service
-
-
-
-
-- name: base config
-  tags: [base]
-  import_tasks: base.yml
-
-
-- name: install packages
-  include: software.yml
-  tags: [software, base, apt]
-
-
-- name: add freifunk routing table
-  tags: [network]
-  lineinfile:
-    dest: /etc/iproute2/rt_tables
-    line: "42\tfreifunk"
-
-- name: copy network config templates
-  tags: [networkd, network]
-  template:
-    src: "network/{{ item }}.j2"
-    dest: "/etc/systemd/network/{{ item }}"
-  loop:
-    - 10-ffhl.netdev
-    - 12-ffhl.network
-
 - name: prepare
   tags: [bird]
   import_tasks: base.yml
 
 - name: setup bird2
-  import_tasks: bird.yml
   tags: [bird]
+  import_tasks: bird.yml
