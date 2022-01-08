@@ -20,7 +20,6 @@
     enabled: yes
     name: "{{ item }}"
   with_items:
-    - bird.service
     - haveged.service
     - netfilter-persistent.service
     - systemd-networkd.service

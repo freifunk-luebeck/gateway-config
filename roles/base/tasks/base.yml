@@ -56,7 +56,7 @@
   loop: "{{ ssh_known_hosts }}"
   shell:
     cmd: ssh-keyscan -H {{ item }} >> /root/.ssh/known_hosts
-    creates: /root/.ssh/known_hosts
+    # creates: /root/.ssh/known_hosts
 
 
 - name: reload sysctl

@@ -1,8 +1,10 @@
 ---
 - hosts: gateways
-  become: yes
+  become: true
   roles:
     - base
+    - role: base_bird
+      tags: [bird]
     - role: meshvpn
       tags: [meshvpn]
     - role: ffhl_nameserver
@@ -10,12 +12,12 @@
 
 
 - hosts: kaisertor
-  become: yes
+  become: true
   roles:
     - icvpn
 
 - hosts: service_hosts
-  become: yes
+  become: true
   roles:
     - services
     - role: ffhl_ns_auth
