@@ -55,7 +55,7 @@
 - name: add trusted ssh hosts to knonw_hosts
   loop: "{{ ssh_known_hosts }}"
   shell:
-    cmd: ssh-keyscan -H {{ item }} >> /root/.ssh/known_hosts
+    cmd: ssh-keyscan -4 -H {{ item }} >> /root/.ssh/known_hosts
     # creates: /root/.ssh/known_hosts
 
 
