@@ -1,0 +1,10 @@
+[Unit]
+Description=Firmware Mirror
+
+[Service]
+Type=oneshot
+WorkingDirectory=/root/
+ExecStart=/root/firmware-mirror.sh
+
+[Install]
+WantedBy=multi-user.target

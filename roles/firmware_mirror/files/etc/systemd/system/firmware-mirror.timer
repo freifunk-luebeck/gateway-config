@@ -1,0 +1,8 @@
+[Unit]
+Description=Firmware Mirror Timer
+
+[Timer]
+OnCalendar= *-*-* 03:42:23
+
+[Install]
+WantedBy=timers.target

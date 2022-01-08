@@ -1,0 +1,54 @@
+
+- name: copy configs
+  copy:
+    src: etc/
+    dest: /etc
+
+
+- name: install nginx
+  apt:
+    state: present
+    install_recommends: no
+    update_cache: yes
+    name:
+      - nginx-full
+      - libnginx-mod-http-fancyindex
+      - libnginx-mod-http-headers-more-filter
+
+- name: copy nginx configs
+  template:
+    src: etc/nginx/sites-available/firmware
+    dest: /etc/nginx/sites-available/firmware
+
+- name: enable sites
+  block:
+    - name: remove all enabled sites
+      file: state=absent path="/etc/nginx/sites-enabled/"
+    - name: create enabled-sites directory
+      file: state=directory path="/etc/nginx/sites-enabled"
+    - name: enable selected sites
+      file:
+        state: link
+        src: "../sites-available/firmware"
+        dest: "/etc/nginx/sites-enabled/firmware"
+
+
+- name: enable nginx service
+  systemd:
+    name: nginx.service
+    state: restarted
+    enabled: yes
+
+
+
+- name: copy mirror script
+  copy:
+    src: root/
+    dest: /root
+    mode: a+xr
+
+- name: enable firmware-mirror timer
+  systemd:
+    name: firmware-mirror.timer
+    state: restarted
+    enabled: yes

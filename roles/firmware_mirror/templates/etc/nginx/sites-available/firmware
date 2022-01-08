@@ -1,0 +1,14 @@
+server {
+	listen 80;
+	listen [::]:80;
+	server_name {{ mirror_url }};
+ 	client_max_body_size 5m;
+    	client_body_timeout 60;
+	
+	root /var/www/firmware;
+	
+	location / {
+		index on;
+	}
+}
+

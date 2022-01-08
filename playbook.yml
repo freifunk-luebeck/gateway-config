@@ -20,3 +20,9 @@
     - services
     - role: ffhl_ns_auth
       tags: [nameserver, nsauth]
+
+- hosts: firmware_mirrors
+  become: yes
+  roles:
+    - role: firmware_mirror
+      tags: [firmware_mirror]
