@@ -2,7 +2,8 @@
 - hosts: gateways
   become: true
   roles:
-    - base
+    - role: base
+      tags: [base]
     - role: base_bird
       tags: [bird]
     - role: meshvpn
