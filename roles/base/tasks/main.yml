@@ -58,8 +58,5 @@
   systemd:
     daemon_reload: yes
 
-- include: bird.yml
-  tags: [bird]
-
 - include: units.yml
   tags: [base, units]

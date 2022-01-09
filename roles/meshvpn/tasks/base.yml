@@ -1,12 +1,5 @@
 ---
 
-- name: copy base configs
-  tags: [base, etc, apt]
-  copy:
-    src: etc/
-    dest: /etc
-
-
 - name: install packages
   apt:
     autoremove: yes

@@ -12,7 +12,7 @@ git --git-dir="$DIR/.git" --work-tree="$DEST" reset --hard
 rm -rf "$DIR"
 
 {% for instance in mesh_vpn_instances %}
-if [ systemctl is-active fastd@{{ instance.name }} ]; then
+if systemctl is-active fastd@{{ instance.name }}; then
 	systemctl reload 'fastd@{{ instance.name }}.service'
 fi
 {% endfor %}

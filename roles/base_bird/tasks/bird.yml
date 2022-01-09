@@ -1,0 +1,20 @@
+---
+
+- name: copy static bird configs
+  copy: src=bird dest=/etc/
+
+- name: generate and copy host specific bird configs
+  template: src=bird/bird_host.conf.j2 dest=/etc/bird/bird_host.conf
+
+- name: generate ibgp configs
+  template: src=bird/bird_ibgp.conf.j2 dest=/etc/bird/bird.conf.d/10-ibgp.conf
+
+- name: restart services
+  systemd:
+    daemon_reload: yes
+    state: restarted
+    enabled: yes
+    name: "{{ item }}"
+  loop:
+    - bird
+    - prometheus-bird-exporter

@@ -1,0 +1,10 @@
+---
+
+
+- name: prepare
+  tags: [bird]
+  import_tasks: base.yml
+
+- name: setup bird2
+  tags: [bird]
+  import_tasks: bird.yml
