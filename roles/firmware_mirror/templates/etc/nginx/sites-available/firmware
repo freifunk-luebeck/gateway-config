@@ -4,11 +4,10 @@ server {
 	server_name {{ mirror_url }};
  	client_max_body_size 5m;
     	client_body_timeout 60;
-	
 	root /var/www/firmware;
 	
 	location / {
-		index on;
+		autoindex on;
 	}
 }
 
