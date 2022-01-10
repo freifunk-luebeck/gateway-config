@@ -13,11 +13,3 @@ ansible_lint:
   - apt install -qq -y ansible-lint
   script:
   - ansible-lint playbook.yml
-
-shellcheck:
-  stage: test
-  allow_failure: yes
-  before_script:
-    - apt update && apt install -y shellcheck
-  script:
-    -  find ./roles/ -name "*.sh" | grep -v templates | xargs shellcheck
