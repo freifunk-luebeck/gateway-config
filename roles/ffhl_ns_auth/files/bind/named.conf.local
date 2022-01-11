@@ -23,5 +23,6 @@ zone "nodes.ffhl.de" {
     file "nodes.zone";
     allow-update {
         127.0.0.1 ;
+        ::1 ;
     };
 };
