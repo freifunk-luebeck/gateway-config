@@ -1,9 +1,4 @@
 ---
-# - name: copy dnsdist configs
-#   copy:
-#     src: dnsdist
-#     dest: /etc/
-
 
 - name: copy bind configs
   loop:
@@ -12,6 +7,16 @@
   copy:
     src: "bind/{{ item }}"
     dest: "/etc/bind/{{ item }}"
+
+
+- name: copy zones
+  copy:
+    src: "zones/{{ item }}"
+    dest: "/var/cache/bind/{{ item }}"
+    owner: bind
+    mode: '0644'
+  loop:
+    - nodes.zone
 
 
 - name: remove old dns repo

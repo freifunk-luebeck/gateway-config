@@ -1,19 +1,27 @@
 zone "luebeck.freifunk.net" IN {
     type master;
-    file "luebeck.freifunk.net.zone";
+    file "ffhl/luebeck.freifunk.net.zone";
 };
 
 zone "ffhl.de" IN {
     type master;
-    file "ffhl.de.zone";
+    file "ffhl/ffhl.de.zone";
 };
 
 zone "ffdyn.net" IN {
     type master;
-    file "ffdyn.net.zone";
+    file "ffhl/ffdyn.net.zone";
 };
 
 zone "ffhl" IN {
     type master;
-    file "ffhl.zone";
+    file "ffhl/ffhl.zone";
+};
+
+zone "nodes.ffhl.de" {
+    type master;
+    file "nodes.zone";
+    allow-update {
+        127.0.0.1 ;
+    };
 };

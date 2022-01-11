@@ -2,7 +2,7 @@
 set -e
 
 DIR=$(mktemp -d)
-DEST="/var/local/ffhl-dns"
+DEST="/var/cache/bind/ffhl"
 REPO="{{ dns_repo_url }}"
 
 mkdir -p "$DEST"

@@ -1,0 +1,12 @@
+$TTL 30 ; 30 seconds
+nodes.ffhl.de. IN SOA  ns1.luebeck.freifunk.net. info.luebeck.freifunk.net. (
+                                2016062805 ; serial
+                                300        ; refresh (5 min)
+                                300        ; retry (10 minutes)
+                                2600       ; expire (43 minutes 20 seconds)
+                                30         ; minimum (30 seconds)
+                                )
+@ NS      ns1.luebeck.freifunk.net.
+  NS      ns2.luebeck.freifunk.net.
+
+test AAAA 2001:67c:2d50::aaaa
