@@ -5,11 +5,11 @@
     - role: base
       tags: [base]
     - role: base_bird
-      tags: [bird]
+      tags: [base_bird, bird]
     - role: meshvpn
       tags: [meshvpn]
     - role: ffhl_nameserver
-      tags: [nameserver]
+      tags: [ffhl_nameserver, nameserver]
 
 
 - hosts: kaisertor
