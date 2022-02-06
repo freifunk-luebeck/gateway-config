@@ -8,7 +8,7 @@
   tags: [base, apt, software]
 
 - name: setup monitoring
-  tags: [monitoring]
+  tags: [monitoring, prometheus]
   import_tasks: monitoring.yml
 
 - name: setup nginx
