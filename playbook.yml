@@ -23,3 +23,9 @@
     - services
     - role: ffhl_ns_auth
       tags: [nameserver, nsauth]
+
+- hosts: blackboxes
+  become: true
+  roles:
+    - role: blackbox
+      tags: [blackbox, monitoring]
