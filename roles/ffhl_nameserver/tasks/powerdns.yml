@@ -1,8 +1,4 @@
 ---
-- name: copy dnsdist configs
-  copy:
-    src: dnsdist
-    dest: /etc/
 
 - name: remove default bind-backend config
   file:

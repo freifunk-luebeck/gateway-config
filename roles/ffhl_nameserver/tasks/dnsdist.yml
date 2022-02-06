@@ -1,0 +1,6 @@
+---
+
+- name: copy dnsdist config
+  copy:
+    src: dnsdist
+    dest: /etc/

@@ -11,5 +11,8 @@
       - pdns-backend-bind
 
 
-- include: powerdns.yml
+- import_tasks: dnsdist.yml
+  tags: [dnsdist]
+
+- import_tasks: powerdns.yml
   tags: [powerdns]
