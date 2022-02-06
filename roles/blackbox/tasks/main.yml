@@ -1,0 +1,4 @@
+---
+
+- import_tasks: prometheus-exporter.yml
+  tags: [prometheus-blackbox-exporter, prometheus]

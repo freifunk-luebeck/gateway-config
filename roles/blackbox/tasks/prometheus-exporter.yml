@@ -1,0 +1,17 @@
+---
+
+- name: install prometheus-blackbox-exporter
+  apt:
+    state: present
+    name: prometheus-blackbox-exporter
+
+- name: copy blackbox-exporter config
+  copy:
+    src: blackbox.yml
+    dest: /etc/prometheus/
+
+- name: restart blackbox-exporter
+  systemd:
+    state: restarted
+    enabled: true
+    name: prometheus-blackbox-exporter
