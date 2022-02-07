@@ -39,8 +39,6 @@ scrape_configs:
   - job_name: powerdns
     static_configs:
       - targets:
-        - "blueberry.luebeck.freifunk.net:8082"
-        - "srv02.luebeck.freifunk.net:8082"
         - "kaisertor.luebeck.freifunk.net:8082"
         - "huextertor.luebeck.freifunk.net:8082"
         - "holstentor.luebeck.freifunk.net:8082"
@@ -63,7 +61,7 @@ scrape_configs:
         - "muehlentor.luebeck.freifunk.net:9324"
         - "gw05.ffhl.chaotikum.org:9324"
 
-  - job_name: "blackbox"
+  - job_name: "blackbox_ping"
     metrics_path: /probe
     params:
       module: [icmp]
@@ -78,4 +76,4 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: target
       - target_label: __address__
-        replacement: "192.168.1.22:9115"
+        replacement: "blackbox.luebeck.freifunk.net:9115"
