@@ -12,12 +12,7 @@
     src: host/{{ inventory_hostname }}/etc/
     dest: /etc
 
-- name: Copy authorized keys file
-  ansible.builtin.copy:
-    src: authorized_keys
-    dest: /root/.ssh/authorized_keys
-    owner: root
-    group: root
+
 
 - name: Disable root login with password
   tags: [base]

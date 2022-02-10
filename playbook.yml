@@ -2,6 +2,7 @@
 - hosts: gateways
   become: true
   roles:
+    - ffhl_access
     - role: base
       tags: [base]
     - role: base_bird
@@ -20,6 +21,7 @@
 - hosts: service_hosts
   become: true
   roles:
+    - ffhl_access
     - services
     - role: ffhl_ns_auth
       tags: [nameserver, nsauth]
@@ -27,5 +29,6 @@
 - hosts: blackboxes
   become: true
   roles:
+    - ffhl_access
     - role: blackbox
       tags: [blackbox, monitoring]
