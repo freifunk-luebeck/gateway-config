@@ -8,17 +8,17 @@ upstream backend {
 server {
 	listen 80;
 	listen [::]:80;
-	
+
 	listen localhost:443 ssl http2;
 	listen [::]:443 ssl http2;
-	
+
 	server_name monitor.luebeck.freifunk.net monitor.ffhl.de monitor.ffhl;
-	
-	include snippets/acme.conf;	
+
+	include snippets/acme.conf;
 	include snippets/tls.conf;
 	ssl_certificate /var/lib/acme/live/luebeck.freifunk.net/fullchain;
 	ssl_certificate_key /var/lib/acme/live/luebeck.freifunk.net/privkey;
-	
+
 	if ($ssl_protocol = "") {
 		return 301 https://$host$request_uri;
 	}
@@ -32,13 +32,13 @@ server {
 		add_header X-Cache-Status $upstream_cache_status;
 		expires 10m;
 		proxy_cache_key "$host$request_uri";
-		
+
 		proxy_connect_timeout       300;
 		proxy_send_timeout          300;
 		proxy_read_timeout          300;
-		send_timeout                300;	
+		send_timeout                300;
 		proxy_cache grafana;
-		proxy_cache_min_uses 5;		
+		proxy_cache_min_uses 5;
 
 		proxy_hide_header Cache-Control;
 		proxy_hide_header Expires;
@@ -48,11 +48,10 @@ server {
 	}
 
 	location / {
-		proxy_connect_timeout       5;
-		proxy_send_timeout          5;
-		proxy_read_timeout          5;
-		send_timeout                5;	
+		proxy_connect_timeout 5;
+		proxy_send_timeout 5;
+		proxy_read_timeout 5;
+		send_timeout 5;
 		proxy_pass http://backend;
 	}
 }
-

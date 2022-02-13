@@ -1,0 +1,20 @@
+server {
+    listen 80;
+    listen [::]:80;
+    listen localhost:443 ssl http2;
+    listen [::]:443 ssl http2;
+
+    server_name backbone.luebeck.freifunk.net backbone.ffhl.de;
+
+    include snippets/acme.conf;
+    include snippets/tls.conf;
+    ssl_certificate /var/lib/acme/live/luebeck.freifunk.net/fullchain;
+    ssl_certificate_key /var/lib/acme/live/luebeck.freifunk.net/privkey;
+
+    location / {
+        proxy_pass https://freifunk-luebeck.pages.chaotikum.org/mfc-onepager/;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

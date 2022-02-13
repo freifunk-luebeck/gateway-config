@@ -9,3 +9,4 @@ nginx:
     - luebeck.freifunk.net
     - wiki
     - ffdyndns
+    - backbone
