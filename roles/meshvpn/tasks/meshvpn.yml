@@ -42,8 +42,8 @@
     owner: root
 
 
-# - name: run meshvpn-keys update script
-#   command: /usr/local/lib/ffhl/update-meshvpn-keys.sh
+- name: run meshvpn-keys update script
+  command: /usr/local/lib/ffhl/update-meshvpn-keys.sh
 
 
 - name: enable meshvpn peer update job
