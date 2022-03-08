@@ -8,7 +8,7 @@
     name:
       # necessary packets
       - batctl
-      - fastd
+      - fastd=22-2~bpo11+1
       - iproute2
       - isc-dhcp-server
       - radvd
