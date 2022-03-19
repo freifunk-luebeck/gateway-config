@@ -1,10 +1,5 @@
 proxy_cache_path /var/cache/nginx levels=1:2 inactive=10m max_size=1g keys_zone=grafana:1m;
 
-upstream backend {
-	server 127.0.0.1:3000;
-#	server cranberry.luebeck.freifunk.net:3000 backup;
-}
-
 server {
 	listen 80;
 	listen [::]:80;
@@ -44,7 +39,7 @@ server {
 		proxy_hide_header Expires;
 		proxy_hide_header X-Accel-Expires;
 		proxy_cache_methods GET POST;
-		proxy_pass http://127.0.0.1:3000;
+		proxy_pass http://monitoring.net.ffhl.de:3000;
 	}
 
 	location / {
@@ -52,6 +47,6 @@ server {
 		proxy_send_timeout 5;
 		proxy_read_timeout 5;
 		send_timeout 5;
-		proxy_pass http://backend;
+		proxy_pass http://monitoring.net.ffhl.de:3000;
 	}
 }
