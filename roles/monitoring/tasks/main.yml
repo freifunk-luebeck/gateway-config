@@ -1,0 +1,12 @@
+---
+
+- name: install utils
+  apt:
+    update_cache: yes
+    state: latest
+    name:
+      - gnupg2
+
+- name: setup monitoring
+  import_tasks: monitoring.yml
+  tags: [monitoring]

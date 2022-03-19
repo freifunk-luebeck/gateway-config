@@ -1,30 +1,41 @@
 ---
-- hosts: gateways
+- hosts: gateways:!holstentor
   become: true
   roles:
-    - ffhl_access
+    - role: prepare_ansible
+      tags: [prepare_ansible]
+    - role: ffhl_access
+      tags: [ffhl_access]
     - role: base
       tags: [base]
     - role: base_bird
       tags: [base_bird, bird]
+    - role: peering
+      tags: [peering]
     - role: meshvpn
       tags: [meshvpn]
     - role: ffhl_nameserver
       tags: [ffhl_nameserver, nameserver]
 
 
-- hosts: kaisertor
-  become: true
-  roles:
-    - icvpn
+# - hosts: kaisertor
+#   become: true
+#   roles:
+#     - icvpn
 
-- hosts: service_hosts
+- hosts: srv02
   become: true
   roles:
     - ffhl_access
     - services
     - role: ffhl_ns_auth
       tags: [nameserver, nsauth]
+
+- hosts: monitoring
+  roles:
+    - role: monitoring
+      tags: [monitoring]
+
 
 - hosts: blackboxes
   become: true
