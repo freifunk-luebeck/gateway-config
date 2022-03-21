@@ -31,11 +31,6 @@
     - role: ffhl_ns_auth
       tags: [nameserver, nsauth]
 
-- hosts: monitoring
-  roles:
-    - role: monitoring
-      tags: [monitoring]
-
 
 - hosts: blackboxes
   become: true
