@@ -4,3 +4,4 @@
   copy:
     src: dnsdist
     dest: /etc/
+  notify: restart dnsdist

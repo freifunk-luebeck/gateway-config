@@ -1,0 +1,23 @@
+---
+
+- name: restart dnsdist
+  systemd:
+    state: restarted
+    name: dnsdist.service
+
+- name: restart pdns-recursor
+  systemd:
+    state: restarted
+    name: pdns-recursor.service
+
+- name: restart pdns
+  systemd:
+    state: restarted
+    name: pdns.service
+
+- name: restart update-ffhl-dns
+  systemd:
+    enabled: yes
+    daemon_reload: yes
+    state: restarted
+    name: update-ffhl-dns.service

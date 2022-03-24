@@ -4,18 +4,20 @@
   file:
     path: /etc/powerdns/pdns.d/bind.conf
     state: absent
+  notify: restart pdns
 
 - name: copy powerdns configs
   copy:
     src: powerdns
     dest: /etc/
-
+  notify:
+    - restart pdns
+    - restart pdns-recursor
 
 - name: remove old dns repo
   file:
     path: /var/local/ffhl-dns
     state: absent
-
 
 # add update script
 - name: copy update script
@@ -23,25 +25,16 @@
     src: update-dns.sh
     dest: /usr/local/lib/ffhl/
     mode: 0775
-
-- name: run dns-update script
-  shell:
-    cmd: /usr/local/lib/ffhl/update-dns.sh
+  notify: restart update-ffhl-dns
 
 - name: copy systemd services and timers
   copy:
     src: systemd/
     dest: /etc/systemd/system/
+  notify: restart
 
-- name: restart powerdns
+- name: enable update-ffhl-dns.timer
   systemd:
-    daemon_reload: yes
-    enabled: yes
-    state: restarted
-    name: "{{ item }}"
-  with_items:
-    - pdns-recursor.service
-    - pdns.service
-    - dnsdist.service
-    - update-ffhl-dns.timer
-    - update-ffhl-dns.service
+    daemon_reload: true
+    enabled: true
+    name: update-ffhl-dns.timer
