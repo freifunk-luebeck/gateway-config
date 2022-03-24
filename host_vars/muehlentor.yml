@@ -11,6 +11,8 @@ dhcpd_end: 10.130.15.255
 # edit this before deploying on final servers!!!
 exit_iface: ens3
 
+exit_traffic: yes
+
 mesh_gwvpn_secret: !vault |
   $ANSIBLE_VAULT;1.1;AES256
   62643665386233343439383533376435383034613538613539356231663433663238333062643766
