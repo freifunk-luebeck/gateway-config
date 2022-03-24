@@ -1,10 +1,13 @@
 ---
 
+- name: synchronize systemd time
+  systemd:
+    state: restarted
+    name: systemd-timesyncd.service
 
-- name: update apt
-  shell:
-    cmd: apt-get update
-    warn: no
+- name: Sleep for 5 seconds and continue with play
+  wait_for:
+    timeout: 5
 
 - name: install python3 and python3-apt
   shell:
