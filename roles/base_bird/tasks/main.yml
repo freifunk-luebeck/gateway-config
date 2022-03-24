@@ -1,10 +1,57 @@
 ---
 
+- name: install bird and bird exporter
+  tags: [apt]
+  apt:
+    autoremove: yes
+    update_cache: yes
+    state: present
+    name:
+      - bird2
+      - prometheus-bird-exporter
 
-- name: prepare
-  tags: [bird]
-  import_tasks: base.yml
+# BIRD
 
-- name: setup bird2
-  tags: [bird]
-  import_tasks: bird.yml
+- name: copy static bird configs
+  tags: [etc]
+  copy:
+    src: "{{ item }}"
+    dest: /etc/bird/
+  with_fileglob: "bird/*"
+  notify: restart bird
+
+- name: create bird.conf.d
+  file:
+    state: directory
+    path: /etc/bird/bird.conf.d
+
+- name: copy host specific configs
+  tags: [etc]
+  copy:
+    src: "{{ item }}"
+    dest: /etc/bird/bird.conf.d/
+  with_fileglob: "host/{{ inventory_hostname }}/bird.conf.d/*"
+  notify: restart bird
+
+- name: generate and copy host specific bird configs
+  template:
+    src: bird/bird_host.conf.j2
+    dest: /etc/bird/bird_host.conf
+  notify: restart bird
+
+- name: generate ibgp configs
+  template:
+    src: bird/bird_ibgp.conf.j2
+    dest: /etc/bird/bird.conf.d/10-ibgp.conf
+  notify: restart bird
+
+
+
+# BIRD exporter
+
+- name: copy prometheus-bird-exporter config
+  tags: [etc]
+  copy:
+    src: prometheus-bird-exporter
+    dest: /etc/default/
+  notify: restart prometheus-bird-exporter

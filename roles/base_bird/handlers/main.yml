@@ -1,0 +1,12 @@
+---
+
+- name: restart bird
+  systemd:
+    state: restarted
+    name: bird.service
+
+
+- name: restart prometheus-bird-exporter
+  systemd:
+    state: restarted
+    name: prometheus-bird-exporter.service
