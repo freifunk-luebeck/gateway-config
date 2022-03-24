@@ -1,0 +1,23 @@
+server {
+	server_name services.ffhl.de services.luebeck.freifunk.net;
+	listen 80;
+	listen [::]:80;
+	listen localhost:443 ssl http2;
+	listen [::]:443 ssl http2;
+
+	include snippets/tls.conf;
+	include snippets/acme.conf;
+	include snippets/https-redirect.conf;
+
+	ssl_certificate /var/lib/acme/live/luebeck.freifunk.net/fullchain;
+	ssl_certificate_key /var/lib/acme/live/luebeck.freifunk.net/privkey;
+
+	return 302 https://luebeck.freifunk.net;
+
+	#location / {
+	#	proxy_set_header HOST $host;
+	#	proxy_set_header X-Forwarded-Proto $scheme;
+	#	proxy_set_header X-Real-IP $remote_addr;
+	#	proxy_pass https://yunohost.luebeck.freifunk.net;
+	#}
+}

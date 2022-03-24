@@ -6,9 +6,15 @@
     install_recommends: no
     update_cache: yes
     name:
+      - openssl
       - nginx-full
       - libnginx-mod-http-fancyindex
       - libnginx-mod-http-headers-more-filter
+
+- name: generate dhparams (can take a while)
+  command:
+    cmd: openssl dhparam -out /etc/nginx/dhparam.pem 4096
+    creates: /etc/nginx/dhparam.pem
 
 - name: copy snippets
   copy:
@@ -19,23 +25,30 @@
   copy:
     src: "{{ item }}"
     dest: /etc/nginx/sites-available/
-  with_fileglob: 'nginx/sites-available/*'
+  with_fileglob: 'nginx/sites/*'
 
 
 - name: enable sites
   block:
     - name: remove all enabled sites
-      file: state=absent path="/etc/nginx/sites-enabled/"
+      file:
+        state: absent
+        path: "/etc/nginx/sites-enabled/"
     - name: create enabled-sites directory
-      file: state=directory path="/etc/nginx/sites-enabled"
+      file:
+        state: directory
+        path: "/etc/nginx/sites-enabled"
     - name: enable selected sites
       file:
         state: link
-        src: "../sites-available/{{ item }}"
-        dest: "/etc/nginx/sites-enabled/{{ item }}"
-      with_items: "{{ nginx.enabled_sites }}"
+        src: "../sites-available/{{ item | basename }}"
+        dest: "/etc/nginx/sites-enabled/{{ item | basename }}"
+      with_fileglob: 'nginx/sites/*'
 
 
+- name: check nginx config
+  command:
+    cmd: nginx -t
 
 - name: restart nginx
   systemd:
