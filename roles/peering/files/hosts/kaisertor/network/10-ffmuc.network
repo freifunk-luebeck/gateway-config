@@ -1,0 +1,6 @@
+[Match]
+Name=ffmuc
+
+[Network]
+Address=fd05:b35:f388::2/64
+LinkLocalAddressing=no

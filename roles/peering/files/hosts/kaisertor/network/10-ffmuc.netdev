@@ -1,0 +1,9 @@
+[NetDev]
+Name=ffmuc
+Kind=ip6gre
+MTUBytes=1480
+
+[Tunnel]
+Local=2a03:2267:ffff:c00::d
+Remote=2001:678:ed0:ff00::6
+TTL=255

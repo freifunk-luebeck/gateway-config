@@ -1,0 +1,20 @@
+---
+
+# network configs for tunnels
+
+- name: copy host specific network configs
+  with_fileglob: hosts/{{ inventory_hostname }}/network/*
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/network/
+  notify: restart systemd-networkd
+
+
+# bird configs for peering
+
+- name: copy host specific configs
+  with_fileglob: hosts/{{ inventory_hostname }}/bird/*
+  copy:
+    src: "{{ item }}"
+    dest: /etc/bird/bird.conf.d/
+  notify: restart bird
