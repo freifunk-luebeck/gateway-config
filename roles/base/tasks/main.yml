@@ -9,44 +9,9 @@
   tags: [software, base, apt]
 
 
-- name: add freifunk routing table
+- name: configure network
+  include: network.yml
   tags: [network]
-  lineinfile:
-    dest: /etc/iproute2/rt_tables
-    line: "42\tfreifunk"
-
-- name: copy network config templates
-  tags: [networkd, network]
-  template:
-    src: "network/{{ item }}.j2"
-    dest: "/etc/systemd/network/{{ item }}"
-  loop:
-    - 10-ffhl.netdev
-    - 12-ffhl.network
-
-- name: restart systemd-networkd
-  systemd:
-    state: restarted
-    name: systemd-networkd
-
-- name: template iptables
-  tags: [iptables, network]
-  block:
-    - name: iptables4 template
-      template: src=iptables/rules.v4 dest=/etc/iptables/rules.v4
-    - name: iptables6 template
-      template: src=iptables/rules.v6 dest=/etc/iptables/rules.v6
-    - name: reload iptables
-      systemd:
-        state: restarted
-        name: netfilter-persistent.service
-
-# sometimes disabled (dunno why)
-- name: enable systemd-networkd
-  tags: [network]
-  systemd:
-    enabled: yes
-    name: systemd-networkd
 
 - name: gwvpn
   tags: [gwvpn, fastd]
