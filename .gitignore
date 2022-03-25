@@ -5,3 +5,4 @@ secret*
 /hosts_testing
 vault-password.txt
 /my-playbooks
+revert_and_setup.sh
