@@ -1,10 +1,8 @@
 ---
 
-
 - name: base config
   tags: [base]
   import_tasks: base.yml
-
 
 - name: install packages
   include: software.yml

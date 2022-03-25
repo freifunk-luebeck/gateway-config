@@ -30,8 +30,9 @@
     update_cache: yes
     state: absent
     name:
-      cron-apt
-      mutt
+      - cron-apt
+      - mutt
+      - rsyslog
 
 - name: install tools
   apt:

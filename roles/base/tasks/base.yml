@@ -1,13 +1,13 @@
 ---
 
 - name: copy base configs
-  tags: [base, etc, apt]
+  tags: [etc]
   copy:
     src: etc/
     dest: /etc
 
 - name: copy host specific configs
-  tags: [bird]
+  tags: [etc]
   copy:
     src: host/{{ inventory_hostname }}/etc/
     dest: /etc
@@ -47,11 +47,6 @@
     dest: /usr/local/lib/ffhl/
     mode: a+x
 
-- name: add trusted ssh hosts to knonw_hosts
-  loop: "{{ ssh_known_hosts }}"
-  shell:
-    cmd: ssh-keyscan -4 -H {{ item }} >> /root/.ssh/known_hosts
-    # creates: /root/.ssh/known_hosts
 
 
 - name: reload sysctl

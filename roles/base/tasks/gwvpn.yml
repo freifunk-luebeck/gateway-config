@@ -3,6 +3,7 @@
   user:
     name: fastd
     system: yes
+    create_home: no
     home: /etc/fastd
 
 - name: create fastd config dirs
