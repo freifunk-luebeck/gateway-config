@@ -5,21 +5,16 @@
   import_tasks: base.yml
 
 - name: install packages
-  include: software.yml
   tags: [software, base, apt]
-
+  import_tasks: software.yml
 
 - name: configure network
-  include: network.yml
   tags: [network]
+  import_tasks: network.yml
 
 - name: gwvpn
   tags: [gwvpn, fastd]
-  include: gwvpn.yml
+  import_tasks: gwvpn.yml
 
-- name: reload systemd
-  systemd:
-    daemon_reload: yes
-
-- include: units.yml
+- import_tasks: units.yml
   tags: [base, units]

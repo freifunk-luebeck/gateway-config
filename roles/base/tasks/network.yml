@@ -23,9 +23,13 @@
   notify: reload iptables
   block:
     - name: iptables4 template
-      template: src=iptables/rules.v4 dest=/etc/iptables/rules.v4
+      template:
+        src: iptables/rules.v4
+        dest: /etc/iptables/rules.v4
     - name: iptables6 template
-      template: src=iptables/rules.v6 dest=/etc/iptables/rules.v6
+      template:
+        src: iptables/rules.v6
+        dest: /etc/iptables/rules.v6
 
 
 # sometimes disabled (dunno why)

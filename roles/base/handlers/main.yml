@@ -1,10 +1,40 @@
 ---
+
+- name: reload sysctl
+  sysctl:
+    reload: true
+
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: restart journald
+  systemd:
+    name: systemd-journald
+
 - name: restart systemd-networkd
   systemd:
     state: restarted
     name: systemd-networkd
 
+- name: restart prometheus-fastd-exporter
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+    name: prometheus-fastd-exporter.service
+
+
+- name: restart fastd
+  systemd:
+    name: fastd
+
 - name: reload iptables
   systemd:
     state: restarted
     name: netfilter-persistent.service
+
+- name: restart sshd
+  systemd:
+    state: restarted
+    name: sshd.service

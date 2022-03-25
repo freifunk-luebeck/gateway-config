@@ -12,6 +12,7 @@
     state: directory
 
 - name: copy gwvpn config
+  notify: restart-fastd
   copy:
     src: mesh-gwvpn/
     dest: /etc/fastd/ffhl_mesh_gwvpn
@@ -19,12 +20,14 @@
 
 
 - name: apply fastd.conf template
+  notify: restart-fastd
   template:
     src: mesh-gwvpn/fastd.conf
     dest: /etc/fastd/ffhl_mesh_gwvpn/fastd.conf
 
 
 - name: create fastd-up script
+  notify: restart-fastd
   template:
     src: mesh-gwvpn/fastd-up
     dest: /etc/fastd/ffhl_mesh_gwvpn/fastd-up
@@ -32,11 +35,9 @@
 
 
 # enable fastd@ffhl_mesh_gwvpn service
-
 - name: enable gwvpn
   systemd:
     name: fastd@ffhl_mesh_gwvpn.service
-    state: restarted
     enabled: yes
 
 # download public keys to your local machine

@@ -1,9 +1,4 @@
 ---
-- name: install python3-apt
-  shell:
-    cmd: apt-get install -y python3-apt
-    warn: no
-
 
 - name: add appropriate source.list
   tags: [apt]
@@ -82,18 +77,17 @@
 # install prometheus-fastd-exporter
 - name: install prometheus-fastd-exporter
   tags: [prometheus-fastd-exporter, fastd]
+  notify: restart prometheus-fastd-exporter
   block:
-  - name: download prometheus-fastd-exporter
-    get_url:
-      url: https://freifunk-luebeck.pages.chaotikum.org/prometheus-fastd-exporter/prometheus-fastd-exporter.deb
-      dest: /tmp/prometheus-fastd-exporter.deb
-
-  - name: install prometheus-fastd-exporter
-    command: dpkg -i --force-confold /tmp/prometheus-fastd-exporter.deb
-
-  - name: enable prometheus-fastd-exporter
-    systemd:
-      daemon_reload: yes
-      state: restarted
-      enabled: yes
-      name: prometheus-fastd-exporter
+    - name: download prometheus-fastd-exporter
+      get_url:
+        url: https://freifunk-luebeck.pages.chaotikum.org/prometheus-fastd-exporter/prometheus-fastd-exporter.deb
+        dest: /tmp/prometheus-fastd-exporter.deb
+    - name: install prometheus-fastd-exporter
+      apt:
+        state: present
+        deb: /tmp/prometheus-fastd-exporter.deb
+    - name: enable prometheus-fastd-exporter
+      systemd:
+        enabled: yes
+        name: prometheus-fastd-exporter

@@ -2,20 +2,29 @@
 
 - name: copy base configs
   tags: [etc]
+  notify:
+    - reload systemd
+    - reload sysctl
+    - restart journald
   copy:
     src: etc/
     dest: /etc
 
+
 - name: copy host specific configs
   tags: [etc]
+  notify:
+    - reload systemd
+    - reload sysctl
+    - restart journald
   copy:
     src: host/{{ inventory_hostname }}/etc/
     dest: /etc
 
 
-
 - name: Disable root login with password
   tags: [base]
+  notify: restart sshd
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^#?PermitRootLogin"
@@ -33,12 +42,15 @@
   tags: [base]
   block:
     - name: enable en_US locals
-      lineinfile: dest=/etc/locale.gen line="en_US.UTF-8 UTF-8"
+      lineinfile:
+        dest: /etc/locale.gen
+        line: "en_US.UTF-8 UTF-8"
     - name: enable de_DE locals
-      lineinfile: dest=/etc/locale.gen line="de_DE.UTF-8 UTF-8"
+      lineinfile:
+        dest: /etc/locale.gen
+        line: "de_DE.UTF-8 UTF-8"
     - name: generate locales
       command: locale-gen
-
 
 - name: copy scripts
   tags: [base]
@@ -46,8 +58,3 @@
     src: scripts/
     dest: /usr/local/lib/ffhl/
     mode: a+x
-
-
-
-- name: reload sysctl
-  command: sysctl -p --system
