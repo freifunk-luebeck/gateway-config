@@ -38,3 +38,6 @@
   systemd:
     state: restarted
     name: sshd.service
+
+- name: generate locales
+  command: locale-gen

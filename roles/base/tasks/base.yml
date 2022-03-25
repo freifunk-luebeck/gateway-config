@@ -40,6 +40,7 @@
 
 - name: set locales
   tags: [base]
+  notify: generate locales
   block:
     - name: enable en_US locals
       lineinfile:
@@ -49,8 +50,6 @@
       lineinfile:
         dest: /etc/locale.gen
         line: "de_DE.UTF-8 UTF-8"
-    - name: generate locales
-      command: locale-gen
 
 - name: copy scripts
   tags: [base]
