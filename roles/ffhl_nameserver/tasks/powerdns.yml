@@ -7,34 +7,28 @@
   notify: restart pdns
 
 - name: copy powerdns configs
-  copy:
-    src: powerdns
-    dest: /etc/
   notify:
     - restart pdns
     - restart pdns-recursor
-
-- name: remove old dns repo
-  file:
-    path: /var/local/ffhl-dns
-    state: absent
+  copy:
+    src: powerdns
+    dest: /etc/
 
 # add update script
 - name: copy update script
+  notify: restart update-ffhl-dns
   template:
     src: update-dns.sh
     dest: /usr/local/lib/ffhl/
     mode: 0775
-  notify: restart update-ffhl-dns
 
 - name: copy systemd services and timers
+  notify: reload systemd
   copy:
     src: systemd/
     dest: /etc/systemd/system/
-  notify: restart
 
 - name: enable update-ffhl-dns.timer
   systemd:
-    daemon_reload: true
     enabled: true
     name: update-ffhl-dns.timer
