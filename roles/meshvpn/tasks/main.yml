@@ -17,3 +17,7 @@
 
 - import_tasks: dhcpd.yml
   tags: [dhcp]
+
+- name: install fastd-exporter
+  import_role:
+    name: fastd-exporter

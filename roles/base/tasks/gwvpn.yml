@@ -50,3 +50,7 @@
   fetch:
     src: /etc/fastd/ffhl_mesh_gwvpn/pubkey.key
     dest: artifacts/
+
+- name: install fastd-exporter
+  import_role:
+    name: fastd-exporter
