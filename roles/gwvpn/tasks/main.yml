@@ -12,22 +12,20 @@
     state: directory
 
 - name: copy gwvpn config
-  notify: restart-fastd
+  notify: restart gwvpn
   copy:
     src: mesh-gwvpn/
     dest: /etc/fastd/ffhl_mesh_gwvpn
     owner: root
 
-
 - name: apply fastd.conf template
-  notify: restart-fastd
+  notify: restart gwvpn
   template:
     src: mesh-gwvpn/fastd.conf
     dest: /etc/fastd/ffhl_mesh_gwvpn/fastd.conf
 
-
 - name: create fastd-up script
-  notify: restart-fastd
+  notify: restart gwvpn
   template:
     src: mesh-gwvpn/fastd-up
     dest: /etc/fastd/ffhl_mesh_gwvpn/fastd-up

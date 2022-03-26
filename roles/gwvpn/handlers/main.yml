@@ -1,0 +1,5 @@
+---
+
+- name: restart gwvpn
+  systemd:
+    name: fastd@ffhl_mesh_gwvpn

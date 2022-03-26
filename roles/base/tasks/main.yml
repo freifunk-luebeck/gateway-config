@@ -12,9 +12,5 @@
   tags: [network]
   import_tasks: network.yml
 
-- name: gwvpn
-  tags: [gwvpn, fastd]
-  import_tasks: gwvpn.yml
-
 - import_tasks: units.yml
   tags: [base, units]

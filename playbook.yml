@@ -8,6 +8,8 @@
       tags: [ffhl_access]
     - role: base
       tags: [base]
+    - role: gwvpn
+      tags: [gwvpn]
     - role: base_bird
       tags: [base_bird, bird]
     - role: peering
