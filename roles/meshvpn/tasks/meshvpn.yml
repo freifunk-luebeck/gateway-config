@@ -13,14 +13,15 @@
 
 - name: copy fastd config templates
   loop: "{{ mesh_vpn_instances }}"
+  notify: restart meshvpn
   template:
     src: mesh-vpn/fastd.conf
     dest: /etc/fastd/{{ item.name }}/fastd.conf
     mode: '0640'
 
-
 - name: create fastd-up script
   loop: "{{ mesh_vpn_instances }}"
+  notify: restart meshvpn
   template:
     src: mesh-vpn/fastd-up
     dest: /etc/fastd/{{ item.name }}/fastd-up
@@ -30,37 +31,29 @@
 # configure peers git
 # add update script
 - name: copy update script
+  notify: run meshvpn-keys update script
   template:
     src: mesh-vpn/update-meshvpn-keys.sh
     dest: /usr/local/lib/ffhl/
     mode: 0775
 
 - name: install mesh-vpn peer update service
+  notify: restart update-ffhl-meshvpn
   copy:
     src: systemd/
     dest: /etc/systemd/system/
     owner: root
 
-
-- name: run meshvpn-keys update script
-  command: /usr/local/lib/ffhl/update-meshvpn-keys.sh
-
-
 - name: enable meshvpn peer update job
   systemd:
-    daemon_reload: yes
     enabled: yes
-    state: restarted
     name: update-ffhl-mesh-vpn.timer
-
 
 # enable fastd instances
 - name: enable fastd instances
   loop: "{{ mesh_vpn_instances }}"
   systemd:
     enabled: yes
-    daemon-reload: yes
-    state: restarted
     name: fastd@{{ item.name }}
 
 

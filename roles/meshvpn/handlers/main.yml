@@ -1,0 +1,16 @@
+---
+
+
+- name: run meshvpn-keys update script
+  command: /usr/local/lib/ffhl/update-meshvpn-keys.sh
+
+- name: restart meshvpn
+  loop: "{{ mesh_vpn_instances }}"
+  systemd:
+    name: "fastd@{{ item.name }}"
+
+- name: restart update-ffhl-meshvpn
+  systemd:
+    daemon_reload: true
+    state: restarted
+    name: update-ffhl-meshvpn
