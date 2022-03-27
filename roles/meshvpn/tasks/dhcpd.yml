@@ -1,6 +1,7 @@
 ---
 
 - name: process dhcpd templates
+  notify: restart dhcpd
   template:
     src: dhcpd/dhcpd.conf.j2
     dest: /etc/dhcp/dhcpd.conf
@@ -11,16 +12,17 @@
     regexp: '^INTERFACESv4='
     line: INTERFACESv4="ffhl"
 
-- name: restart dhcpd
-  when: not exit_traffic
-  systemd:
-    enabled: no
-    state: stopped
-    name: isc-dhcp-server.service
-
-- name: restart dhcpd
+- name: enable dhcpd
   when: exit_traffic
   systemd:
     enabled: yes
-    state: restarted
+    masked: no
+    name: isc-dhcp-server.service
+
+- name: disable dhcpd
+  when: not exit_traffic
+  notify: stop dhcpd
+  systemd:
+    enabled: no
+    masked: yes
     name: isc-dhcp-server.service

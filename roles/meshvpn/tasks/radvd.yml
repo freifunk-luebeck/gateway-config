@@ -1,20 +1,23 @@
 ---
 - name: radvd templates
+  notify: restart radvd
   template:
     src: radvd/radvd.conf.j2
     dest: /etc/radvd.conf
 
-- name: restart radvd
+- name: enable radvd
   when: exit_traffic
+  notify: stop radvd
   systemd:
-    state: restarted
+    masked: no
     enabled: yes
-    name: radvd
+    name: radvd.service
 
 
-- name: restart radvd
+- name: disable radvd
   when: not exit_traffic
+  notify: restart radvd
   systemd:
-    state: stopped
+    masked: yes
     enabled: no
     name: radvd

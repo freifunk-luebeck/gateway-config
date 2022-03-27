@@ -5,7 +5,7 @@
   tags: [software, base, apt]
 
 - name: copy network configs
-  tags: [networl]
+  tags: [network]
   import_tasks: network.yml
 
 - name: mesh-vpn

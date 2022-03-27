@@ -14,3 +14,27 @@
     daemon_reload: true
     state: restarted
     name: update-ffhl-meshvpn
+
+- name: restart radvd
+  when: exit_traffic
+  systemd:
+    state: restarted
+    name: radvd.service
+
+- name: stop radvd
+  when: exit_traffic
+  systemd:
+    state: stopped
+    name: radvd.service
+
+- name: restart dhcpd
+  when: exit_traffic
+  systemd:
+    state: restarted
+    name: isc-dhcp-server.service
+
+- name: stop dhcpd
+  when: exit_traffic
+  systemd:
+    state: stopped
+    name: isc-dhcp-server.service

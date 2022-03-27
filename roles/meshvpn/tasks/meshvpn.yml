@@ -61,6 +61,7 @@
 - name: create public key files
   loop: "{{ mesh_vpn_instances }}"
   shell:
+    creates: /etc/fastd/{{ item.name }}/pubkey.key
     cmd: fastd --show-key -c /etc/fastd/{{ item.name }}/fastd.conf > /etc/fastd/{{ item.name }}/pubkey.key
 
 - name: fetch public keys
