@@ -1,0 +1,27 @@
+---
+
+- name: remove old dns repo
+  file:
+    path: /var/local/ffhl-dns
+    state: absent
+
+# add update script
+- name: copy update script
+  template:
+    src: update-dns.sh
+    dest: /usr/local/lib/ffhl/
+    mode: "0775"
+
+- name: copy systemd services and timers
+  notify: reload systemd
+  copy:
+    src: systemd/{{ item }}
+    dest: /etc/systemd/system/
+  loop:
+    - update-ffhl-dns.service
+    - update-ffhl-dns.timer
+
+- name: enable zone-mirror timer
+  systemd:
+    enabled: yes
+    name: update-ffhl-dns.timer

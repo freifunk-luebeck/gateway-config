@@ -24,5 +24,7 @@ zone "nodes.ffhl.de" {
     allow-update {
         127.0.0.1 ;
         ::1 ;
+        10.130.0.106 ;
+        2001:67c:2d50:0:a426:84ff:fe4f:f7d4 ;
     };
 };

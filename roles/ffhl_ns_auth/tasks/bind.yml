@@ -1,6 +1,7 @@
 ---
 
 - name: copy bind configs
+  notify: restart bind
   loop:
     - named.conf.options
     - named.conf.local
@@ -10,6 +11,7 @@
 
 
 - name: copy zones
+  notify: reload zones
   copy:
     src: "zones/{{ item }}"
     dest: "/var/cache/bind/{{ item }}"
@@ -19,29 +21,10 @@
     - nodes.zone
 
 
-- name: remove old dns repo
-  file:
-    path: /var/local/ffhl-dns
-    state: absent
-
-
-# add update script
-- name: copy update script
-  template:
-    src: update-dns.sh
-    dest: /usr/local/lib/ffhl/
-    mode: 0775
-
-- name: copy systemd services and timers
-  copy:
-    src: systemd/
-    dest: /etc/systemd/system/
-
-- name: restart dns services
+- name: enable dns zone update serivce
   systemd:
     daemon_reload: yes
     enabled: yes
-    state: restarted
     name: "{{ item }}"
   loop:
     - bind9.service

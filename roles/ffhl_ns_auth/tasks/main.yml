@@ -1,7 +1,6 @@
 ---
 
 
-
 - name: remove other dns services
   tags: [dns]
   apt:
@@ -19,7 +18,9 @@
     name:
       - bind9
 
+- name: configure zone mirroring
+  import_tasks: zone-mirror.yml
 
-- name: installing bind
+- name: configuring bind
   import_tasks: bind.yml
-  tags: [powerdns]
+  tags: [bind]
