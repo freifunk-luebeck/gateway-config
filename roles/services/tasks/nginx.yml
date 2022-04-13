@@ -4,7 +4,6 @@
   apt:
     state: present
     install_recommends: no
-    update_cache: yes
     name:
       - openssl
       - nginx-full
@@ -17,11 +16,13 @@
     creates: /etc/nginx/dhparam.pem
 
 - name: copy snippets
+  notify: restart nginx
   copy:
     src: nginx/snippets
     dest: /etc/nginx/
 
 - name: copy available sites
+  notify: restart nginx
   copy:
     src: "{{ item }}"
     dest: /etc/nginx/sites-available/
@@ -35,10 +36,12 @@
         state: absent
         path: "/etc/nginx/sites-enabled/"
     - name: create enabled-sites directory
+      notify: restart nginx
       file:
         state: directory
         path: "/etc/nginx/sites-enabled"
     - name: enable selected sites
+      notify: restart nginx
       file:
         state: link
         src: "../sites-available/{{ item | basename }}"
