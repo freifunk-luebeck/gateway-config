@@ -1,0 +1,16 @@
+[all:vars]
+ansible_python_interpreter=/usr/bin/env python3
+ansible_ssh_user=root
+
+[gateways]
+kaisertor
+huextertor
+holstentor
+muehlentor
+gw05
+
+[service_hosts]
+srv02 ansible_ssh_host=srv02.luebeck.freifunk.net
+
+[blackboxes]
+blackbox ansible_ssh_host=blackbox.luebeck.freifunk.net

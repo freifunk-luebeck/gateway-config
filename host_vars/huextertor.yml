@@ -1,4 +1,6 @@
 
+ansible_ssh_host: huextertor.mesh.ffhl.chaotikum.org
+
 # Base role
 ip4: 10.130.0.252
 ip6: 2001:67c:2d50::bbaa

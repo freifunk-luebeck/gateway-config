@@ -1,4 +1,5 @@
 # real host address
+ansible_ssh_host: kaisertor.mesh.ffhl.chaotikum.org
 
 ip4: 10.130.0.255
 ip6: 2001:67c:2d50::aaaa
