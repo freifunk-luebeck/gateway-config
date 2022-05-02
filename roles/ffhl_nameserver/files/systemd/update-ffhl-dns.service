@@ -1,4 +1,0 @@
-[Service]
-Type=oneshot
-RemainAfterExit=true
-ExecStart=/usr/local/lib/ffhl/update-dns.sh

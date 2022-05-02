@@ -1,0 +1,7 @@
+- hosts: dns-auth
+  become: true
+  roles:
+    - role: dns_common
+      tage: [dns_common, dns]
+    - role: dns_auth
+      tags: [dns_auth, dns]

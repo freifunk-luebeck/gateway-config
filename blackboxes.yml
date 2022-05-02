@@ -1,0 +1,8 @@
+
+
+- hosts: blackboxes
+  become: true
+  roles:
+    - ffhl_access
+    - role: blackbox
+      tags: [blackbox, monitoring]

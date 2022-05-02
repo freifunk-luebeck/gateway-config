@@ -1,0 +1,26 @@
+---
+- hosts: gateways:!holstentor
+  become: true
+  roles:
+    # - role: prepare_ansible
+    #   tags: [prepare_ansible]
+    - role: ffhl_access
+      tags: [ffhl_access]
+    - role: base
+      tags: [base]
+    - role: gwvpn
+      tags: [gwvpn]
+    - role: base_bird
+      tags: [base_bird, bird]
+    - role: peering
+      tags: [peering]
+    - role: meshvpn
+      tags: [meshvpn]
+    - role: dns_common
+      tags: [dns_common, nameserver]
+
+
+# - hosts: kaisertor
+#   become: true
+#   roles:
+#     - icvpn

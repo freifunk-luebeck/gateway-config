@@ -1,0 +1,82 @@
+records:
+  - {name: "@", type: A,    rdata: 5.9.249.24}
+  - {name: "@", type: AAAA, rdata: 2a01:4f8:262:48c2:1::3}
+
+  # nameserver
+  - {name: ns1, type: A,    rdata: 5.9.249.24}
+  - {name: ns1, type: AAAA, rdata: 2a01:4f8:262:48c2:1::3}
+  - {name: ns2, type: A,    rdata: 185.163.119.235}
+  - {name: ns2, type: AAAA, rdata: 2a03:4000:3b:53c:a4d4:5dff:fee7:d0e0}
+
+  - {name: nodes, type: NS, rdata: ns1}
+  - {name: nodes, type: NS, rdata: ns2}
+
+    # servers
+  - {name: srv02, type: A,     rdata: 5.9.249.24}
+  - {name: srv02, type: AAAA,  rdata: 2a01:4f8:262:48c2:1::3}
+  - {name: srv01, type: CNAME, rdata: srv02}
+  - {name: srv03, type: A,     rdata: 10.130.0.11}
+  - {name: srv03, type: AAAA,  rdata: 2001:67c:2d50::b}
+
+  - {name: srv04, type: A,    rdata: 10.130.0.13}
+  - {name: srv04, type: AAAA, rdata: 2001:67c:2d50::d}
+
+  - {name: blackbox01,    type: A,    rdata: 10.130.0.14}
+  - {name: blackbox01,    type: AAAA, rdata: 2001:67c:2d50::e}
+
+  - {name: blueberry,   type: A,    rdata: 10.130.0.101}
+  - {name: blueberry,   type: AAAA, rdata: 2001:67c:2d50::101}
+  - {name: strawberry,  type: A,    rdata: 10.130.0.102}
+  - {name: strawberry,  type: AAAA, rdata: 2001:67c:2d50::102}
+  - {name: srv03-tahoe, type: A,    rdata: 10.130.0.103}
+  - {name: srv03-tahoe, type: AAAA, rdata: 2001:67c:2d50::103}
+  - {name: dyndns,      type: A,    rdata: 10.130.0.104}
+  - {name: dyndns,      type: AAAA, rdata: 2001:67c:2d50::104}
+  - {name: mirror01,    type: A,    rdata: 10.130.0.105}
+  - {name: mirror01,    type: AAAA, rdata: 2001:67c:2d50::105}
+  - {name: docker01,    type: A,    rdata: 10.130.0.106}
+  - {name: docker01,    type: AAAA, rdata: 2001:67c:2d50::106}
+
+  - {name: holstentor,   type: AAAA, rdata: 2001:67c:2d50::ccaa}
+  - {name: holstentor,   type: A,    rdata: 10.130.0.253}
+  - {name: muehlentor,   type: AAAA, rdata: 2001:67c:2d50::ddaa}
+  - {name: muehlentor,   type: A,    rdata: 10.130.0.254}
+  - {name: kaisertor,    type: AAAA, rdata: 2001:67c:2d50::aaaa}
+  - {name: kaisertor,    type: A,    rdata: 10.130.0.255}
+  - {name: huextertor,   type: AAAA, rdata: 2001:67c:2d50::bbaa}
+  - {name: huextertor,   type: A,    rdata: 10.130.0.252}
+  - {name: 4.huextertor, type: A,    rdata: 10.130.0.252}
+  - {name: 4.muehlentor, type: A,    rdata: 10.130.0.254}
+  - {name: 4.holstentor, type: A,    rdata: 10.130.0.253}
+  - {name: 4.kaisertor,  type: A,    rdata: 10.130.0.255}
+  - {name: 6.holstentor, type: AAAA, rdata: 2001:67c:2d50::ccaa}
+  - {name: 6.muehlentor, type: AAAA, rdata: 2001:67c:2d50::ddaa}
+  - {name: 6.kaisertor,  type: AAAA, rdata: 2001:67c:2d50::aaaa}
+  - {name: 6.huextertor, type: AAAA, rdata: 2001:67c:2d50::bbaa}
+
+  # Test Gateway
+  - {name: wg01, type: A, rdata: 5.9.249.27}
+  - {name: wg01, type: AAAA, rdata: 2a01:4f8:172:1ba6:1::20}
+
+
+  # services
+  - {name: www,                type: CNAME, rdata: srv02}
+  - {name: map,                type: CNAME, rdata: srv02}
+  - {name: map2,               type: CNAME, rdata: srv02}
+  - {name: firmware,           type: CNAME, rdata: srv02}
+  - {name: mirror01.firmware,  type: CNAME, rdata: mirror01}
+  - {name: git,                type: CNAME, rdata: srv02}
+  - {name: wiki,               type: CNAME, rdata: srv02}
+  - {name: monitor,            type: CNAME, rdata: srv02}
+  - {name: status,             type: CNAME, rdata: srv02}
+  - {name: peertube,           type: CNAME, rdata: blueberry}
+  - {name: up,                 type: CNAME, rdata: blueberry}
+  - {name: yourservice,        type: NS,    rdata: srv02.luebeck.freifunk.net.}
+  - {name: backbone,           type: CNAME, rdata: srv02}
+  - {name: monitoring.net,     type: AAAA,  rdata: 2001:67c:2d50::f}
+  - {name: 1.introducer.tahoe, type: CNAME, rdata: srv04}
+  - {name: 2.introducer.tahoe, type: CNAME, rdata: srv03-tahoe}
+  - {name: anycastdns,         type: AAAA,  rdata: 2001:67c:2d50:1::a82:7fe0}
+  - {name: node,               type: A,     rdata: 10.130.0.1}
+  - {name: node,               type: AAAA,  rdata: fdef:ffc0:3dd7::1}
+  - {name: opkg.services,      type: CNAME, rdata: firmware}

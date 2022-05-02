@@ -1,0 +1,7 @@
+- hosts: srv02
+  become: true
+  roles:
+    - ffhl_access
+    - services
+    - role: dns_auth
+      tags: [nameserver, nsauth]

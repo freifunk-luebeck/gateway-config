@@ -1,0 +1,13 @@
+---
+
+- name: gateways
+  import_playbook: gateways.yml
+
+- name: dns
+  import_playbook: dns.yml
+
+- name: services
+  import_playbook: services.yml
+
+- name: blackboxes
+  import_playbook: blackboxes.yml

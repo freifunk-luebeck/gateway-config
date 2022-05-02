@@ -1,0 +1,14 @@
+$ORIGIN ffhl.de.
+$TTL 300
+ffhl.de. IN SOA ns1.luebeck.freifunk.net. maschinenraum.luebeck.freifunk.net. (
+                {{ ansible_date_time.epoch }} ; serial number of this zone file
+                1h         ; slave refresh
+                15m        ; slave retry time in case of a problem
+                30d        ; slave expiration time
+                3m         ; negative cache
+                )
+
+@ NS ns1.ffhl.de.
+  NS ns2.ffhl.de.
+
+$INCLUDE ffhl/zones.common.db

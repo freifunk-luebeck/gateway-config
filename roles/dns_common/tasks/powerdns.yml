@@ -1,0 +1,15 @@
+---
+
+- name: install packages
+  tags: [dns, powerdns]
+  apt:
+    state: present
+    name:
+      - pdns-recursor
+
+- name: copy pdns-recursor configs
+  notify:
+    - restart pdns-recursor
+  copy:
+    src: powerdns/recursor.conf
+    dest: /etc/powerdns/

@@ -1,0 +1,11 @@
+---
+
+- name: restart dnsdist
+  systemd:
+    state: restarted
+    name: dnsdist.service
+
+- name: restart pdns-recursor
+  systemd:
+    state: restarted
+    name: pdns-recursor.service

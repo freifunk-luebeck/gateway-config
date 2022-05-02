@@ -1,0 +1,16 @@
+---
+
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: freeze zones
+  command: rndc freeze
+
+- name: restart bind
+  systemd:
+    state: restarted
+    name: bind9.service
+
+- name: thaw zones
+  command: rndc thaw

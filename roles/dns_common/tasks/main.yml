@@ -1,0 +1,14 @@
+---
+
+- name: remove old packages
+  apt:
+    state: absent
+    name:
+      - pdns-server
+      - pdns-backend-bind
+
+
+- import_tasks: dnsdist.yml
+  tags: [dnsdist]
+- import_tasks: powerdns.yml
+  tags: [pdns-recursor]

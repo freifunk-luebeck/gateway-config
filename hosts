@@ -5,12 +5,15 @@ ansible_ssh_user=root
 [gateways]
 kaisertor
 huextertor
-holstentor
 muehlentor
 gw05
 
+[dns-auth]
+srv02
+huextertor
+
 [service_hosts]
-srv02 ansible_ssh_host=srv02.luebeck.freifunk.net
+srv02
 
 [blackboxes]
-blackbox ansible_ssh_host=blackbox.luebeck.freifunk.net
+blackbox01 ansible_ssh_host=blackbox01.ffhl.de

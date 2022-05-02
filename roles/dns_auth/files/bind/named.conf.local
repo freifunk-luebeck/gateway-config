@@ -1,0 +1,25 @@
+zone "ffhl" IN {
+    type master;
+    file "ffhl/ffhl.db";
+};
+
+zone "luebeck.freifunk.net" IN {
+    type master;
+    file "ffhl/luebeck.freifunk.net.db";
+};
+
+zone "ffhl.de" IN {
+    type master;
+    file "ffhl/ffhl.de.db";
+};
+
+zone "nodes.ffhl.de" {
+    type master;
+    file "ffhl/nodes.ffhl.de.db";
+    allow-update {
+        127.0.0.1 ;
+        ::1 ;
+        10.130.0.106 ;
+        2001:67c:2d50:0:a426:84ff:fe4f:f7d4 ;
+    };
+};

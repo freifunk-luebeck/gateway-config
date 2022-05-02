@@ -1,0 +1,14 @@
+$ORIGIN ffhl.
+$TTL 10m
+ffhl.  IN  SOA  srv02.ffhl. info.luebeck.freifunk.net. (
+              {{ ansible_date_time.epoch }} ; serial number of this zone file
+              1h         ; slave refresh
+              3m         ; slave retry time in case of a problem
+              1h         ; slave expiration time
+              1m         ; negative cache
+              )
+
+@ IN NS ns1.ffhl.
+  IN NS ns2.ffhl.
+
+$INCLUDE ffhl/zones.common.db

@@ -1,0 +1,58 @@
+---
+
+# cleanup older roles
+
+- name: remove incompatible packages
+  tags: [dns, bind]
+  apt:
+    state: absent
+    name:
+      - pdns-server
+      - pdns-backend-bind
+
+
+- name: remove old dns update service
+  notify: reload systemd
+  file:
+    state: absent
+    path: /etc/systemd/system/{{ item }}
+  loop:
+    - update-ffhl-dns.service
+    - update-ffhl-dns.timer
+
+
+# setup
+
+- name: install packages
+  tags: [dns, bind]
+  apt:
+    state: present
+    name:
+      - bind9
+
+- name: copy bind configs
+  copy:
+    src: bind/{{ item }}
+    dest: /etc/bind
+  loop:
+    - named.conf.local
+    - named.conf.options
+
+- name: create zones directory
+  file:
+    state: directory
+    path: /var/cache/bind/ffhl
+    owner: bind
+    group: bind
+
+# weird jinja2 filters so we can use with_glob
+- name: generate zones
+  notify:
+    - freeze zones
+    - restart bind
+    - thaw zones
+  template:
+    src: "zones/{{ item | basename }}"
+    dest: /var/cache/bind/ffhl/{{ item | basename | regex_replace('^(.*)\.j2$', '\1') }}
+  with_fileglob:
+    - "../templates/zones/*"

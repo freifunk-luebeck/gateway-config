@@ -1,8 +1,7 @@
 ---
 
 - name: reload sysctl
-  sysctl:
-    reload: true
+  command: sysctl -p
 
 - name: reload systemd
   systemd:

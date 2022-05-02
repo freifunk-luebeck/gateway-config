@@ -1,0 +1,15 @@
+$ORIGIN luebeck.freifunk.net.
+$TTL 300
+luebeck.freifunk.net.   IN  SOA     ns1.luebeck.freifunk.net. maschinenraum.luebeck.freifunk.net. (
+                        {{ ansible_date_time.epoch }} ; serial number of this zone file
+                        1h         ; slave refresh
+                        15m        ; slave retry time in case of a problem
+                        30d        ; slave expiration time
+                        3m         ; negative cache
+                        )
+
+@                       IN  NS    ns1.luebeck.freifunk.net.
+                        IN  NS    ns2.luebeck.freifunk.net.
+                        IN  MX    20 mail.chaotikum.net.
+
+$INCLUDE ffhl/zones.common.db
