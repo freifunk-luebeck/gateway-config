@@ -1,5 +1,5 @@
 ---
-- hosts: gateways:!holstentor
+- hosts: gateways
   become: true
   roles:
     # - role: prepare_ansible
@@ -17,8 +17,7 @@
     - role: meshvpn
       tags: [meshvpn]
     - role: dns_common
-      tags: [dns_common, nameserver]
-
+      tage: [dns_common, dns]
 
 # - hosts: kaisertor
 #   become: true
