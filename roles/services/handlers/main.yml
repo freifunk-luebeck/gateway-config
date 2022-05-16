@@ -1,5 +1,9 @@
 ---
 
+- name: check nginx config
+  command:
+    cmd: nginx -t
+
 - name: restart nginx
   systemd:
     state: restarted

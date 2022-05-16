@@ -2,6 +2,7 @@
   become: true
   roles:
     - ffhl_access
-    - services
+    - role: services
+      tags: [services]
     - role: dns_auth
-      tags: [nameserver, nsauth]
+      tags: [dns_auth, nameserver, nsauth]
