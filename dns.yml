@@ -1,4 +1,4 @@
-- hosts: dns-auth
+- hosts: dns_auth
   become: true
   roles:
     - role: dns_common
