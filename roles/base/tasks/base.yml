@@ -22,13 +22,12 @@
     dest: /etc
 
 
-- name: Disable root login with password
+- name: Disable password login
   tags: [base]
   notify: restart sshd
   lineinfile:
     dest: /etc/ssh/sshd_config
-    regexp: "^#?PermitRootLogin"
-    line: "PermitRootLogin without-password"
+    line: "PasswordAuthentication no"
 
 
 # configurations and stuff
