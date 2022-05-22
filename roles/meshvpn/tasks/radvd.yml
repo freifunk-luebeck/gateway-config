@@ -6,7 +6,6 @@
     dest: /etc/radvd.conf
 
 - name: enable radvd
-  when: exit_traffic
   notify: stop radvd
   systemd:
     masked: no

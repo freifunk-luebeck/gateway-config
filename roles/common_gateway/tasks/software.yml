@@ -7,13 +7,7 @@
     copy:
       src: apt/preferences.d
       dest: /etc/apt/
-  - name: add source list for debian buster
-    when: '"buster" in ansible_facts["lsb"]["description"]'
-    copy:
-      src: apt/debian_buster.list
-      dest: /etc/apt/sources.list
   - name: add source list for debian bullseye
-    when: "'bullseye' in ansible_facts['lsb']['description']"
     copy:
       src: apt/debian_bullseye.list
       dest: /etc/apt/sources.list

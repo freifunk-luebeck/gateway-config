@@ -20,6 +20,7 @@
 
 - name: template iptables
   tags: [iptables, network]
+  when: exit_iface is defined
   notify: reload iptables
   block:
     - name: iptables4 template

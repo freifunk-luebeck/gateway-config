@@ -11,11 +11,13 @@
 - name: mesh-vpn
   tags: [fastd]
   import_tasks: meshvpn.yml
+  when: exit_traffic is defined and exit_traffic
 
 - import_tasks: radvd.yml
   tags: [radvd]
 
 - import_tasks: dhcpd.yml
+  when: exit_traffic is defined and exit_traffic
   tags: [dhcp]
 
 - name: install fastd-exporter

@@ -1,4 +1,3 @@
-
 ansible_ssh_host: huextertor.mesh.ffhl.chaotikum.org
 
 # Base role

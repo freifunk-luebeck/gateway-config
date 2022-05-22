@@ -1,17 +1,18 @@
 ---
 - hosts: gateways
   become: true
+  max_fail_percentage: 0
   roles:
     # - role: prepare_ansible
     #   tags: [prepare_ansible]
     - role: ffhl_access
       tags: [ffhl_access]
-    - role: base
-      tags: [base]
+    - role: common_gateway
+      tags: [common_gateway]
     - role: gwvpn
       tags: [gwvpn]
-    - role: base_bird
-      tags: [base_bird, bird]
+    - role: bird_common
+      tags: [bird_common, bird]
     - role: peering
       tags: [peering]
     - role: meshvpn
