@@ -23,7 +23,10 @@ records:
 
   - {name: blackbox01,    type: A,    rdata: 10.130.0.14}
   - {name: blackbox01,    type: AAAA, rdata: 2001:67c:2d50::e}
+  - {name: blackbox02,    type: AAAA, rdata: 2001:67c:2d50:0:8c74:68ff:fe66:9fc0}
 
+
+  # additional servers
   - {name: blueberry,   type: A,    rdata: 10.130.0.101}
   - {name: blueberry,   type: AAAA, rdata: 2001:67c:2d50::101}
   - {name: strawberry,  type: A,    rdata: 10.130.0.102}
@@ -80,3 +83,16 @@ records:
   - {name: node,               type: A,     rdata: 10.130.0.1}
   - {name: node,               type: AAAA,  rdata: fdef:ffc0:3dd7::1}
   - {name: opkg.services,      type: CNAME, rdata: firmware}
+
+
+  # service discovery for prometheus
+  # rdata is a string with following format: <priority> <weight> <port> <target>
+  - {name: _blackbox._tcp,      type: SRV,  rdata: 10 5 9115 blackbox01}
+  - {name: _blackbox._tcp,      type: SRV,  rdata: 10 5 9115 blackbox02}
+
+  - {name: _gateway._tcp,       type: SRV,  rdata: 10 5 9115 holstentor}
+  - {name: _gateway._tcp,       type: SRV,  rdata: 10 5 9115 burgtor}
+  - {name: _gateway._tcp,       type: SRV,  rdata: 10 5 9115 muehlentor}
+  - {name: _gateway._tcp,       type: SRV,  rdata: 10 5 9115 kaisertor}
+  - {name: _gateway._tcp,       type: SRV,  rdata: 10 5 9115 gw05}
+  - {name: _gateway._tcp,       type: SRV,  rdata: 10 5 9115 gw06}
