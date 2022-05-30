@@ -1,6 +1,7 @@
 ---
 
 - name: synchronize systemd time
+  changed_when: false
   systemd:
     state: restarted
     name: systemd-timesyncd.service
@@ -10,6 +11,7 @@
     timeout: 5
 
 - name: install python3 and python3-apt
+  changed_when: false
   shell:
     cmd: apt-get install -y python3 python3-apt
     warn: no
