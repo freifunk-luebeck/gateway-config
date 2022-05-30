@@ -20,7 +20,7 @@
     name: isc-dhcp-server.service
 
 - name: disable dhcpd
-  when: not exit_traffic
+  when: exit_traffic is not defined or not exit_traffic
   notify: stop dhcpd
   systemd:
     enabled: no

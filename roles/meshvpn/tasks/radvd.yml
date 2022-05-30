@@ -14,7 +14,7 @@
 
 
 - name: disable radvd
-  when: not exit_traffic
+  when: exit_traffic is not defined or not exit_traffic
   notify: restart radvd
   systemd:
     masked: yes
