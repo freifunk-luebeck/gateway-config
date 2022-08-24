@@ -1,4 +1,9 @@
+# gw06 at freifunknord e.V.
 ansible_ssh_host: gw06.ffhl.chaotikum.org
+
+# gateway id
+# used to derive ip and mac addresses
+gwid: 6
 
 # Base role
 ip4: 10.130.0.250
@@ -52,3 +57,15 @@ mesh_vpn_instances:
     mac: de:ad:ca:fe:06:01
     mtu: 1280
     port: 10011
+
+
+# routing
+ibgp_exclude:
+  - kaisertor
+
+exit_traffic: false
+
+internal_ospf:
+  export_routes: true
+  import_routes: true
+  exclude_neighbors: []

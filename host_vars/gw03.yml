@@ -1,5 +1,7 @@
-# real host address
+# kaisertor
 ansible_ssh_host: kaisertor.mesh.ffhl.chaotikum.org
+
+gwid: 3
 
 ip4: 10.130.0.255
 ip6: 2001:67c:2d50::aaaa
@@ -52,10 +54,16 @@ mesh_vpn_instances:
     mac: de:ad:ca:fe:aa:01
 
 
+# routing
+internal_ospf:
+  import_routes: false
+  export_routes: true
+  exclude_neighbors: []
+
 
 # the out-interface for NAT
 exit_iface: ens3
-exit_traffic: yes
+exit_traffic: true
 
 # ICVPN variables
 icvpn_name: luebeck2

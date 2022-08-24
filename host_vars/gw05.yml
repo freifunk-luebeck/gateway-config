@@ -1,5 +1,7 @@
+# gw05 at chaotikum e.V.
 ansible_ssh_host: gw05.ffhl.chaotikum.org
 
+gwid: 5
 # Base role
 ip4: 10.130.0.251
 ip6: 2001:67c:2d50::5:1
@@ -9,10 +11,8 @@ fastd_mesh_mac: de:ad:ca:fe:05:02
 fastd_gw_mac: de:ad:ca:fe:05:03
 dhcpd_start: 10.130.32.1
 dhcpd_end: 10.130.39.255
-exit_iface: enp1s0
 
 # meshvpn
-exit_traffic: no
 # masked_services:
 #   - radvd.service
 
@@ -56,3 +56,14 @@ mesh_vpn_instances:
     mac: de:ad:ca:fe:05:05
     mtu: 1280
     port: 10011
+
+
+
+exit_iface: enp1s0
+exit_traffic: true
+
+# routing
+internal_ospf:
+  import_routes: true
+  export_routes: true
+  exclude_neighbors: []

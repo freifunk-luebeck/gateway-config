@@ -1,4 +1,7 @@
-ansible_ssh_host: huextertor.mesh.ffhl.chaotikum.org
+# huextertor
+ansible_ssh_host: gw02.ffhl.chaotikum.org
+
+gwid: 2
 
 # Base role
 ip4: 10.130.0.252
@@ -80,3 +83,11 @@ mesh_vpn_instances:
     mtu: 1312
     port: 10013
     mac: de:ad:ca:fe:bb:03
+
+
+# routing
+exit_traffic: false
+
+internal_ospf:
+  import_routes: true
+  export_routes: true
