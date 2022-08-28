@@ -3,22 +3,18 @@ ansible_python_interpreter=/usr/bin/env python3
 ansible_ssh_user=root
 
 [gateways]
-# kaisertor
-gw03
-# huextertor
-gw02
-# muehlentor
-gw04
+kaisertor
+huextertor
+muehlentor
 gw05
 gw06
 
 [dns_auth]
 srv02
-gw02
+huextertor
 
 [service_hosts]
 srv02
 
 [blackboxes]
 blackbox01 ansible_ssh_host=blackbox01.ffhl.de
-blackbox02 ansible_ssh_host=blackbox02.ffhl.de

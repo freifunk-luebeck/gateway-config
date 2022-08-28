@@ -1,14 +1,16 @@
 ---
 
-- name: add apt preferences
-  copy:
-    src: apt/preferences.d
-    dest: /etc/apt/
-
-- name: add source list for debian bullseye
-  copy:
-    src: apt/debian_bullseye.list
-    dest: /etc/apt/sources.list
+- name: add appropriate source.list
+  tags: [apt]
+  block:
+  - name: add apt preferences
+    copy:
+      src: apt/preferences.d
+      dest: /etc/apt/
+  - name: add source list for debian bullseye
+    copy:
+      src: apt/debian_bullseye.list
+      dest: /etc/apt/sources.list
 
 
 

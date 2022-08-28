@@ -1,3 +1,5 @@
+serial: 1661360520
+
 records:
   - {name: "@", type: A,    rdata: 5.9.249.24}
   - {name: "@", type: AAAA, rdata: 2a01:4f8:262:48c2:1::3}

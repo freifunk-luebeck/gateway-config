@@ -1,4 +1,0 @@
-internal_ospf:
-  import_routes: false
-  export_routes: true
-  exclude_neighbors: []

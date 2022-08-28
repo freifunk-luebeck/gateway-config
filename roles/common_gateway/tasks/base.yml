@@ -7,11 +7,8 @@
     - reload sysctl
     - restart journald
   copy:
-    src: '{{ item.src }}'
-    dest: '/etc/{{ item.path }}'
-  with_community.general.filetree: etc/
-  when: item.state == 'file'
-
+    src: etc/
+    dest: /etc
 
 
 - name: copy host specific configs
