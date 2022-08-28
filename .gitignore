@@ -7,3 +7,4 @@ secret*
 vault-password.txt
 /my-playbooks
 revert_and_setup.sh
+gateway_switcher.sh
