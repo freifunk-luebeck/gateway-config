@@ -1,6 +1,5 @@
 ---
 
-
 - name: download prometheus-fastd-exporter
   get_url:
     url: https://freifunk-luebeck.pages.chaotikum.org/prometheus-fastd-exporter/prometheus-fastd-exporter.deb

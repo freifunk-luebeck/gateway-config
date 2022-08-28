@@ -11,7 +11,7 @@
     path: /etc/fastd/ffhl_mesh_gwvpn
     state: directory
 
-- name: copy gwvpn config
+- name: copy gwvpn peers
   notify: restart gwvpn
   copy:
     src: mesh-gwvpn/
@@ -49,6 +49,6 @@
     src: /etc/fastd/ffhl_mesh_gwvpn/pubkey.key
     dest: artifacts/
 
-- name: install fastd-exporter
-  import_role:
-    name: fastd-exporter
+# - name: install fastd-exporter
+#   import_role:
+#     name: fastd-exporter

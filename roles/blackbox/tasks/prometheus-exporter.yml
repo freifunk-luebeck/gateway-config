@@ -5,13 +5,14 @@
     state: present
     name: prometheus-blackbox-exporter
 
+- name: copy systemd override
+  notify: restart blackbox-exporter
+  copy:
+    src: override.conf
+    dest: /etc/systemd/system/prometheus-blackbox-exporter.service.d/
+
 - name: copy blackbox-exporter config
+  notify: restart blackbox-exporter
   copy:
     src: blackbox.yml
     dest: /etc/prometheus/
-
-- name: restart blackbox-exporter
-  systemd:
-    state: restarted
-    enabled: true
-    name: prometheus-blackbox-exporter

@@ -1,4 +1,0 @@
-[Service]
-Type=oneshot
-WorkingDirectory=/etc/tinc/icvpn
-ExecStart=/usr/bin/git pull

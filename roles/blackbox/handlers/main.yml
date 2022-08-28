@@ -1,0 +1,7 @@
+---
+
+- name: restart blackbox-exporter
+  systemd:
+    daemon_reload: true
+    state: restarted
+    name: prometheus-blackbox-exporter

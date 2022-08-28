@@ -12,5 +12,7 @@ server {
 	ssl_certificate /var/lib/acme/live/luebeck.freifunk.net/fullchain;
 	ssl_certificate_key /var/lib/acme/live/luebeck.freifunk.net/privkey;
 
-	return 302 https://monitoring.freifunknord.de$request_uri;
+	location / {
+		return 302 https://monitoring.freifunknord.de$request_uri;
+	}
 }

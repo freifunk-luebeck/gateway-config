@@ -1,9 +1,5 @@
 ---
-- name: copy base files
-  tags: [icvpn]
-  copy:
-    src: etc/
-    dest: /etc
+
 
 - name: meta repo
   tags: [icvpn]
