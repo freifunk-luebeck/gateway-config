@@ -1,0 +1,11 @@
+# internal ospf
+
+protocol ospf v3 ospf_ffhl6 {
+    ipv6 {
+        table peering;
+        import {{ "all" if (internal_ospf.import_routes | default(true)) else "none" }};
+        export {{ "all" if (internal_ospf.export_routes | default(true)) else "none" }};
+    };
+
+    {% include "bird/ospf_ffhl.conf.j2" %}
+};

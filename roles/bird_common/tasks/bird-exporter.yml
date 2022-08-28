@@ -1,0 +1,6 @@
+- name: copy prometheus-bird-exporter config
+  notify: restart prometheus-bird-exporter
+  tags: [etc]
+  copy:
+    src: prometheus-bird-exporter
+    dest: /etc/default/
