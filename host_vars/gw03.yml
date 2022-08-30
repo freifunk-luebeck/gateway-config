@@ -12,6 +12,9 @@ fastd_gw_mac: de:ad:ca:fe:aa:cc
 dhcpd_start: 10.130.16.1
 dhcpd_end: 10.130.23.255
 
+underlay_vpn:
+  pubkey: MAzD9w4KgNkzMwhZNfFzdTw31UbBgzM3AhS0dfPfXEk=
+
 mesh_gwvpn_secret: !vault |
   $ANSIBLE_VAULT;1.1;AES256
   63643064613564623039386335613930663666613037333239383839653037613564343161373338

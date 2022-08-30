@@ -7,7 +7,7 @@
     state: present
     name:
       - batctl
-      - fastd=22-2~bpo11+1
+      - fastd
       - iproute2
       - isc-dhcp-server
       - radvd

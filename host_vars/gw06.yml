@@ -17,6 +17,9 @@ fastd_gw_mac: de:ad:ca:fe:06:03
 
 # exit_iface: ens18
 
+underlay_vpn:
+  pubkey: x3XUUNp6BaYn71rXYPoHks51YyT0p3m3dCsYszHB3A4=
+
 mesh_gwvpn_secret: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           64326136366162633661366239396139623830306261313035343936653462356238383633653366

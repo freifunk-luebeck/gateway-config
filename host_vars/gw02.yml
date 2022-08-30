@@ -12,8 +12,13 @@ fastd_mesh_mac: de:ad:ca:fe:bb:bb
 fastd_gw_mac: de:ad:ca:fe:bb:cc
 dhcpd_start: 10.130.24.1
 dhcpd_end: 10.130.31.254
+
 # edit this before deploying on final servers!!!
 exit_iface: eth0
+
+
+underlay_vpn:
+  pubkey: 7vj4WSuxm5Iao6+e7oqZg9/yaT2Kx6cQgVIOBS7odHg=
 
 mesh_gwvpn_secret: !vault |
   $ANSIBLE_VAULT;1.1;AES256

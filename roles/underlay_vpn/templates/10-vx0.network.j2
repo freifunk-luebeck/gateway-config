@@ -1,0 +1,9 @@
+[Match]
+Name=vx_{{ item.handle }}_*
+MACAddress=de:ad:ca:{{ formatted_gwid }}:08:{{ "%02d" | format(item.vni) }}
+
+[Network]
+BatmanAdvanced=bat_{{ item.handle }}
+
+[Link]
+ARP=false

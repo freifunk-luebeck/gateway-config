@@ -1,0 +1,1 @@
+formatted_gwid: "{{ '%02d' | format(gwid) }}"

@@ -5,9 +5,9 @@
     src: apt/preferences.d
     dest: /etc/apt/
 
-- name: add source list for debian bullseye
+- name: add sources.list
   copy:
-    src: apt/debian_bullseye.list
+    src: apt/debian_bookworm.list
     dest: /etc/apt/sources.list
 
 
@@ -25,22 +25,20 @@
   apt:
     autoremove: yes
     update_cache: yes
-    state: present
+    state: latest
     name:
       # necessary packets
+      - systemd
       - batctl
       - fastd
       - git
       - haveged
       - iproute2
       - iptables-persistent
-      - isc-dhcp-server
       - openssh-server
       - prometheus-node-exporter
-      - radvd
       # - systemd-timesyncd causes dependency hell atm
       # tools
-      - screenfetch
       - apt-file
       - bridge-utils
       - curl

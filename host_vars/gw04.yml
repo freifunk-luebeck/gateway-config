@@ -17,6 +17,10 @@ exit_iface: ens3
 
 exit_traffic: yes
 
+
+underlay_vpn:
+  pubkey: j/YQBoJgSift5aN2V0ps5vmTRv9evc4dFSH+/elWIX8=
+
 mesh_gwvpn_secret: !vault |
   $ANSIBLE_VAULT;1.1;AES256
   62643665386233343439383533376435383034613538613539356231663433663238333062643766

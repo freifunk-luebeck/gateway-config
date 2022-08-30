@@ -5,16 +5,16 @@ gwid: 5
 # Base role
 ip4: 10.130.0.251
 ip6: 2001:67c:2d50::5:1
-ip6_ula: fdef:ffc0:3dd7::5:1
-freifunk_mac: de:ad:ca:fe:05:01
-fastd_mesh_mac: de:ad:ca:fe:05:02
-fastd_gw_mac: de:ad:ca:fe:05:03
+ip6_ula: "fdef:ffc0:3dd7::{{ gwid }}:1"
+freifunk_mac: de:ad:ca:fe:{{ "%02d" | format(gwid) }}:01
+fastd_mesh_mac: de:ad:ca:fe:{{ "%02d" | format(gwid) }}:02
+fastd_gw_mac: de:ad:ca:fe:{{ "%02d" | format(gwid) }}:03
 dhcpd_start: 10.130.32.1
 dhcpd_end: 10.130.39.255
 
-# meshvpn
-# masked_services:
-#   - radvd.service
+
+underlay_vpn:
+  pubkey: CFJu3qSoX1uulUVVmJ2C6+r5gyjecbvKcY+1Ld3mUw8=
 
 mesh_gwvpn_secret: !vault |
       $ANSIBLE_VAULT;1.1;AES256

@@ -1,0 +1,12 @@
+[NetDev]
+Name=bat_{{ item.handle }}
+Kind=batadv
+MACAddress=de:ad:ca:{{ formatted_gwid }}:07:{{ "%02d" | format(item.vni) }}
+
+
+[BatmanAdvanced]
+GatewayMode=server
+OriginatorIntervalSec=5
+GatewayBandwidthDown=250M
+GatewayBandwidthUp=250M
+RoutingAlgorithm=batman-iv

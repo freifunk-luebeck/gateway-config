@@ -1,0 +1,54 @@
+---
+
+- name: install wireguard tools
+  apt:
+    state: latest
+    name: wireguard-tools
+
+- name: copy private key files
+  notify: restart systemd-networkd
+  copy:
+    mode: "0640"
+    owner: root
+    group: systemd-network
+    src: "underlay_vpn/{{ inventory_hostname }}.key"
+    dest: /etc/systemd/wg0-priv.key
+
+- name: generate wireguard config
+  notify: restart systemd-networkd
+  template:
+    src: 10-wg0.netdev.j2
+    dest: /etc/systemd/network/10-wg0.netdev
+
+- name: generate network config
+  notify: restart systemd-networkd
+  template:
+    src: 10-wg0.network.j2
+    dest: /etc/systemd/network/10-wg0.network
+
+
+# overlay network
+##################
+
+- name: apply GRE template
+  notify: restart systemd-networkd
+  template:
+    src: 10-vx0.netdev.j2
+    dest: "/etc/systemd/network/10-vx_{{ item[0].handle }}_{{ '%02d' | format(hostvars[item[1]].gwid) }}.netdev"
+  loop: "{{ overlay_networks | product(groups['gateways'] | difference(inventory_hostname)) }}"
+
+
+- name: copy batman iface config
+  notify: restart systemd-networkd
+  template:
+    src: 10-bat0.netdev.j2
+    dest: "/etc/systemd/network/10-bat_{{ item.handle }}.netdev"
+  loop: "{{ overlay_networks }}"
+
+
+- name: copy l2 domain config
+  notify: restart systemd-networkd
+  template:
+    src: 10-vx0.network.j2
+    dest: "/etc/systemd/network/10-vx_{{ item.handle }}.network"
+  loop: "{{ overlay_networks }}"

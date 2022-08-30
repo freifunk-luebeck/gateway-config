@@ -13,6 +13,10 @@
   when: item.state == 'file'
 
 
+- name: copy bashrc
+  copy:
+    src: bashrc
+    dest: /root/.bashrc
 
 - name: copy host specific configs
   tags: [etc]
@@ -52,10 +56,3 @@
       lineinfile:
         dest: /etc/locale.gen
         line: "de_DE.UTF-8 UTF-8"
-
-- name: copy scripts
-  tags: [base]
-  copy:
-    src: scripts/
-    dest: /usr/local/lib/ffhl/
-    mode: a+x
