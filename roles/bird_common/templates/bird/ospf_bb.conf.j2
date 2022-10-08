@@ -1,0 +1,36 @@
+# internal ospf
+
+{% if exit_traffic %}
+protocol static default4 {
+    ipv4 {
+        table master4;
+    };
+    route 0.0.0.0/0 via {{ exit_via | default(ansible_facts['default_ipv4']['gateway']) }};
+};
+{% endif %}
+
+
+# Internal OSPF IPv4
+
+protocol ospf v3 bb4 {
+    ipv4 {
+        table master4;
+        import where is_default4();
+        export where is_default4();
+    };
+
+    {% include "bird/ospf_bb.j2" %}
+};
+
+
+# Internal OSPF IPv6
+
+protocol ospf v3 bb6 {
+    ipv6 {
+        table peering;
+        import {{ "all" if (internal_ospf.import_routes | default(true)) else "none" }};
+        export {{ "all" if (internal_ospf.export_routes | default(true)) else "none" }};
+    };
+
+    {% include "bird/ospf_bb.j2" %}
+};

@@ -20,6 +20,7 @@
       - cron-apt
       - mutt
       - rsyslog
+      - molly-guard
 
 - name: install tools
   apt:
@@ -48,7 +49,7 @@
       - iperf3
       - iputils-ping
       - jq
-      - molly-guard
+      # - molly-guard
       - openssh-client
       - python3-yaml
       - socat

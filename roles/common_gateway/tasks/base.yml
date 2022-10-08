@@ -1,6 +1,19 @@
 ---
 
-- name: copy base configs
+
+- name: copy base configs (directories)
+  tags: [etc]
+  notify:
+    - reload systemd
+    - reload sysctl
+    - restart journald
+  file:
+    state: directory
+    path: '/etc/{{ item.path }}'
+  with_community.general.filetree: etc/
+  when: item.state == 'directory'
+
+- name: copy base configs (files)
   tags: [etc]
   notify:
     - reload systemd

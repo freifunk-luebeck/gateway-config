@@ -1,0 +1,10 @@
+[Match]
+Name = gre_{{ item.handle }}_*
+
+[Network]
+LinkLocalAddressing = no
+DHCP = no
+BatmanAdvanced = bat_{{ item.handle }}
+
+[Link]
+ARP = false

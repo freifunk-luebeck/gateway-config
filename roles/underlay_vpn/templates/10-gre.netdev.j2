@@ -1,0 +1,11 @@
+[NetDev]
+Name = gre_{{ item[0].handle }}_{{ "%02d" | format(hostvars[item[1]].gwid) }}
+Kind = ip6gretap
+MTUBytes = 1378
+# MACAddress = de:ad:ca:{{ formatted_gwid }}:01:{{ "%02d" | format(hostvars[item[1]].gwid) }}
+
+[Tunnel]
+Key = {{ item[0].vni }}
+Remote = {{ overlay_network_ula | ipaddr(hostvars[item[1]].gwid) | ipaddr('address') }}
+Local = {{ overlay_network_ula | ipaddr(gwid) | ipaddr('address') }}
+Independent = true

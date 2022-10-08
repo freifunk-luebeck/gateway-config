@@ -1,18 +1,19 @@
 [NetDev]
-Name=wg0
-Kind=wireguard
+Name = wg0
+Kind = wireguard
+MTUBytes = 1420
 
 [WireGuard]
-PrivateKeyFile=/etc/systemd/wg0-priv.key
-ListenPort=42000
+PrivateKeyFile = /etc/systemd/wg0-priv.key
+ListenPort = 42000
 
 
 {% for peer in (groups["gateways"] | difference(inventory_hostname) | sort ) %}
 # {{ peer }}
 [WireGuardPeer]
-PublicKey={{ hostvars[peer].underlay_vpn.pubkey }}
-Endpoint={{ hostvars[peer].ansible_ssh_host }}:42000
-AllowedIPs={{ ["10.0.0", hostvars[peer].gwid] | join('.') |  ipaddr }}/32
-PersistentKeepalive=60
+PublicKey = {{ hostvars[peer].underlay_vpn.pubkey }}
+Endpoint = {{ hostvars[peer].ansible_ssh_host }}:42000
+AllowedIPs = {{ "10.0.0.0/24" | ipaddr(hostvars[peer].gwid) | ipaddr('address') }}/32, {{ overlay_network_ula | ipaddr(hostvars[peer].gwid) | ipaddr('address')}}/128
+PersistentKeepalive = 60
 
 {% endfor %}

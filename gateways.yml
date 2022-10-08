@@ -3,8 +3,8 @@
   become: true
   max_fail_percentage: 0
   roles:
-    # - role: prepare_ansible
-    #   tags: [prepare_ansible]
+    - role: prepare_ansible
+      tags: [prepare_ansible]
     - role: ffhl_access
       tags: [ffhl_access]
     - role: common_gateway

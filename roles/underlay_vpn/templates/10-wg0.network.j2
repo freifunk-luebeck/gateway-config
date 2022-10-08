@@ -2,4 +2,5 @@
 Name = wg0
 
 [Network]
-Address = {{ ["10.0.0", gwid] | join('.') |  ipaddr }}/24
+# generated ula space (https://www.unique-local-ipv6.com/)
+Address = {{ overlay_network_ula | ipaddr(gwid) }}

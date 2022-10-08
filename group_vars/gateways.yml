@@ -1,6 +1,12 @@
 
+overlay_network_ula: fd61:b8ce:2712::/48
 overlay_networks:
-  - handle: ffhl
+  - handle: bb
     vni: 1
-  - handle: ffnord
+    batman: false
+  - handle: ffhl
     vni: 2
+    batman: true
+  - handle: ffnord
+    vni: 3
+    batman: true

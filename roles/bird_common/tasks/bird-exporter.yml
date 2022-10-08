@@ -1,3 +1,12 @@
+---
+
+- name: install bird exporter
+  apt:
+    update_cache: true
+    state: latest
+    name:
+      - prometheus-bird-exporter
+
 - name: copy prometheus-bird-exporter config
   notify: restart prometheus-bird-exporter
   tags: [etc]

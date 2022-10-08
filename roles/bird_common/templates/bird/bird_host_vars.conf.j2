@@ -1,4 +1,4 @@
-router id {{ ip4 }};
+router id {{ "10.0.0.0/24" | ipaddr | ipaddr(gwid) | ipaddr('address') }};
 
 define OWNIP     = {{ ip4 }};
 define PUBLIC_IP = {{ ip6 }};

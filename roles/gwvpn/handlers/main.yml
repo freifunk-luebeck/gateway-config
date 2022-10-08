@@ -1,5 +1,5 @@
 ---
 
-- name: restart gwvpn
-  systemd:
-    name: fastd@ffhl_mesh_gwvpn
+- name: reload networkd
+  command:
+    cmd: networkctl reload

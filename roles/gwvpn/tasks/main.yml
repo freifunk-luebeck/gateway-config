@@ -1,54 +1,25 @@
 ---
-- name: create fastd user
-  user:
-    name: fastd
-    system: yes
-    create_home: no
-    home: /etc/fastd
 
-- name: create fastd config dirs
-  file:
-    path: /etc/fastd/ffhl_mesh_gwvpn
-    state: directory
-
-- name: copy gwvpn peers
-  notify: restart gwvpn
-  copy:
-    src: mesh-gwvpn/
-    dest: /etc/fastd/ffhl_mesh_gwvpn
-    owner: root
-
-- name: apply fastd.conf template
-  notify: restart gwvpn
-  template:
-    src: mesh-gwvpn/fastd.conf
-    dest: /etc/fastd/ffhl_mesh_gwvpn/fastd.conf
-
-- name: create fastd-up script
-  notify: restart gwvpn
-  template:
-    src: mesh-gwvpn/fastd-up
-    dest: /etc/fastd/ffhl_mesh_gwvpn/fastd-up
-    mode: '0744'
-
-
-# enable fastd@ffhl_mesh_gwvpn service
-- name: enable gwvpn
+- name: disable old gwvpn
   systemd:
     name: fastd@ffhl_mesh_gwvpn.service
-    enabled: yes
+    enabled: false
+    state: stopped
 
-# download public keys to your local machine
-- name: create public key files
-  shell:
-    creates: /etc/fastd/ffhl_mesh_gwvpn/pubkey.key
-    cmd: fastd --show-key -c /etc/fastd/ffhl_mesh_gwvpn/fastd.conf > /etc/fastd/ffhl_mesh_gwvpn/pubkey.key
+- name: remove old files
+  file:
+    state: absent
+    path: "{{ item }}"
+  loop:
+    - /etc/fastd/ffhl_mesh_gwvpn
+    - /etc/fastd/ffhl_mesh_gwvpn
+    - /etc/fastd/ffhl_mesh_gwvpn/fastd.conf
+    - /etc/fastd/ffhl_mesh_gwvpn/fastd-up
 
-- name: fetch public keys
-  fetch:
-    src: /etc/fastd/ffhl_mesh_gwvpn/pubkey.key
-    dest: artifacts/
 
-# - name: install fastd-exporter
-#   import_role:
-#     name: fastd-exporter
+- name: network config
+  notify: reload networkd
+  template:
+    src: 10-tunnel.network.j2
+    dest: "/etc/systemd/network/10-gre_bb_{{ '%02d' | format(hostvars[item].gwid) }}.network"
+  loop: "{{ groups['gateways'] | difference(inventory_hostname) }}"

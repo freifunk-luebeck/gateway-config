@@ -1,0 +1,13 @@
+[Match]
+Name = gre_bb_{{ "%02d" | format(hostvars[item].gwid) }}
+
+[Network]
+IPv6AcceptRA = no
+
+[Address]
+Address = {{ "10.0.0.0/24" | ipaddr(gwid) | ipaddr('address') }}/32
+Peer = {{ "10.0.0.0/24" | ipaddr(hostvars[item].gwid) | ipaddr('address') }}/32
+
+[Address]
+Address = {{ "2001:67c:2d50:ff00::/56" | ipaddr(gwid) | ipaddr('address') }}/128
+Peer = {{ "2001:67c:2d50:ff00::/56" | ipaddr(hostvars[item].gwid) | ipaddr('address') }}/128

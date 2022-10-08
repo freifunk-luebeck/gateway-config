@@ -1,0 +1,46 @@
+---
+
+- name: apply GRE template
+  notify: restart systemd-networkd
+  template:
+    src: 10-gre.netdev.j2
+    dest: "/etc/systemd/network/10-gre_{{ item[0].handle }}_{{ '%02d' | format(hostvars[item[1]].gwid) }}.netdev"
+  loop: "{{ overlay_networks | product(groups['gateways'] | difference(inventory_hostname)) }}"
+
+
+- name: create batman domain interfaces
+  notify: restart systemd-networkd
+  template:
+    src: 10-bat0.netdev.j2
+    dest: "/etc/systemd/network/10-bat_{{ item.handle }}.netdev"
+  loop: "{{ overlay_networks }}"
+  when: "item.batman"
+
+
+- name: setup gre tunnels for batman
+  notify: restart systemd-networkd
+  template:
+    src: 10-gre.network.j2
+    dest: "/etc/systemd/network/10-gre_{{ item.handle }}.network"
+  loop: "{{ overlay_networks }}"
+  when: "item.batman"
+
+
+- name: remove old files
+  file:
+    state: absent
+    path: "/etc/systemd/network/10-gre_{{ item[0] }}_{{ '%02d' | format(hostvars[item[1]].gwid) }}.netdev"
+  loop: "{{ ['backbone', 'gwbb', 'x'] | product(groups['gateways']) }}"
+
+
+- name: remove old files
+  file:
+    state: absent
+    path: "/etc/systemd/network/10-vx_{{ item.handle }}.network"
+  loop: "{{ overlay_networks }}"
+
+- name: remove old files
+  file:
+    state: absent
+    path: "/etc/systemd/network/10-vx_{{ item[0].handle }}_{{ '%02d' | format(hostvars[item[1]].gwid) }}.netdev"
+  loop: "{{ overlay_networks | product(groups['gateways'] | difference(inventory_hostname)) }}"

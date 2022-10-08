@@ -4,8 +4,6 @@
     state: latest
     name:
       - bird2
-      - prometheus-bird-exporter
-
 
 - name: create bird.conf.d
   file:
@@ -23,13 +21,6 @@
   with_fileglob: "bird/*"
 
 
-- name: copy host specific configs
-  notify: restart bird
-  copy:
-    src: "{{ item }}"
-    dest: /etc/bird/bird.conf.d/
-  with_fileglob: "host/{{ inventory_hostname }}/bird.conf.d/*"
-
 - name: generate and copy host specific bird configs
   notify: restart bird
   template:
@@ -37,11 +28,14 @@
     dest: /etc/bird/bird_host_vars.conf
 
 
-- name: remove old ibgp config
+- name: generate ospf configs
   notify: restart bird
-  file:
-    state: absent
-    path: /etc/bird/bird.conf.d/10-ibgp.conf
+  template:
+    src: "bird/{{ item }}.j2"
+    dest: "/etc/bird/bird.conf.d/40-{{ item }}"
+  loop:
+  - ospf_bb.conf
+
 
 - name: remove old ospf config
   notify: restart bird
@@ -50,13 +44,7 @@
     path: /etc/bird/bird.conf.d/{{ item }}
   loop:
     - 40-internal-ospf.conf
+    - 40-ospf_ffhl4.conf
+    - 40-ospf_ffhl6.conf
     - 60-ospf-internal.conf
-
-- name: generate ospf configs
-  notify: restart bird
-  template:
-    src: "bird/{{ item }}.j2"
-    dest: "/etc/bird/bird.conf.d/40-{{ item }}"
-  loop:
-  - ospf_ffhl4.conf
-  - ospf_ffhl6.conf
+    - 10-ibgp.conf
