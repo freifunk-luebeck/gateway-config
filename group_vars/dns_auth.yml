@@ -1,7 +1,7 @@
 serial: 1661360520
 
 records:
-  - {name: "@", type: A,    rdata: 5.9.249.24}
+  - {name: "@", type: A,    rdata: 5.9.249.29}
   - {name: "@", type: AAAA, rdata: 2a01:4f8:262:48c2:1::3}
 
   # nameserver
@@ -14,9 +14,8 @@ records:
   - {name: nodes, type: NS, rdata: ns2}
 
     # servers
-  - {name: srv02, type: A,     rdata: 5.9.249.24}
+  - {name: srv02, type: A,     rdata: 5.9.249.29}
   - {name: srv02, type: AAAA,  rdata: 2a01:4f8:262:48c2:1::3}
-  - {name: srv01, type: CNAME, rdata: srv02}
   - {name: srv03, type: A,     rdata: 10.130.0.11}
   - {name: srv03, type: AAAA,  rdata: 2001:67c:2d50::b}
 
