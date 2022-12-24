@@ -1,0 +1,94 @@
+
+{
+  debug
+  email "info@luebeck.freifunk.net"
+  acme_ca "https://acme-v02.api.letsencrypt.org/directory"
+  servers {
+    metrics
+  }
+}
+
+(transparent_upstream) {
+  header_up Host {upstream_hostport}
+  #header_up -X-Forwarded-*
+  header_up -X-Forwarded-Host
+  transport http {
+    tls_insecure_skip_verify
+  }
+}
+
+
+luebeck.freifunk.net, ffhl.de {
+  rewrite * /ffhl-website/{uri}/
+
+  reverse_proxy https://freifunk-luebeck.pages.chaotikum.org {
+    import transparent_upstream
+  }
+}
+
+
+backbone.luebeck.freifunk.net, backbone.ffhl.de {
+  # url is actually https://freifunk-luebeck.pages.chaotikum.org/mfc-onepager/
+
+  rewrite * /mfc-onepager{uri}
+  reverse_proxy https://freifunk-luebeck.pages.chaotikum.org {
+    import transparent_upstream
+  }
+}
+
+
+status.luebeck.freifunk.net, status.ffhl.de {
+  file_server
+  root * /var/www/ffhl-status
+}
+
+
+# very expressive config but this disables automatic https redirect
+http://firmware.luebeck.freifunk.net, http://firmware.ffhl.de, https://firmware.luebeck.freifunk.net, https://firmware.ffhl.de {
+  root * /var/www/firmware
+  file_server browse {
+    hide .fancyindex
+  }
+
+  handle_path /wizard/* {
+    file_server
+    root * /var/www/firmware-selector
+  }
+}
+
+
+git.ffhl, git.luebeck.freifunk.net, git.ffhl.de {
+  redir https://git.chaotikum.org/freifunk-luebeck 301
+}
+
+
+monitor.luebeck.freifunk.net, monitor.ffhl.de {
+  redir https://monitoring.freifunknord.de{uri} 302
+}
+
+
+map.luebeck.freifunk.net, map.ffhl.de {
+  root * /var/www/hopglass
+  file_server
+
+  handle_path /data/* {
+    reverse_proxy http://localhost:4000
+  }
+
+  reverse_proxy /requestd http://localhost:21001
+}
+
+
+
+
+xn--lbeck-kva.freifunk.net, www.luebeck.freifunk.net, www.ffhl.de {
+  redir https://luebeck.freifunk.net{uri}
+}
+
+
+wiki.luebeck.freifunk.net, wiki.ffhl.de {
+  rewrite * /wiki{uri}
+  reverse_proxy https://freifunk-luebeck.pages.chaotikum.org {
+    import transparent_upstream
+  }
+}

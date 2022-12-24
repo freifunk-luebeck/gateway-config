@@ -11,6 +11,10 @@
   tags: [nginx]
   import_tasks: nginx.yml
 
+- name: setup caddy
+  tags: [caddy]
+  import_tasks: caddy.yml
+
 - name: ffdyndns
   tags: [ffdyndns]
   import_tasks: ffdyndns.yml

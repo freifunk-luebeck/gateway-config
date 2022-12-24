@@ -1,0 +1,44 @@
+---
+
+
+- name: Ensure caddy dependencies are installed.
+  apt:
+    state: present
+    name:
+      - debian-keyring
+      - debian-archive-keyring
+      - apt-transport-https
+      - gnupg2
+      - curl
+
+- name: Add Caddy apt key.
+  apt_key:
+    url: "https://dl.cloudsmith.io/public/caddy/stable/gpg.key"
+    id: 65760C51EDEA2017CEA2CA15155B6D79CA56EA34
+    state: present
+  register: add_repository_key
+  ignore_errors: true
+
+- name: Add Caddy repository.
+  apt_repository:
+    repo: "deb https://dl.cloudsmith.io/public/caddy/stable/deb/debian any-version main"
+    state: present
+    update_cache: true
+
+- name: disable nginx
+  systemd:
+    state: stopped
+    enabled: false
+    name: nginx
+
+- name: Install Caddy
+  package:
+    name: "caddy"
+    state: "latest"
+  notify: restart caddy
+
+- name: copy config
+  copy:
+    src: caddy/caddyfile
+    dest: /etc/caddy/Caddyfile
+  notify: restart caddy

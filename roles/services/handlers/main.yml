@@ -8,3 +8,8 @@
   systemd:
     state: restarted
     name: nginx.service
+
+- name: restart caddy
+  systemd:
+    state: restarted
+    name: caddy.service

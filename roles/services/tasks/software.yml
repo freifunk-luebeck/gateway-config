@@ -3,7 +3,6 @@
 - name: install python3-apt
   command:
     cmd: apt-get install -y python3-apt
-    warn: false
 
 - name: remove packages that are not needed
   apt:
