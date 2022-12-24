@@ -1,0 +1,9 @@
+---
+- name: Restart
+  hosts: gateways
+  gather_facts: false
+  tasks:
+    - name: reboot
+      reboot:
+        connect_timeout: 60
+        reboot_timeout: 300
