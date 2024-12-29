@@ -1,6 +1,6 @@
 $ORIGIN luebeck.freifunk.net.
 $TTL 300
-luebeck.freifunk.net.   IN  SOA     ns1.luebeck.freifunk.net. maschinenraum.luebeck.freifunk.net. (
+luebeck.freifunk.net.   IN  SOA     ns1.he.net. maschinenraum.luebeck.freifunk.net. (
                         {{ serial }} ; serial number of this zone file
                         1h         ; slave refresh
                         15m        ; slave retry time in case of a problem
@@ -8,8 +8,11 @@ luebeck.freifunk.net.   IN  SOA     ns1.luebeck.freifunk.net. maschinenraum.lueb
                         3m         ; negative cache
                         )
 
-@                       IN  NS    ns1.luebeck.freifunk.net.
-                        IN  NS    ns2.luebeck.freifunk.net.
+@                       IN  NS    ns1.he.net.
+                        IN  NS    ns2.he.net.
+                        IN  NS    ns3.he.net.
+                        IN  NS    ns2.he.net.
+                        IN  NS    ns5.he.net.
                         IN  MX    20 mail.chaotikum.net.
 
 $INCLUDE ffhl/zones.common.db
