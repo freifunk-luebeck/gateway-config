@@ -1,6 +1,3 @@
-# huextertor
-ansible_ssh_host: gw02.ffhl.chaotikum.org
-
 gwid: 2
 
 # Base role

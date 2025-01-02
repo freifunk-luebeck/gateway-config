@@ -1,6 +1,4 @@
 # muehlentor
-ansible_ssh_host: muehlentor.mesh.ffhl.chaotikum.org
-
 gwid: 4
 
 # Base role

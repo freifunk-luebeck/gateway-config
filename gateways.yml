@@ -9,8 +9,8 @@
       tags: [ffhl_access]
     - role: common_gateway
       tags: [common_gateway, common]
-    - role: underlay_vpn
-      tags: [underlay_vpn, gateways]
+    # - role: underlay_vpn
+    #   tags: [underlay_vpn, gateways]
     - role: gwvpn
       tags: [gwvpn]
     - role: bird_common

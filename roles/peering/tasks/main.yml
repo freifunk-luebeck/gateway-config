@@ -11,10 +11,18 @@
 
 
 # bird configs for peering
-
 - name: copy host specific configs
-  with_fileglob: hosts/{{ inventory_hostname }}/bird/*
   copy:
-    src: "{{ item }}"
+    src: hosts/{{ inventory_hostname }}/bird/50-bgp_public.conf
     dest: /etc/bird/bird.conf.d/
   notify: restart bird
+
+
+- name: clean old files
+  file:
+    state: absent
+    path: "/etc/bird/bird.conf.d/{{ item }}"
+  loop:
+    - "50-bgp_he.conf"
+    - "50-ffhh.conf"
+    - "50-ffmuc.conf"

@@ -7,7 +7,7 @@
 
 - name: add sources.list
   copy:
-    src: apt/debian_bookworm.list
+    src: apt/debian_bullseye.list
     dest: /etc/apt/sources.list
 
 

@@ -1,20 +1,12 @@
 [all:vars]
-ansible_python_interpreter=/usr/bin/env python3
 ansible_ssh_user=root
 
 [gateways]
-# kaisertor
-gw03
-# huextertor
-gw02
-# muehlentor
-gw04
+kaisertor ansible_ssh_host=kaisertor.mesh.ffhl.chaotikum.org
+huextertor ansible_ssh_host=huextertor.mesh.ffhl.chaotikum.org
+muehlentor ansible_ssh_host=muehlentor.mesh.ffhl.chaotikum.org
 gw05
 gw06
-
-[dns_auth]
-srv02
-gw02
 
 [service_hosts]
 srv02
